@@ -28,3 +28,20 @@ body {
     transform: rotate(360deg);
   }
 }
+
+body::-webkit-scrollbar {
+  width: 1em;
+  border-radius: 25px;
+
+}
+ 
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 25px;
+  background: rgb(185, 184, 184);
+}
+ 
+body::-webkit-scrollbar-thumb {
+  background-image: linear-gradient( #5a6486, #1a2035);
+  border-radius: 25px;
+}
