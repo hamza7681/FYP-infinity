@@ -30,7 +30,7 @@ const Navbar = () => {
     <>
       <div className="flex flex-row justify-between shadow-lg h-[80px] items-center relative px-[10px]">
         <div>
-          <img src={logo} alt="logo" className="h-[130px] relative" />
+          <img src={logo} alt="logo" className="h-[70px] relative" />
         </div>
         <div className="cursor-pointer md:block hidden">
           <span

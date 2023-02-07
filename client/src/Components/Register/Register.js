@@ -67,8 +67,8 @@ const Register = () => {
             ></path>
           </svg>
           <div className="flex justify-center flex-col items-center">
-            <img className="w-[200px]" src={logo} alt="logo" />
-            <h1 className="text-[24px] font-semibold relative -top-[30px] ">
+            <img className="z-10 w-[200px] " src={logo} alt="logo" />
+            <h1 className="text-[24px] font-semibold relative -top-[10px] ">
               Register
             </h1>
           </div>
