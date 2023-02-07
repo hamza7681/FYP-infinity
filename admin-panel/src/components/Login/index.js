@@ -1,12 +1,31 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
+import { http } from "../../axios/config";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
 
-  const login = (e) => {
+  const login = async (e) => {
+    setLoading(true);
     e.preventDefault();
+    try {
+      const res = await http.post("/auth/login", { email, password });
+      toast.success(res.data.msg);
+      localStorage.setItem("token", res.data.token);
+      dispatch({ type: "LOGIN", payload: res.data.token });
+      navigate('/dashboard')
+      setLoading(false);
+    } catch (error) {
+      toast.error(error.response.data.msg);
+      setLoading(false);
+    }
   };
 
   return (
@@ -43,7 +62,7 @@ const Login = () => {
           onClick={login}
           className="bg-orange-600 w-full py-[10px] text-white font-bold rounded-full my-[10px]"
         >
-          Login
+          {loading ? "loading..." : "Login"}
         </button>
       </div>
     </div>

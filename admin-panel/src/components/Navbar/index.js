@@ -23,18 +23,25 @@ import {
 import { ImBooks } from "react-icons/im";
 import { AiOutlineBarChart, AiOutlinePoweroff } from "react-icons/ai";
 import { GiShoppingCart } from "react-icons/gi";
-import { Link, Route, Routes, useLocation } from "react-router-dom";
+import {
+  Link,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import pic from "../../Assets/user-logo.jpg";
 import HomePage from "../../pages/HomePage";
 import { FiSettings } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
+import { MdFeedback } from "react-icons/md";
 
 const drawerWidth = 240;
 
 const routes = [
   {
     name: "Dashboard",
-    path: "/",
+    path: "/dashboard",
     icon: <FaHome />,
   },
   {
@@ -48,11 +55,6 @@ const routes = [
     icon: <GiShoppingCart />,
   },
   {
-    name: "Charts",
-    path: "/charts",
-    icon: <AiOutlineBarChart />,
-  },
-  {
     name: "Tutors",
     path: "/tutors",
     icon: <FaGraduationCap />,
@@ -61,6 +63,11 @@ const routes = [
     name: "Students",
     path: "/students",
     icon: <FaUsers />,
+  },
+  {
+    name: "Feedbacks",
+    path: "/feedbacks",
+    icon: <MdFeedback />,
   },
 ];
 
@@ -154,6 +161,7 @@ const Navbar = () => {
   const [appbg, setAppbg] = React.useState(0);
   const [show, setShow] = React.useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -183,19 +191,93 @@ const Navbar = () => {
           <HiBars3CenterLeft className="md:hidden block text-[24px] absolute left-[10px]" />
           <div className="flex flex-row items-center justify-between w-full">
             <h1 className="text-[22px]">Infinite Institute</h1>
-            <div className="flex flex-row justify-between items-center w-[100px]">
-              <div className="relative">
-                <FaBell className="text-[22px]" />
-                <div className="bg-green-600 absolute top-[-5px] right-[-5px] h-[15px] w-[15px] rounded-full flex justify-center items-center ">
-                  <span className="text-[13px]">1</span>
+            <div className="flex flex-row gap-6">
+              <div className="flex flex-row justify-between items-center w-[60px]">
+                <div className="relative">
+                  <FaBell className="text-[22px]" />
+                  <div className="bg-green-600 absolute top-[-5px] right-[-5px] h-[15px] w-[15px] rounded-full flex justify-center items-center ">
+                    <span className="text-[13px]">1</span>
+                  </div>
                 </div>
+                <AiOutlinePoweroff
+                  className="text-[22px] cursor-pointer"
+                  onClick={() => {
+                    dispatch({ type: "LOGOUT" });
+                    navigate("/");
+                    localStorage.removeItem("token");
+                  }}
+                />
               </div>
-              <AiOutlinePoweroff className="text-[22px]  " />
+              <div
+                className=" w-fit  flex justify-center items-center bg-white px-[14px] py-[10px] rounded-[10px] z-10 cursor-pointer"
+                onClick={() => setShow(!show)}
+              >
+                <FiSettings className="text-black text-[22px] rotate-infinite cursor-pointer" />
+              </div>
+              {show ? (
+                <div className="absolute top-[70px] rounded-[10px] right-[60px] flex flex-col bg-white w-[300px] rounded- [10px] z-10 border-[2px] shadow-lg ">
+                  <div className="bg-[#5867dd] py-[7px] px-[10px] rounded-t-[10px] ">
+                    <p className="text-white ">Settings</p>
+                  </div>
+                  <div className="px-[20px] py-[20px]">
+                    <p>Navbar Color</p>
+                    <div className="flex flex-row gap-4 mt-[10px]">
+                      {colorsApp.map((val, index) => {
+                        return (
+                          <>
+                            <div
+                              className={`w-[20px] h-[20px] rounded-full cursor-pointer ${
+                                navbg === index
+                                  ? "border-[2px] border-gray-700"
+                                  : "border-[2px] border-gray-300"
+                              }`}
+                              style={{ background: val }}
+                              onClick={() => {
+                                setNavbg(index);
+                                dispatch({ type: "APP_BAR", payload: val });
+                              }}
+                            ></div>
+                          </>
+                        );
+                      })}
+                    </div>
+                  </div>
+                  <div className="px-[20px] py-[20px]">
+                    <p>Background Color</p>
+                    <div className="flex flex-row gap-4 mt-[10px]">
+                      {bgColors.map((val, index) => {
+                        return (
+                          <>
+                            <div
+                              className={`w-[20px] h-[20px] rounded-full cursor-pointer ${
+                                appbg === index
+                                  ? "border-[2px] border-blue-700"
+                                  : "border-[2px] border-gray-400"
+                              }`}
+                              style={{ background: val }}
+                              onClick={() => {
+                                setAppbg(index);
+                                dispatch({ type: "APP_BACK", payload: val });
+                              }}
+                            ></div>
+                          </>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </Toolbar>
       </AppBar>
-      <Drawer className="md:block hidden" variant="permanent" open={open}>
+      <Drawer
+        className="md:block hidden absolute "
+        variant="permanent"
+        open={open}
+      >
         <DrawerHeader>
           <img
             className="h-[50px] relative left-[20px] "
@@ -236,7 +318,7 @@ const Navbar = () => {
 
           <List>
             {routes.map((val, index) => (
-              <Link key={index} to={val.path}>
+              <Link key={index} to={val.path} onClick={handleDrawerClose}>
                 <ListItem
                   className={`hover:bg-[#808ae4]  rounded-[3px] mb-[10px] ${
                     val.path === pathname ? "bg-[#808ae4]" : ""
@@ -289,73 +371,12 @@ const Navbar = () => {
         </div>
       </Drawer>
       <Box
-        className="  h-screen relative"
+        className="  h-auto  "
         component="main"
         sx={{ flexGrow: 1, p: 3, background: appBackground }}
       >
-        <div
-          className="absolute top-[300px] right-0 flex justify-center items-center bg-white px-[14px] py-[10px] rounded-l-[10px] z-10 cursor-pointer"
-          onClick={() => setShow(!show)}
-        >
-          <FiSettings className="text-black text-[22px] rotate-infinite cursor-pointer" />
-        </div>
-        {show ? (
-          <div className="absolute top-[300px] rounded-[10px] right-[60px] flex flex-col bg-white w-[300px] rounded- [10px] z-10 border-[2px] shadow-lg ">
-            <div className="bg-[#5867dd] py-[7px] px-[10px] rounded-t-[10px] ">
-              <p className="text-white ">Settings</p>
-            </div>
-            <div className="px-[20px] py-[20px]">
-              <p>Navbar Color</p>
-              <div className="flex flex-row gap-4 mt-[10px]">
-                {colorsApp.map((val, index) => {
-                  return (
-                    <>
-                      <div
-                        className={`w-[20px] h-[20px] rounded-full cursor-pointer ${
-                          navbg === index
-                            ? "border-[2px] border-gray-700"
-                            : "border-[2px] border-gray-300"
-                        }`}
-                        style={{ background: val }}
-                        onClick={() => {
-                          setNavbg(index);
-                          dispatch({ type: "APP_BAR", payload: val });
-                        }}
-                      ></div>
-                    </>
-                  );
-                })}
-              </div>
-            </div>
-            <div className="px-[20px] py-[20px]">
-              <p>Background Color</p>
-              <div className="flex flex-row gap-4 mt-[10px]">
-                {bgColors.map((val, index) => {
-                  return (
-                    <>
-                      <div
-                        className={`w-[20px] h-[20px] rounded-full cursor-pointer ${
-                          appbg === index
-                            ? "border-[2px] border-blue-700"
-                            : "border-[2px] border-gray-400"
-                        }`}
-                        style={{ background: val }}
-                        onClick={() => {
-                          setAppbg(index);
-                          dispatch({ type: "APP_BACK", payload: val });
-                        }}
-                      ></div>
-                    </>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        ) : (
-          ""
-        )}
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/dashboard" element={<HomePage />} />
         </Routes>
       </Box>
     </Box>

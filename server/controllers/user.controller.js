@@ -7,17 +7,12 @@ const EmailSender = require("../utils/emailSender");
 const userCtrl = {
   register: async (req, res) => {
     const { firstName, lastName, email, password } = req.body;
-    const regex = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
     try {
       if (!firstName || !lastName || !email || !password) {
         return res
           .status(StatusCodes.BAD_REQUEST)
           .json({ msg: "Please fill all fields" });
-      } else if (!regex.test(email)) {
-        return res
-          .status(StatusCodes.BAD_REQUEST)
-          .json({ msg: "Invalid Email" });
-      } else {
+      }  else {
         const findUser = await User.findOne({ email: email });
         if (findUser) {
           return res

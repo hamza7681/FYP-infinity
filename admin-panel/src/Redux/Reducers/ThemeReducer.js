@@ -6,7 +6,6 @@ const initialState = {
 const ThemeReducer = (state = initialState, action) => {
   switch (action.type) {
     case "APP_BAR":
-      console.log(action.payload);
       return {
         ...state,
         appBarColor: action.payload,

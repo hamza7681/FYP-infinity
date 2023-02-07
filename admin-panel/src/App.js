@@ -2,16 +2,21 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import LoginPage from "./pages/LoginPage";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useSelector } from "react-redux";
 
 function App() {
-  const token = null;
+  const { token } = useSelector((s) => s.AuthReducer);
   return (
     <>
-      {!token ? (
+      <ToastContainer />
+
+      {token ? (
         <Navbar />
       ) : (
         <Routes>
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/" element={<LoginPage />} />
         </Routes>
       )}
     </>
