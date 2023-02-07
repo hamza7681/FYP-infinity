@@ -5,6 +5,7 @@ import ChatPage from "./Pages/ChatPage";
 import HomePage from "./Pages/HomePage";
 import LoginPage from "./Pages/LoginPage";
 import RegisterPage from "./Pages/RegisterPage";
+import CartPage from "./Pages/CartPage";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import ForgotPage from "./Pages/ForgotPage";
@@ -47,6 +48,7 @@ function App() {
         </Route>
         <Route element={<PrivateRoutes />}>
           <Route path="/chat" element={<ChatPage />} />
+          <Route path="/cart" element={<CartPage />}/>
         </Route>
       </Routes>
     </>
