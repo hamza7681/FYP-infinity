@@ -12,7 +12,7 @@ const userCtrl = {
         return res
           .status(StatusCodes.BAD_REQUEST)
           .json({ msg: "Please fill all fields" });
-      }  else {
+      } else {
         const findUser = await User.findOne({ email: email });
         if (findUser) {
           return res
@@ -206,6 +206,96 @@ const userCtrl = {
       } else {
         return res.status(StatusCodes.OK).json(users);
       }
+    } catch (error) {
+      return res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ msg: error.message });
+    }
+  },
+  getDashboard: async (req, res) => {
+    try {
+      const { year, month } = req.params;
+      const startDate = new Date(`${year}-${month}-01`);
+      const endDate = new Date(
+        startDate.getFullYear(),
+        startDate.getMonth() + 1,
+        0
+      );
+      let newArray = [];
+      //For Students
+      const result = await User.aggregate([
+        {
+          $match: {
+            role: 0,
+            createdAt: {
+              $gte: startDate,
+              $lt: endDate,
+            },
+          },
+        },
+        {
+          $group: {
+            _id: {
+              $dateToString: {
+                format: "%Y-%m-%d",
+                date: "$createdAt",
+              },
+            },
+            qty: { $sum: 1 },
+          },
+        },
+        {
+          $sort: { _id: 1 },
+        },
+      ]);
+      const data = result.map((user) => ({
+        qty: user.qty,
+        date: user._id,
+      }));
+
+      let obj = {
+        name: "Students",
+        data: data,
+      };
+      newArray.push(obj);
+
+      const tutor = await User.aggregate([
+        {
+          $match: {
+            role: 1,
+            createdAt: {
+              $gte: startDate,
+              $lt: endDate,
+            },
+          },
+        },
+        {
+          $group: {
+            _id: {
+              $dateToString: {
+                format: "%Y-%m-%d",
+                date: "$createdAt",
+              },
+            },
+            qty: { $sum: 1 },
+          },
+        },
+        {
+          $sort: { _id: 1 },
+        },
+      ]);
+      const tutordata = tutor.map((user) => ({
+        qty: user.qty,
+        date: user._id,
+      }));
+
+      let obj2 = {
+        name: "Tutors",
+        data: tutordata,
+      };
+      newArray.push(obj2);
+
+      return res.status(StatusCodes.OK).json(newArray);
     } catch (error) {
       return res
         .status(StatusCodes.INTERNAL_SERVER_ERROR)

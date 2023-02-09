@@ -86,7 +86,7 @@ const Navbar = () => {
           )}
         </div>
         <div className=" flex-row gap-6 md:flex hidden">
-          <Link to="/" className="text-[20px] relative ">
+          <Link to="/cart" className="text-[20px] relative ">
             <BsCart3 />
             <div className="absolute top-[-10px] left-[10px] w-[20px] h-[20px] bg-[#f5822a] flex justify-center items-center rounded-full text-white text-[12px]">
               1

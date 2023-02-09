@@ -25,7 +25,7 @@ const Payment = () => {
             value="versa"
             placeholder="VERSA"
             />
-            <label>Versa</label>
+            <label>Master</label>
             </div><br/>
             <div className='flex flex-col'>
               <label>Name on Card</label>
