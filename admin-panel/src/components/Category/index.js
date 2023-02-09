@@ -177,11 +177,21 @@ const Category = () => {
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row, index) => {
                     return (
-                      <TableRow hover role="checkbox" tabIndex={-1} key={index}>
-                        <TableCell style={{ fontWeight: "bold" }}>
+                      <TableRow
+                        hover
+                        role="checkbox"
+                        tabIndex={-1}
+                        key={index}
+                        style={{ backgroundColor: "#5c6894" }}
+                      >
+                        <TableCell
+                          style={{ fontWeight: "bold", color: "white" }}
+                        >
                           {index + 1}
                         </TableCell>
-                        <TableCell>{row.name}</TableCell>
+                        <TableCell style={{ color: "white" }}>
+                          {row.name}
+                        </TableCell>
                         <TableCell>
                           <div
                             className="bg-green-500 w-fit flex justify-center items-center p-[7px] rounded-[3px] cursor-pointer"
@@ -219,6 +229,7 @@ const Category = () => {
             page={page}
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
+            style={{ backgroundColor: "#2f3859", color: "white" }}
           />
         </Paper>
       </div>

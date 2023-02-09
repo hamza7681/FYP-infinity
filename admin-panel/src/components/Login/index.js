@@ -16,7 +16,7 @@ const Login = () => {
     setLoading(true);
     e.preventDefault();
     try {
-      const res = await http.post("/auth/login", { email, password });
+      const res = await http.post("/auth/admin-login", { email, password });
       toast.success(res.data.msg);
       localStorage.setItem("token", res.data.token);
       dispatch({ type: "LOGIN", payload: res.data.token });

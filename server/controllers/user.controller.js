@@ -75,6 +75,45 @@ const userCtrl = {
         .json({ msg: error.message });
     }
   },
+  adminLogin: async (req, res) => {
+    const { email, password } = req.body;
+    try {
+      if (!email || !password) {
+        return res
+          .status(StatusCodes.BAD_REQUEST)
+          .json({ msg: "Please fill all fields" });
+      } else {
+        const findUser = await User.findOne({ email: email });
+        if (findUser) {
+          if (findUser.role === 1) {
+            const isMatch = await bcrypt.compare(password, findUser.password);
+            if (isMatch) {
+              const token = await tokenGenerator(findUser.id);
+              return res
+                .status(StatusCodes.OK)
+                .json({ msg: "Login Successfully", token: token });
+            } else {
+              return res
+                .status(StatusCodes.BAD_REQUEST)
+                .json({ msg: "Incorrect Email or Password" });
+            }
+          } else {
+            return res
+              .status(StatusCodes.BAD_REQUEST)
+              .json({ msg: "Only Admin can login!" });
+          }
+        } else {
+          return res
+            .status(StatusCodes.NOT_FOUND)
+            .json({ msg: "User not found!" });
+        }
+      }
+    } catch (error) {
+      return res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ msg: error.message });
+    }
+  },
   forgot: async (req, res) => {
     const { email } = req.body;
     const regex = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
