@@ -44,9 +44,7 @@ const Category = () => {
   useEffect(() => {
     if (token) {
       const fetchCategories = async () => {
-        const res = await http.get("/category/get-category", {
-          headers: { Authorization: token },
-        });
+        const res = await http.get("/category/get-category");
         setRows(res.data);
         setFetchAgain(false);
       };
