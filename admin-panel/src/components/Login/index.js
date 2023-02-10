@@ -16,7 +16,7 @@ const Login = () => {
     setLoading(true);
     e.preventDefault();
     try {
-      const res = await http.post("/auth/login", { email, password });
+      const res = await http.post("/auth/admin-login", { email, password });
       toast.success(res.data.msg);
       localStorage.setItem("token", res.data.token);
       dispatch({ type: "LOGIN", payload: res.data.token });
@@ -29,7 +29,7 @@ const Login = () => {
   };
 
   return (
-    <div className="h-screen flex justify-center items-center">
+    <div className="h-screen mt-[-48px] flex justify-center items-center">
       <div className="w-[400px] rounded-[10px] bg-white flex flex-col justify-center items-center py-[30px] px-[20px]">
         <h1>Login</h1>
         <input

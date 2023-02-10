@@ -27,7 +27,7 @@ const userModel = new mongoose.Schema(
     },
     role: {
       type: Number,
-      default: 0, //0 user, 1 admin, 2 teacher
+      default: 0, //0 user, 1 admin, 2 tutor
     },
     description: {
       type: String,
@@ -59,7 +59,7 @@ const userModel = new mongoose.Schema(
     },
   },
   {
-    timestamps: false,
+    timestamps: true,
   }
 );
 

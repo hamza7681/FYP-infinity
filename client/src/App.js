@@ -14,6 +14,7 @@ import PrivateRoutes from "./Routes/PrivateRoutes";
 import ProtectedRoutes from "./Routes/ProtectedRoutes";
 import { useDispatch, useSelector } from "react-redux";
 import { http } from "./Axios/config";
+import AddCoursePage from "./Pages/AddCoursePage";
 
 function App() {
   const { token } = useSelector((s) => s.AuthReducer);
@@ -34,7 +35,7 @@ function App() {
       getUser();
     }
   }, [token, dispatch]);
-  
+
   return (
     <>
       <ToastContainer />
@@ -48,7 +49,8 @@ function App() {
         </Route>
         <Route element={<PrivateRoutes />}>
           <Route path="/chat" element={<ChatPage />} />
-          <Route path="/cart" element={<CartPage />}/>
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/add-course" element={<AddCoursePage />} />
         </Route>
       </Routes>
     </>

@@ -7,6 +7,8 @@ const {
   allUsers,
   getUser,
   searchUser,
+  getDashboard,
+  adminLogin,
 } = require("../controllers/user.controller");
 const auth = require("../middlewares/auth.middleware");
 const router = require("express").Router();
@@ -19,5 +21,7 @@ router.get("/get-profile", auth, getProfile);
 router.get("/all-users", auth, allUsers);
 router.get("/get-user/:id", auth, getUser);
 router.get("/search-user", auth, searchUser);
+router.get("/dashboard/:year/:month", getDashboard);
+router.post("/admin-login", adminLogin);
 
 module.exports = router;

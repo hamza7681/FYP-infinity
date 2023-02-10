@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../../Assets/I.png";
 import { Link, useNavigate } from "react-router-dom";
 import { BsCart3, BsSearch } from "react-icons/bs";
@@ -8,6 +8,7 @@ import { FaBars } from "react-icons/fa";
 import Sidebar from "./Sidebar";
 import { BiChat } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
+import { http } from "../../Axios/config";
 
 const Navbar = () => {
   const [showDiv, setShowDiv] = useState(false);
@@ -15,17 +16,25 @@ const Navbar = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const Categories = [
-    "Mobile Developement",
-    "Website Developmenet",
-    "Game Development",
-    "Graphics Designing",
-  ];
+  const [Categories, setCategories] = useState([]);
   const { token, user } = useSelector((s) => s.AuthReducer);
   const logout = () => {
     dispatch({ type: "LOGOUT" });
     localStorage.removeItem("token");
   };
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const res = await http.get("/category/get-category");
+        setCategories(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchCategories();
+  }, []);
+
   return (
     <>
       <div className="flex flex-row justify-between shadow-lg h-[80px] items-center relative px-[10px]">
@@ -41,19 +50,20 @@ const Navbar = () => {
           </span>
           {showDiv ? (
             <div className="absolute top-[60px] left-[160px] flex flex-col bg-white border-[1px] rounded-[4px]">
-              {Categories.map((val, index) => {
-                return (
-                  <>
-                    <Link
-                      to="/"
-                      className="px-[10px] py-[15px] hover:bg-gray-300"
-                      onClick={() => setShowDiv(false)}
-                    >
-                      {val}
-                    </Link>
-                  </>
-                );
-              })}
+              {Categories &&
+                Categories.map((val, index) => {
+                  return (
+                    <>
+                      <Link
+                        to="/"
+                        className="px-[10px] py-[15px] hover:bg-gray-300"
+                        onClick={() => setShowDiv(false)}
+                      >
+                        {val.name}
+                      </Link>
+                    </>
+                  );
+                })}
             </div>
           ) : (
             ""
@@ -72,12 +82,28 @@ const Navbar = () => {
         <div className=" flex-row gap-3 md:flex hidden">
           {token ? (
             <>
-              <Link to="/" className="text-[15px] hover:text-[#f5822a]">
-                Tutors
-              </Link>
-              <Link to="/" className="text-[15px] hover:text-[#f5822a]">
-                My Learning
-              </Link>
+              {user.role === 2 ? (
+                <>
+                  <Link
+                    to="/add-course"
+                    className="text-[15px] hover:text-[#f5822a]"
+                  >
+                    Add Course
+                  </Link>
+                  <Link to="/my-courses" className="text-[15px] hover:text-[#f5822a]">
+                    My Courses
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link to="/tutors" className="text-[15px] hover:text-[#f5822a]">
+                    Tutors
+                  </Link>
+                  <Link to="/my-learning" className="text-[15px] hover:text-[#f5822a]">
+                    My Learning
+                  </Link>
+                </>
+              )}
             </>
           ) : (
             <Link to="/" className="text-[15px] hover:text-[#f5822a]">
@@ -86,17 +112,25 @@ const Navbar = () => {
           )}
         </div>
         <div className=" flex-row gap-6 md:flex hidden">
-          <Link to="/" className="text-[20px] relative ">
-            <BsCart3 />
-            <div className="absolute top-[-10px] left-[10px] w-[20px] h-[20px] bg-[#f5822a] flex justify-center items-center rounded-full text-white text-[12px]">
-              1
-            </div>
-          </Link>
+          {user.role === 2 ? (
+            ""
+          ) : (
+            <Link to="/cart" className="text-[20px] relative ">
+              <BsCart3 />
+              <div className="absolute top-[-10px] left-[10px] w-[20px] h-[20px] bg-[#f5822a] flex justify-center items-center rounded-full text-white text-[12px]">
+                1
+              </div>
+            </Link>
+          )}
           {token ? (
             <>
-              <Link to="/" className="text-[20px] ">
-                <FiHeart />
-              </Link>
+              {user.role === 2 ? (
+                ""
+              ) : (
+                <Link to="/" className="text-[20px] ">
+                  <FiHeart />
+                </Link>
+              )}
               <Link to="/chat" className="text-[22px] ">
                 <BiChat />
               </Link>
@@ -119,7 +153,7 @@ const Navbar = () => {
                 />
                 <div className="absolute top-0 left-[38px] w-[15px] h-[15px] bg-[#36b404] flex justify-center items-center rounded-full"></div>
                 {dropdown ? (
-                  <div className="absolute top-[50px] right-[30px] bg-white border-[1px] w-[300px] p-[20px] rounded-[4px] shadow-md">
+                  <div className="absolute top-[50px] right-[30px] bg-white border-[1px] w-[350px] p-[20px] rounded-[4px] shadow-md">
                     <div className="flex flex-row items-center justify-start gap-2">
                       <img
                         src={user.dp}
@@ -130,7 +164,7 @@ const Navbar = () => {
                         <h1 className="text-[#f5822a] font-bold tracking-wider text-[22px]">
                           {user.firstName} {user.lastName}
                         </h1>
-                        <p className="relative top-[-5px] text-gray-400 text-[14px]">
+                        <p className="relative top-[-5px] text-gray-400 text-[12px]">
                           {user.email}
                         </p>
                       </div>
