@@ -1,6 +1,6 @@
 import React from 'react'
 
-const PaymentInput = ({type, placeholder, name}) => {
+const PaymentInput = ({type, placeholder, name,change}) => {
   return (
     <>
         <input
@@ -8,6 +8,7 @@ const PaymentInput = ({type, placeholder, name}) => {
             type={type}
             placeholder={placeholder}
             name={name}
+            onChange={change}
         />
     </>
   )

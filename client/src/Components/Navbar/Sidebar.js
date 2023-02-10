@@ -7,12 +7,12 @@ import logo from "../../Assets/I.png";
 const Sidebar = ({ setShowSidebar }) => {
   return (
     <>
-      <div className="md:hidden block bg-white border-[1px] w-[350px] p-[20px] shadow-md absolute top-0 h-screen ">
-        <div className=" flex flex-row justify-between items-center">
+      <div className="md:hidden block bg-white border-[1px] w-[350px] p-[20px] shadow-md absolute top-0 h-screen z-11 left-[-10px]">
+        <div className=" flex flex-row justify-between items-center py-[20px]">
           <img
             src={logo}
             alt="logo"
-            className="h-[120px] relative top-[-30px]"
+            className="h-[70px] relative top-[-30px]"
           />
           <FaTimes
             className="text-[#f5822a] relative top-[-30px]"

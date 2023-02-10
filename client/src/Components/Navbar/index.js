@@ -37,7 +37,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="flex flex-row justify-between shadow-lg h-[80px] items-center relative px-[10px]">
+      <div className="flex flex-row justify-between shadow-lg h-[80px] items-center sticky top-0 px-[10px] z-10 bg-white">
         <div>
           <img src={logo} alt="logo" className="h-[70px] relative" />
         </div>
@@ -90,16 +90,25 @@ const Navbar = () => {
                   >
                     Add Course
                   </Link>
-                  <Link to="/my-courses" className="text-[15px] hover:text-[#f5822a]">
+                  <Link
+                    to="/my-courses"
+                    className="text-[15px] hover:text-[#f5822a]"
+                  >
                     My Courses
                   </Link>
                 </>
               ) : (
                 <>
-                  <Link to="/tutors" className="text-[15px] hover:text-[#f5822a]">
+                  <Link
+                    to="/tutors"
+                    className="text-[15px] hover:text-[#f5822a]"
+                  >
                     Tutors
                   </Link>
-                  <Link to="/my-learning" className="text-[15px] hover:text-[#f5822a]">
+                  <Link
+                    to="/my-learning"
+                    className="text-[15px] hover:text-[#f5822a]"
+                  >
                     My Learning
                   </Link>
                 </>
@@ -234,9 +243,8 @@ const Navbar = () => {
             onClick={() => setShowSidebar(true)}
           />
         </div>
+        {showSidebar ? <Sidebar setShowSidebar={setShowSidebar} /> : ""}
       </div>
-      {/* sidebar  */}
-      {showSidebar ? <Sidebar setShowSidebar={setShowSidebar} /> : ""}
     </>
   );
 };
