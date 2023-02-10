@@ -15,7 +15,18 @@ const courses=[
     author: "Joe Dev",
     price: "$500",
   },
-  
+  {
+    image: "pic",
+    title: "CSS",
+    author: "Joe Dev",
+    price: "$300",
+  },
+  {
+    image: "pic",
+    title: "Node JS",
+    author: "Smith",
+    price: "$1000",
+  },
 ]
 const Courses = () => {
   return (
@@ -25,14 +36,14 @@ const Courses = () => {
           <div className='h-[5%]'>
             <h2 className='text-[24px]'>Courses Details</h2>
           </div><br/>
-          <div className='flex flex-col h-[85%] '>
+          <div className='flex flex-col md:h-[500px] overflow-y-scroll scrollbar-hidden '>
             <div className='flex flex-row border-b-2'>
               <div className='w-1/4  font-bold'>Image</div>
               <div className='w-1/4 font-bold'>Title</div>
               <div className='w-1/4 font-bold'>Author</div>
               <div className='w-1/4 font-bold'>Price</div>
             </div>
-          {courses.map((val, index) =>{
+            {courses.map((val, index) =>{
             return(
               <>
               <div className='flex flex-row items-center border-b-2'>
@@ -55,7 +66,7 @@ const Courses = () => {
               </div>
               </>
             )
-          })}
+            })}
           </div><br/>
             <div className=" py-[7px] w-1/2 flex flex-row items-center bg-[#f5822a]  h-[10%]">
                 <AiOutlineArrowLeft className="text-[28px]" />
