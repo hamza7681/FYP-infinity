@@ -8,7 +8,6 @@ import { FaTimes } from "react-icons/fa";
 import { http } from "../../Axios/config";
 import { useSelector } from "react-redux";
 import moment from "moment-timezone";
-import { AiFillLike, AiOutlineLike } from "react-icons/ai";
 
 const Chatbox = ({
   setShowDiv,
@@ -27,7 +26,6 @@ const Chatbox = ({
 
   const [messages, setMessages] = useState([]);
   const { user, token } = useSelector((s) => s.AuthReducer);
-  // const [likeMessage, setLikeMessage] = useState(false);
 
   useEffect(() => {
     endMessage.current.scrollIntoView({ behavior: "smooth" });
@@ -68,7 +66,6 @@ const Chatbox = ({
   const sendMessage = async (e) => {
     e.preventDefault();
     let obj;
-    let file;
     if (message.media !== null) {
       obj = {
         text: message.msg,

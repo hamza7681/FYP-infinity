@@ -10,6 +10,7 @@ const CourseInput = ({
   setState,
   setCount,
   type,
+  textarea2,
 }) => {
   return (
     <>
@@ -37,13 +38,32 @@ const CourseInput = ({
             </p>
           </>
         ) : (
-          <input
-            type={type}
-            placeholder="Enter title"
-            className={inputStyle}
+          <>
+            {textarea2 ? (
+              ""
+            ) : (
+              <input
+                type={type}
+                placeholder="Enter title"
+                className={inputStyle}
+                value={value}
+                onChange={(e) => setState(e.target.value)}
+              />
+            )}
+          </>
+        )}
+        {textarea2 ? (
+          <textarea
+            className="w-full mt-[3px] focus:outline-none border-[1px] py-[7px] px-[15px] rounded-[4px] border-gray-400 resize-none"
+            rows={14}
+            placeholder="Enter course description..."
             value={value}
-            onChange={(e) => setState(e.target.value)}
-          />
+            onChange={(e) => {
+              setState(e.target.value);
+            }}
+          ></textarea>
+        ) : (
+          ""
         )}
       </div>
     </>

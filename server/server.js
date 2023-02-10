@@ -20,6 +20,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/chatMedia", express.static("chatMedia/"));
+app.use("/courseImages", express.static("courseImages/"));
 
 //socket io
 let activeUsers = [];
@@ -35,7 +36,7 @@ io.on("connection", (socket) => {
     io.emit("get-users", activeUsers);
   });
   socket.on("send-message", (data) => {
-    console.log(data)
+    console.log(data);
     const { recieverId } = data;
     const user = activeUsers.find((user) => user.userId === recieverId);
     console.log("Sending from socket to: ", recieverId);
