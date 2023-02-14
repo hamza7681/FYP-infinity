@@ -53,19 +53,19 @@ function Login() {
             fill-opacity="1"
             d="M0,96L24,106.7C48,117,96,139,144,133.3C192,128,240,96,288,80C336,64,384,64,432,96C480,128,528,192,576,218.7C624,245,672,235,720,208C768,181,816,139,864,112C912,85,960,75,1008,96C1056,117,1104,171,1152,192C1200,213,1248,203,1296,202.7C1344,203,1392,213,1416,218.7L1440,224L1440,320L1416,320C1392,320,1344,320,1296,320C1248,320,1200,320,1152,320C1104,320,1056,320,1008,320C960,320,912,320,864,320C816,320,768,320,720,320C672,320,624,320,576,320C528,320,480,320,432,320C384,320,336,320,288,320C240,320,192,320,144,320C96,320,48,320,24,320L0,320Z"
           ></path>
-        </svg>
-        <div className=" w-[95%] md:w-[400px] relative overflow-hidden shadow-2xl border-[1px] rounded-[3px]">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 1440 320"
-            className="absolute top-[0px] w-[900px] rotate-[200deg] "
-          >
+        </svg>  
+        <div cla ss Name=" w-[95%] md:w-[400px] relative overflow-hidden shadow-2xl border-[1px] rounded-[3px]">
+          <svg     
+            xmlns= "http://www.w3.org/2000/svg"
+            viewBo x="0 0 1440 320"
+            class Name ="absolute  top-[0px] w-[900px] rotate-[200deg ]  "
+             >
             <path
               fill="#f5822a"
               fill-opacity="1"
               d="M0,96L24,106.7C48,117,96,139,144,133.3C192,128,240,96,288,80C336,64,384,64,432,96C480,128,528,192,576,218.7C624,245,672,235,720,208C768,181,816,139,864,112C912,85,960,75,1008,96C1056,117,1104,171,1152,192C1200,213,1248,203,1296,202.7C1344,203,1392,213,1416,218.7L1440,224L1440,320L1416,320C1392,320,1344,320,1296,320C1248,320,1200,320,1152,320C1104,320,1056,320,1008,320C960,320,912,320,864,320C816,320,768,320,720,320C672,320,624,320,576,320C528,320,480,320,432,320C384,320,336,320,288,320C240,320,192,320,144,320C96,320,48,320,24,320L0,320Z"
             ></path>
-          </svg>
+          </svg> 
           <div className="flex justify-center flex-col items-center">
             <img className="z-10 w-[200px] " src={logo} alt="logo" />
             <h1 className="text-[24px] font-semibold relative -top-[10px] ">
@@ -80,7 +80,7 @@ function Login() {
               value={userData.email}
               change={handleData}
               name="email"
-            />
+            /> 
             <GlobalInput
               type={show ? "text" : "password"}
               icon={<FaLock />}
