@@ -51,22 +51,28 @@ const userCtrl = {
           .json({ msg: "Please fill all fields" });
       } else {
         const findUser = await User.findOne({ email: email });
-        if (findUser) {
-          const isMatch = await bcrypt.compare(password, findUser.password);
-          if (isMatch) {
-            const token = await tokenGenerator(findUser.id);
-            return res
-              .status(StatusCodes.OK)
-              .json({ msg: "Login Successfully", token: token });
+        if (findUser.role === 1) {
+          return res
+            .status(StatusCodes.FORBIDDEN)
+            .json({ msg: "Admin can't login here!" });
+        } else {
+          if (findUser) {
+            const isMatch = await bcrypt.compare(password, findUser.password);
+            if (isMatch) {
+              const token = await tokenGenerator(findUser.id);
+              return res
+                .status(StatusCodes.OK)
+                .json({ msg: "Login Successfully", token: token });
+            } else {
+              return res
+                .status(StatusCodes.BAD_REQUEST)
+                .json({ msg: "Incorrect Email or Password" });
+            }
           } else {
             return res
-              .status(StatusCodes.BAD_REQUEST)
-              .json({ msg: "Incorrect Email or Password" });
+              .status(StatusCodes.NOT_FOUND)
+              .json({ msg: "User not found!" });
           }
-        } else {
-          return res
-            .status(StatusCodes.NOT_FOUND)
-            .json({ msg: "User not found!" });
         }
       }
     } catch (error) {

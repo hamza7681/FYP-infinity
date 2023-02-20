@@ -51,10 +51,9 @@ const courseCtrl = {
   },
   getCourses: async (req, res) => {
     try {
-      const result = await Course.find().populate(
-        "created_by",
-        "firstName lastName"
-      );
+      const result = await Course.find()
+        .populate("category")
+        .populate("created_by", "firstName lastName");
       if (result.length === 0) {
         return res
           .status(StatusCodes.NOT_FOUND)
@@ -91,10 +90,9 @@ const courseCtrl = {
   getCourseById: async (req, res) => {
     try {
       const id = req.params.id;
-      const result = await Course.findById(id).populate(
-        "created_by",
-        "firstName lastName"
-      );
+      const result = await Course.findById(id)
+        .populate("category")
+        .populate("created_by", "firstName lastName");
       return res.status(StatusCodes.OK).json(result);
     } catch (error) {
       return res

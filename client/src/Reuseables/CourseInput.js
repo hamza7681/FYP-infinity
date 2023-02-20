@@ -11,6 +11,7 @@ const CourseInput = ({
   setCount,
   type,
   textarea2,
+  placeholder
 }) => {
   return (
     <>
@@ -44,7 +45,7 @@ const CourseInput = ({
             ) : (
               <input
                 type={type}
-                placeholder="Enter title"
+                placeholder={placeholder}
                 className={inputStyle}
                 value={value}
                 onChange={(e) => setState(e.target.value)}

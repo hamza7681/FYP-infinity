@@ -146,9 +146,9 @@ const Stats = () => {
           </div>
           <div className="bg-gradient-to-r from-blue-600 to-blue-900 flex justify-center items-center py-[30px] rounded-[7px] flex-col">
             <p className="text-white text-[22px] font-semibold">
-              Total Revenue Generated
+              Total Courses
             </p>
-            <p className="text-[42px] text-white">PKR 3000</p>
+            <p className="text-[42px] text-white">1</p>
           </div>
           <div className="bg-gradient-to-r from-green-600 to-green-900 flex justify-center items-center py-[30px] rounded-[7px] flex-col">
             <p className="text-white text-[22px] font-semibold">

@@ -39,6 +39,8 @@ import LoginPage from "../../pages/LoginPage";
 import ProtectedRoutes from "../../routes/ProtectedRoutes";
 import PrivateRoutes from "../../routes/PrivateRoutes";
 import CategoryPage from "../../pages/CategoryPage";
+import CoursesPage from "../../pages/CoursesPage";
+import ViewCoursePage from "../../pages/ViewCoursePage";
 
 const drawerWidth = 240;
 
@@ -402,6 +404,8 @@ const Navbar = () => {
           <Route element={<ProtectedRoutes />}>
             <Route path="/dashboard" element={<HomePage />} />
             <Route path="/categories" element={<CategoryPage />} />
+            <Route path="/courses" element={<CoursesPage />} />
+            <Route path="/courses/:id" element={<ViewCoursePage />} />
           </Route>
         </Routes>
       </Box>

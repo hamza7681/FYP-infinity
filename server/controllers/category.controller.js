@@ -1,5 +1,6 @@
 const { StatusCodes } = require("http-status-codes");
 const Category = require("../models/categoryModel");
+const Course = require("../models/courseModel");
 
 const categoryCtrl = {
   addCategory: async (req, res) => {
@@ -53,10 +54,11 @@ const categoryCtrl = {
         .json({ msg: error.message });
     }
   },
-  deletCategory: async (req, res) => {
+  deleteCategory: async (req, res) => {
     const id = req.params.id;
     try {
       await Category.findByIdAndDelete(id);
+      await Course.findOneAndDelete({ category: id });
       return res
         .status(StatusCodes.OK)
         .json({ msg: "Category deleted successfully" });

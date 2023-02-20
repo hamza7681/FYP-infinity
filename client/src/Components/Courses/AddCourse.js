@@ -74,7 +74,7 @@ const AddCourse = () => {
       setCategory("");
       setDescription("");
       setImgFile(null);
-      setImg(null)
+      setImg(null);
       setLoading(false);
     } catch (error) {
       toast.error(error.response.data.msg);
@@ -97,6 +97,7 @@ const AddCourse = () => {
               inputStyle="focus:outline-none border-[1px] py-[7px] px-[15px] rounded-[4px] border-gray-400"
               value={title}
               setState={setTitle}
+              placeholder="Enter title"
             />
             <CourseInput
               title="Price"
@@ -105,6 +106,7 @@ const AddCourse = () => {
               type="number"
               value={price}
               setState={setPrice}
+              placeholder="Enter price"
             />
             <div className="w-full">
               <label className="text-purple-600 font-semibold text-[15px]">
@@ -118,7 +120,7 @@ const AddCourse = () => {
                 {categories &&
                   categories.map((val) => {
                     return (
-                      <option key={val._id} value={val.name}>
+                      <option key={val._id} value={val._id}>
                         {val.name}
                       </option>
                     );
@@ -131,6 +133,7 @@ const AddCourse = () => {
               textarea2={true}
               value={description}
               setState={setDescription}
+              placeholder="Enter course description"
             />
           </div>
           <div className="flex flex-col md:w-1/2 gap-6">
@@ -141,6 +144,7 @@ const AddCourse = () => {
               setState={setLang}
               type="text"
               inputStyle="focus:outline-none border-[1px] py-[7px] px-[15px] rounded-[4px] border-gray-400"
+              placeholder="Enter course language"
             />
 
             <CourseInput
