@@ -4,6 +4,7 @@ import Navbar from "../Components/Navbar";
 import { useSelector } from "react-redux";
 import { BsExclamationTriangle } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import Footer from "../Components/Footer/Footer";
 
 const AddCoursePage = () => {
   const { user } = useSelector((s) => s.AuthReducer);
@@ -27,6 +28,7 @@ const AddCoursePage = () => {
           </div>
         </>
       )}
+      <Footer/>
     </>
   );
 };
