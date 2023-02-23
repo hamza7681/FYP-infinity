@@ -15,6 +15,7 @@ import ProtectedRoutes from "./Routes/ProtectedRoutes";
 import { useDispatch, useSelector } from "react-redux";
 import { http } from "./Axios/config";
 import AddCoursePage from "./Pages/AddCoursePage";
+import TutorPage from "./Pages/TutorPage";
 
 function App() {
   const { token } = useSelector((s) => s.AuthReducer);
@@ -51,6 +52,7 @@ function App() {
           <Route path="/chat" element={<ChatPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/add-course" element={<AddCoursePage />} />
+          <Route path="/tutors" element={<TutorPage />} />
         </Route>
       </Routes>
     </>

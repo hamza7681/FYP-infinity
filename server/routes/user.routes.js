@@ -9,6 +9,7 @@ const {
   searchUser,
   getDashboard,
   adminLogin,
+  getTutors,
 } = require("../controllers/user.controller");
 const auth = require("../middlewares/auth.middleware");
 const router = require("express").Router();
@@ -23,5 +24,6 @@ router.get("/get-user/:id", auth, getUser);
 router.get("/search-user", auth, searchUser);
 router.get("/dashboard/:year/:month", getDashboard);
 router.post("/admin-login", adminLogin);
+router.post("/get-tutors", getTutors);
 
 module.exports = router;

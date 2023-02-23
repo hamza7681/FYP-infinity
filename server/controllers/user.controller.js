@@ -257,6 +257,18 @@ const userCtrl = {
         .json({ msg: error.message });
     }
   },
+
+  getTutors: async (req, res) => {
+    try {
+      const tutors = await User.find({ role: 2 }).select("-password");
+      return res.status(StatusCodes.OK).json(tutors);
+    } catch (error) {
+      return res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ msg: error.message });
+    }
+  },
+
   getDashboard: async (req, res) => {
     try {
       const { year, month } = req.params;
