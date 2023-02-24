@@ -24,6 +24,6 @@ router.get("/get-user/:id", auth, getUser);
 router.get("/search-user", auth, searchUser);
 router.get("/dashboard/:year/:month", getDashboard);
 router.post("/admin-login", adminLogin);
-router.post("/get-tutors", getTutors);
+router.get("/get-tutors", getTutors);
 
 module.exports = router;

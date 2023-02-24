@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
-const EMAIL = process.env.USER_EMAIL;
-const PASSWORD = process.env.USER_PASS;
+const EMAIL = process.env.USER_EMAIL || "infinity.institude010@gmail.com";
+const PASSWORD = process.env.USER_PASS || "zufilzkhjehljwbn";
 
 const transport = nodemailer.createTransport({
   host: "smtp.gmail.com",
