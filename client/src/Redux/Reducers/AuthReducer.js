@@ -1,6 +1,7 @@
 const initialState = {
   token: null,
   user: {},
+  followings: [],
 };
 
 const AuthReducer = (state = initialState, action) => {
@@ -14,11 +15,17 @@ const AuthReducer = (state = initialState, action) => {
       return {
         token: null,
         user: {},
+        followings: [],
       };
     case "GET_USER":
       return {
         ...state,
         user: action.payload,
+      };
+    case "GET_FOLLOWINGS":
+      return {
+        ...state,
+        followings: action.payload,
       };
     default:
       return {

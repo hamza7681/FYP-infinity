@@ -4,58 +4,14 @@ import { AiOutlineEye } from "react-icons/ai";
 import { FiUserMinus, FiUserPlus } from "react-icons/fi";
 import { http } from "../../Axios/config";
 import ReactPaginate from "react-paginate";
-
-const Items = ({ currentItems }) => {
-  return (
-    <>
-      {currentItems.length === 0 ? (
-        <>
-          <p>No Tutors found!</p>
-        </>
-      ) : (
-        <>
-          {currentItems &&
-            currentItems.map((val) => {
-              return (
-                <>
-                  <div
-                    className="w-full md:w-[280px] border-[1px] rounded-[5px] border-gray-200 shadow-xl"
-                    key={val._id}
-                  >
-                    <img src={pic} alt="tutor pic" className="w-full" />
-                    <div className="px-[15px] py-[10px]">
-                      <h1 className="text-[22px] font-semibold">
-                        {val.firstName} {val.lastName}
-                      </h1>
-                      <p className="text-[16px] text-gray-500">{val.subject}</p>
-                    </div>
-                    <div className="flex flex-row justify-start w-full items-center">
-                      <div className="w-1/2 flex flex-row justify-center items-center gap-2 py-[10px] cursor-pointer border-t-[1px] border-r-[1px] border-t-gray-300 border-r-gray-300">
-                        <AiOutlineEye />
-                        <span>View</span>
-                      </div>
-                      <div className="w-1/2 flex flex-row justify-center items-center gap-2 py-[10px] cursor-pointer border-t-[1px] border-l-[1px] border-t-gray-300 border-l-gray-300">
-                        <FiUserPlus />
-                        <span>Follow</span>
-                      </div>
-                      {/* <div  className="w-1/2 flex flex-row justify-center items-center gap-2 py-[10px] cursor-pointer border-t-[1px] border-l-[1px] border-t-gray-300 border-l-gray-300">
-                    <FiUserMinus />
-                    <span>Unfollow</span>
-                  </div> */}
-                    </div>
-                  </div>
-                </>
-              );
-            })}
-        </>
-      )}
-    </>
-  );
-};
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const Tutors = () => {
   const [tutors, setTutors] = useState([]);
   const [defaultData, setDefault] = useState([]);
+  const dispatch = useDispatch();
+  const { token, user, followings } = useSelector((s) => s.AuthReducer);
 
   useEffect(() => {
     const fetchTutors = async () => {
@@ -69,6 +25,23 @@ const Tutors = () => {
     };
     fetchTutors();
   }, []);
+
+  useEffect(() => {
+    if (token) {
+      const fetchFollowings = async () => {
+        try {
+          const res = await http.get(
+            "/follow/get-followers-userId/" + user._id,
+            { headers: { Authorization: token } }
+          );
+          dispatch({ type: "GET_FOLLOWINGS", payload: res.data });
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchFollowings();
+    }
+  }, [token, user._id, dispatch]);
 
   const [itemOffset, setItemOffset] = useState(0);
   const itemsPerPage = 6;
@@ -98,6 +71,95 @@ const Tutors = () => {
     }
   };
 
+  const FollowToggle = ({ val }) => {
+    const find = followings?.find((x) => x.following?._id === val._id);
+    if (find) {
+      return (
+        <>
+          <FiUserMinus />
+          <span>Un-follow</span>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <FiUserPlus />
+          <span>Follow</span>
+        </>
+      );
+    }
+  };
+
+  const addFollowing = async (following) => {
+    try {
+      const res = await http.post(
+        "/follow/add-follower",
+        {
+          user: user?._id,
+          following: following,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      toast.success(res.data.msg);
+      window.location.reload();
+    } catch (error) {
+      toast.error(error.response.data.msg);
+      window.location.reload();
+    }
+  };
+
+  const Items = ({ currentItems }) => {
+    return (
+      <>
+        {currentItems.length === 0 ? (
+          <>
+            <p>No Tutors found!</p>
+          </>
+        ) : (
+          <>
+            {currentItems &&
+              currentItems.map((val) => {
+                return (
+                  <>
+                    <div
+                      className="w-full md:w-[280px] border-[1px] rounded-[5px] border-gray-200 shadow-xl"
+                      key={val._id}
+                    >
+                      <img src={pic} alt="tutor pic" className="w-full" />
+                      <div className="px-[15px] py-[10px]">
+                        <h1 className="text-[22px] font-semibold">
+                          {val.firstName} {val.lastName}
+                        </h1>
+                        <p className="text-[16px] text-gray-500">
+                          {val.subject}
+                        </p>
+                      </div>
+                      <div className="flex flex-row justify-start w-full items-center">
+                        <div className="w-1/2 flex flex-row justify-center items-center gap-2 py-[10px] cursor-pointer border-t-[1px] border-r-[1px] border-t-gray-300 border-r-gray-300">
+                          <AiOutlineEye />
+                          <span>View</span>
+                        </div>
+                        <div
+                          className="w-1/2 flex flex-row justify-center items-center gap-2 py-[10px] cursor-pointer border-t-[1px] border-l-[1px] border-t-gray-300 border-l-gray-300"
+                          onClick={() => addFollowing(val._id)}
+                        >
+                          <FollowToggle val={val} />
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                );
+              })}
+          </>
+        )}
+      </>
+    );
+  };
+
   return (
     <>
       <div className="w-full p-[10px] md:p-[30px]">
@@ -105,12 +167,14 @@ const Tutors = () => {
           <h1 className="text-[24px] font-semibold">Tutors</h1>
         </div>
         <div className="w-full flex flex-col md:flex-row mt-[30px]">
-          <div className="w-full md:w-[30%] flex justify-center items-center md:border-r-gray-400 md:border-r-[1px]">
+          <div className="w-full md:w-[30%] flex justify-center h-[200px] md:border-r-gray-400 md:border-r-[1px]">
             <div className="flex flex-col justify-center items-center bg-gray-200 p-[50px] rounded-[5px] shadow-lg">
               <p className="text-[28px] font-semibold text-[#292a77]">
                 Total Tutors
               </p>
-              <p className="text-[28px] font-semibold text-[#292a77]">{tutors?.length}</p>
+              <p className="text-[28px] font-semibold text-[#292a77]">
+                {defaultData?.length}
+              </p>
             </div>
           </div>
           <div className="w-full md:w-[70%] px-[10px]">

@@ -3,6 +3,7 @@ const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const { tokenGenerator } = require("../utils/tokenGenerator");
 const EmailSender = require("../utils/emailSender");
+const Follow = require("../models/followModel");
 
 const userCtrl = {
   register: async (req, res) => {
@@ -187,9 +188,32 @@ const userCtrl = {
   getProfile: async (req, res) => {
     const id = req.user;
     try {
-      const profile = await User.findById(id).select("-password");
+      let profile = await User.findById(id).select("-password");
+      const followers = await Follow.find({ following: id }).populate(
+        "user",
+        "-password"
+      );
+      const newProfile = {
+        _id: profile._id,
+        firstName: profile.firstName,
+        lastName: profile.lastName,
+        email: profile.email,
+        dp: profile.dp,
+        role: profile.role,
+        description: profile.description,
+        website: profile.website,
+        facebook: profile.facebook,
+        linkedin: profile.linkedin,
+        qualification: profile.qualification,
+        subject: profile.subject,
+        visibility: profile.visibility,
+        __v: profile.__v,
+        createdAt: profile.createdAt,
+        updatedAt: profile.updatedAt,
+        followers: followers,
+      };
       if (profile) {
-        return res.status(StatusCodes.OK).json({ user: profile });
+        return res.status(StatusCodes.OK).json({ user: newProfile });
       } else {
         return res
           .status(StatusCodes.NOT_FOUND)
