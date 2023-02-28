@@ -45,6 +45,7 @@ import TutorPage from "../../pages/TutorPage";
 import ViewTutorPage from "../../pages/ViewTutorPage";
 import StudentPage from "../../pages/StudentPage";
 import ViewStudentPage from "../../pages/ViewStudentPage";
+import NotificationPage from "../../pages/NotificationPage";
 
 const drawerWidth = 240;
 
@@ -83,6 +84,11 @@ const routes = [
     name: "Categories",
     path: "/categories",
     icon: <MdCategory />,
+  },
+  {
+    name: "Notifications",
+    path: "/notifications",
+    icon: <FaBell />,
   },
 ];
 
@@ -129,6 +135,9 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
   backgroundColor: "#2A2F5B",
   opacity: 0.95,
+  position: "sticky",
+  top: 0,
+  zIndex: 10,
 }));
 
 const AppBar = styled(MuiAppBar, {
@@ -414,6 +423,7 @@ const Navbar = () => {
             <Route path="/tutors/:id" element={<ViewTutorPage />} />
             <Route path="/students" element={<StudentPage />} />
             <Route path="/students/:id" element={<ViewStudentPage />} />
+            <Route path="/notifications" element={<NotificationPage />} />
           </Route>
         </Routes>
       </Box>
