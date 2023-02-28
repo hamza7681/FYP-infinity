@@ -293,6 +293,43 @@ const userCtrl = {
     }
   },
 
+  getTutorById: async (req, res) => {
+    const id = req.params.id;
+    try {
+      const tutor = await User.findById(id).select("-password");
+      if (tutor) {
+        return res.status(StatusCodes.OK).json(tutor);
+      }
+    } catch (error) {
+      return res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ msg: error.message });
+    }
+  },
+  getStudents: async (req, res) => {
+    try {
+      const tutors = await User.find({ role: 0 }).select("-password");
+      return res.status(StatusCodes.OK).json(tutors);
+    } catch (error) {
+      return res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ msg: error.message });
+    }
+  },
+
+  deleteTutorById: async (req, res) => {
+    const id = req.params.id;
+    try {
+      await User.findByIdAndDelete(id);
+      return res
+        .status(StatusCodes.OK)
+        .json({ msg: "Tutor deleted successfully" });
+    } catch (error) {
+      return res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ msg: error.message });
+    }
+  },
   getDashboard: async (req, res) => {
     try {
       const { year, month } = req.params;

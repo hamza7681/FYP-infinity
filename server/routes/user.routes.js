@@ -10,6 +10,9 @@ const {
   getDashboard,
   adminLogin,
   getTutors,
+  getTutorById,
+  deleteTutorById,
+  getStudents,
 } = require("../controllers/user.controller");
 const auth = require("../middlewares/auth.middleware");
 const router = require("express").Router();
@@ -25,5 +28,8 @@ router.get("/search-user", auth, searchUser);
 router.get("/dashboard/:year/:month", getDashboard);
 router.post("/admin-login", adminLogin);
 router.get("/get-tutors", getTutors);
+router.get("/get-tutor-id/:id", getTutorById);
+router.delete("/delete-tutor/:id", auth, deleteTutorById);
+router.get("/get-students", getStudents);
 
 module.exports = router;

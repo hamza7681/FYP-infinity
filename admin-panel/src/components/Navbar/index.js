@@ -41,6 +41,10 @@ import PrivateRoutes from "../../routes/PrivateRoutes";
 import CategoryPage from "../../pages/CategoryPage";
 import CoursesPage from "../../pages/CoursesPage";
 import ViewCoursePage from "../../pages/ViewCoursePage";
+import TutorPage from "../../pages/TutorPage";
+import ViewTutorPage from "../../pages/ViewTutorPage";
+import StudentPage from "../../pages/StudentPage";
+import ViewStudentPage from "../../pages/ViewStudentPage";
 
 const drawerWidth = 240;
 
@@ -238,7 +242,7 @@ const Navbar = () => {
                     <p className="text-white ">Settings</p>
                   </div>
                   <div className="px-[20px] py-[20px]">
-                    <p>Navbar Color</p>
+                    <p className="text-black">Navbar Color</p>
                     <div className="flex flex-row gap-4 mt-[10px]">
                       {colorsApp.map((val, index) => {
                         return (
@@ -261,7 +265,7 @@ const Navbar = () => {
                     </div>
                   </div>
                   <div className="px-[20px] py-[20px]">
-                    <p>Background Color</p>
+                    <p className="text-black">Background Color</p>
                     <div className="flex flex-row gap-4 mt-[10px]">
                       {bgColors.map((val, index) => {
                         return (
@@ -406,6 +410,10 @@ const Navbar = () => {
             <Route path="/categories" element={<CategoryPage />} />
             <Route path="/courses" element={<CoursesPage />} />
             <Route path="/courses/:id" element={<ViewCoursePage />} />
+            <Route path="/tutors" element={<TutorPage />} />
+            <Route path="/tutors/:id" element={<ViewTutorPage />} />
+            <Route path="/students" element={<StudentPage />} />
+            <Route path="/students/:id" element={<ViewStudentPage />} />
           </Route>
         </Routes>
       </Box>
