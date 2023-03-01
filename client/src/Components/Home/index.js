@@ -2,14 +2,13 @@ import React, { useEffect } from "react";
 import Courses from "./Courses";
 import Vision from "./Vision";
 import Features from "./Features";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { http } from "../../Axios/config";
 
 const Home = () => {
-  const { token } = useSelector((s) => s.AuthReducer);
+  //const { token } = useSelector((s) => s.AuthReducer);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (token) {
       const getCourses = async () => {
         try {
           const res = await http.get("http://localhost:5000/course/get-course");
@@ -19,8 +18,8 @@ const Home = () => {
         }
       };
       getCourses();
-    }
-  }, [token, dispatch]);
+    
+  }, [ dispatch]);
   return (
     <>
       <div>

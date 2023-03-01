@@ -28,7 +28,10 @@ const feature  = [
 const Features = () => {
   return (
     <>
+    <div className="py-[10px] px-[25px] mt-3">
+        <h2 className="font-bold text-[25px] ">Features</h2>
         <div className='flex flex-col md:flex-row gap-3 py-[15px] mx-[5px] px-[50px]'>
+
             {feature.map((val, index) => {
                 return(
                     <>
@@ -43,6 +46,7 @@ const Features = () => {
                 )
             })}
             </div>
+        </div>
     </>
   )
 }

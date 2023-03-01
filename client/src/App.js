@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import ChatPage from "./Pages/ChatPage";
 import HomePage from "./Pages/HomePage";
 import LoginPage from "./Pages/LoginPage";
+// import ProfilePage from "./Pages/ProfilePage";
 import RegisterPage from "./Pages/RegisterPage";
 import CartPage from "./Pages/CartPage";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,7 +17,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { http } from "./Axios/config";
 import AddCoursePage from "./Pages/AddCoursePage";
 import TutorPage from "./Pages/TutorPage";
-
 function App() {
   const { token } = useSelector((s) => s.AuthReducer);
   const dispatch = useDispatch();
@@ -53,6 +53,8 @@ function App() {
           <Route path="/cart" element={<CartPage />} />
           <Route path="/add-course" element={<AddCoursePage />} />
           <Route path="/tutors" element={<TutorPage />} />
+          {/* <Route path="/Profile" element={<ProfilePage />} /> */}
+
         </Route>
       </Routes>
     </>
