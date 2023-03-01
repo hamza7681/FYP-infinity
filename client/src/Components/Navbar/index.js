@@ -18,6 +18,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const [Categories, setCategories] = useState([]);
   const { token, user } = useSelector((s) => s.AuthReducer);
+  const { cartItems } = useSelector((s) => s.CourseReducer);
   const logout = () => {
     dispatch({ type: "LOGOUT" });
     localStorage.removeItem("token");
@@ -127,7 +128,7 @@ const Navbar = () => {
             <Link to="/cart" className="text-[20px] relative ">
               <BsCart3 />
               <div className="absolute top-[-10px] left-[10px] w-[20px] h-[20px] bg-[#f5822a] flex justify-center items-center rounded-full text-white text-[12px]">
-                1
+                {cartItems.length}
               </div>
             </Link>
           )}
