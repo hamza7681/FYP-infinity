@@ -18,19 +18,7 @@ function Courses() {
       };
       getCourses();
     }
-    if(courses){
-      const getCourses = async () => {
-        try {
-          const res = await http.get("http://localhost:5000/course/get-course", {
-          });
-          dispatch ({ type: "GET_COURSES", payload: res.data});
-        }catch (error) {
-          console.log(error);
-        }
-      };
-      getCourses();
-    }
-  }, [token, courses, dispatch]);
+  }, [token, dispatch]);
   return (
     <>
       <div className='py-[10px] px-[25px] mt-3'>
