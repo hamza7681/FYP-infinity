@@ -75,6 +75,16 @@ const NotificationCtrl = {
         .json({ msg: error.message });
     }
   },
+  markedAllRead: async (req, res) => {
+    try {
+      await Notification.updateMany({}, { status: false });
+      return res.status(StatusCodes.OK).json({ msg: "All notification marked as Read!" });
+    } catch (error) {
+      return res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ msg: error.message });
+    }
+  },
 };
 
 module.exports = NotificationCtrl;

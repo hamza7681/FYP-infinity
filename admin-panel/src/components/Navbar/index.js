@@ -46,6 +46,9 @@ import ViewTutorPage from "../../pages/ViewTutorPage";
 import StudentPage from "../../pages/StudentPage";
 import ViewStudentPage from "../../pages/ViewStudentPage";
 import NotificationPage from "../../pages/NotificationPage";
+import NotificationMenu from "./NotificationMenu";
+import { http } from "../../axios/config";
+import { toast } from "react-toastify";
 
 const drawerWidth = 240;
 
@@ -185,8 +188,23 @@ const Navbar = () => {
   const [navbg, setNavbg] = React.useState(0);
   const [appbg, setAppbg] = React.useState(0);
   const [show, setShow] = React.useState(false);
+  const [showNot, setShowNot] = React.useState(false);
+  const [activeNots, setActiveNots] = React.useState([]);
+  const [fetchAgain, setFetchAgain] = React.useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (token) {
+      const fetchNotifications = async () => {
+        const res = await http.get("/notification/get-active-notification");
+        console.log(res.data);
+        setActiveNots(res.data);
+        setFetchAgain(false);
+      };
+      fetchNotifications();
+    }
+  }, [token, fetchAgain]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -194,6 +212,16 @@ const Navbar = () => {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const markedAll = async () => {
+    try {
+      const res = await http.patch("/notification/marked-all-read");
+      toast.success(res.data.msg);
+      setFetchAgain(true);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -221,10 +249,26 @@ const Navbar = () => {
                 <>
                   <div className="flex flex-row justify-between items-center w-[60px]">
                     <div className="relative">
-                      <FaBell className="text-[22px]" />
+                      <FaBell
+                        className="text-[22px] cursor-pointer"
+                        onClick={() => setShowNot(!showNot)}
+                      />
                       <div className="bg-green-600 absolute top-[-5px] right-[-5px] h-[15px] w-[15px] rounded-full flex justify-center items-center ">
-                        <span className="text-[13px]">1</span>
+                        <span className="text-[13px]">
+                          {activeNots && activeNots.length}
+                        </span>
                       </div>
+                      {showNot ? (
+                        <div className="absolute right-[20px]">
+                          <NotificationMenu
+                            notifications={activeNots}
+                            click={markedAll}
+                            setShow={setShowNot}
+                          />
+                        </div>
+                      ) : (
+                        ""
+                      )}
                     </div>
                     <AiOutlinePoweroff
                       className="text-[22px] cursor-pointer"
@@ -326,7 +370,7 @@ const Navbar = () => {
           </DrawerHeader>
           <div
             style={{ background: appBarColor }}
-            className={`h-screen  opacity-[0.95] px-[10px] pt-[10px]`}
+            className={`h-screen  opacity-[0.95] px-[10px] pt-[10px] overflow-y-auto scroll_bar`}
           >
             <div className="flex flex-col justify-center items-center py-[10px]">
               <img

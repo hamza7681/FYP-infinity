@@ -1,39 +1,23 @@
-import React, { useEffect} from 'react'
-import {http} from "../../Axios/config"
-import { useDispatch, useSelector } from 'react-redux';
+import React from "react";
+import { useSelector } from "react-redux";
 function Courses() {
-  const {courses} = useSelector((s) => s.CourseReducer);
-  const {token} = useSelector((s) => s.CourseReducer);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    if (token){
-      const getCourses = async () => {
-        try {
-          const res = await http.get("http://localhost:5000/course/get-course", {
-          });
-          dispatch ({ type: "GET_COURSES", payload: res.data});
-        }catch (error) {
-          console.log(error);
-        }
-      };
-      getCourses();
-    }
-  }, [token, dispatch]);
+  const { courses } = useSelector((s) => s.CourseReducer);
+  console.log(courses);
   return (
     <>
-      <div className='py-[10px] px-[25px] mt-3'>
-        <h2 className='font-bold text-[25px]'>Courses</h2>
+      <div className="py-[10px] px-[25px] mt-3">
+        <h2 className="font-bold text-[25px]">Courses</h2>
         {courses.map((val, index) => {
-          return(
+          return (
             <>
               <div>
-
+                <h1>{val.title}</h1>
               </div>
             </>
-          )
+          );
         })}
       </div>
     </>
   );
 }
-export default Courses
+export default Courses;
