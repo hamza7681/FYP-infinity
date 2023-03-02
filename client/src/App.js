@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import ChatPage from "./Pages/ChatPage";
 import HomePage from "./Pages/HomePage";
 import LoginPage from "./Pages/LoginPage";
-// import ProfilePage from "./Pages/ProfilePage";
+import ProfilePage from "./Pages/ProfilePage";
 import RegisterPage from "./Pages/RegisterPage";
 import CartPage from "./Pages/CartPage";
 import "react-toastify/dist/ReactToastify.css";
@@ -53,7 +53,7 @@ function App() {
           <Route path="/cart" element={<CartPage />} />
           <Route path="/add-course" element={<AddCoursePage />} />
           <Route path="/tutors" element={<TutorPage />} />
-          {/* <Route path="/Profile" element={<ProfilePage />} /> */}
+          <Route path="/Profile" element={<ProfilePage />} />
 
         </Route>
       </Routes>
