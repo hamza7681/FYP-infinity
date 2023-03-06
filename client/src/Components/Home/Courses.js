@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AiFillStar } from "react-icons/ai";
 import { BsCartDash, BsCartPlus } from "react-icons/bs";
 import { BiHeart } from "react-icons/bi";
+import FormattedPrice from "../../Reuseables/FormattedPrice";
 
 function Stars() {
   const stars = [];
@@ -38,7 +39,9 @@ function Courses() {
                     <h2 className="text-[18px] font-bold mt-2">{val.title}</h2>
                     <p>{val.title_desc}</p>
                     <div className="flex flex-col gap-2 w-full">
-                      <p className="font-bold">PKR {val.price}</p>
+                      <p className="font-bold">
+                        <FormattedPrice price={val.price} />
+                      </p>
                       <p className="text-[#ffd700] flex flex-row items-center text-[18px] ">
                         <Stars />
                       </p>

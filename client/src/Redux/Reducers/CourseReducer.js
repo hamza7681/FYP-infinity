@@ -13,6 +13,11 @@ const CourseReducer = (state = initialState, action) => {
     case "ADD_TO_CART":
       const item = action.payload;
       const newPrice = state.totalPrice + item.price;
+      localStorage.setItem(
+        "cartItems",
+        JSON.stringify([...state.cartItems, item])
+      );
+      localStorage.setItem("totalPrice", newPrice);
       return {
         ...state,
         cartItems: [...state.cartItems, item],
@@ -24,13 +29,23 @@ const CourseReducer = (state = initialState, action) => {
         (item) => item._id !== newItem._id
       );
       const remPrice = state.totalPrice - newItem.price;
+      localStorage.setItem("totalPrice", remPrice);
+      localStorage.setItem("cartItems", JSON.stringify(filterProducts));
       return {
         ...state,
         cartItems: filterProducts,
         totalPrice: remPrice,
       };
     default:
-      return state;
+      return {
+        ...state,
+        cartItems: localStorage.getItem("cartItems")
+          ? JSON.parse(localStorage.getItem("cartItems"))
+          : [],
+        totalPrice: localStorage.getItem("totalPrice")
+          ? localStorage.getItem("totalPrice")
+          : 0,
+      };
   }
 };
 export default CourseReducer;

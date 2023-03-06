@@ -1,10 +1,12 @@
 import React from "react";
 import { FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
+import FormattedPrice from "../../Reuseables/FormattedPrice";
 
 const Courses = () => {
   const { cartItems, totalPrice } = useSelector((s) => s.CourseReducer);
   const dispatch = useDispatch();
+
   return (
     <>
       <div className="w-full flex justify-center  items-center relative">
@@ -55,17 +57,17 @@ const Courses = () => {
                           {val.created_by.firstName} {val.created_by.lastName}
                         </div>
                         <div className="w-1/5 text-[12px] md:text-[16px]">
-                          {val.price}
+                          <FormattedPrice price={val.price} />
                         </div>
                         <div className="w-1/5 text-[12px] md:text-[16px]">
                           <div
-                            className="bg-red-600 w-fit p-[7px] rounded-[4px]"
-                            onClick={() =>
+                            className="bg-red-600 w-fit p-[7px] rounded-[4px] cursor-pointer"
+                            onClick={() => {
                               dispatch({
                                 type: "REMOVE_FROM_CART",
                                 payload: val,
-                              })
-                            }
+                              });
+                            }}
                           >
                             <FaTrash className="text-white" />
                           </div>
@@ -90,7 +92,7 @@ const Courses = () => {
                     {cartItems.length}
                   </p>
                   <p className="text-[16px] md:text-[22px] text-gray-600 text-right">
-                    {totalPrice}
+                    <FormattedPrice price={totalPrice} />
                   </p>
                 </div>
               </div>
