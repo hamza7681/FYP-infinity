@@ -6,6 +6,6 @@ router.use("/category", require("./category.routes"));
 router.use("/course", require("./course.routes"));
 router.use("/follow", require("./follow.routes"));
 router.use("/notification", require("./notification.routes"));
-
+router.use("/order", require("./order.routes"));
 
 module.exports = router;

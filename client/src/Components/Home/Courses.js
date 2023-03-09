@@ -4,6 +4,7 @@ import { AiFillStar } from "react-icons/ai";
 import { BsCartDash, BsCartPlus } from "react-icons/bs";
 import { BiHeart } from "react-icons/bi";
 import FormattedPrice from "../../Reuseables/FormattedPrice";
+import { useNavigate } from "react-router-dom";
 
 function Stars() {
   const stars = [];
@@ -14,7 +15,9 @@ function Stars() {
 }
 function Courses() {
   const { courses, cartItems } = useSelector((s) => s.CourseReducer);
+  const { token } = useSelector((s) => s.AuthReducer);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -54,9 +57,13 @@ function Courses() {
                     </div>
                     {!cartItems.find((item) => item._id === val._id) ? (
                       <div
-                        onClick={() =>
-                          dispatch({ type: "ADD_TO_CART", payload: val })
-                        }
+                        onClick={() => {
+                          if (token) {
+                            dispatch({ type: "ADD_TO_CART", payload: val });
+                          } else {
+                            navigate("/login");
+                          }
+                        }}
                         className="border-2 rounded-br-lg gap-2 border-black flex flex-row items-center justify-center w-full  py-[10px] text-[#fff] bg-[#03043b] hover:bg-white hover:text-black  "
                       >
                         <BsCartPlus className="relative top-[-2px]" />
