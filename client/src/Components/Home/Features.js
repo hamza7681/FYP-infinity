@@ -34,7 +34,7 @@ const Features = () => {
           {feature.map((val, index) => {
             return (
               <>
-                <div className="w-full md:w-1/4 flex flex-row border-black border rounded-md py-[30px] px-[15px] ">
+                <div className="w-full md:w-1/4 flex flex-row gap-2 border-black border rounded-md py-[30px] px-[15px] ">
                   <div className="w-1/5 text-[50px] flex items-center">
                     {val.icon}
                   </div>
