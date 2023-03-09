@@ -182,7 +182,7 @@ const Navbar = () => {
                     <div className="border-[1px] my-[20px]"></div>
                     <div className="flex flex-col gap-2">
                       <Link
-                        to="/"
+                        to="/profile"
                         className="p-[8px] hover:bg-gray-300 rounded-[4px]"
                       >
                         My Profile
@@ -194,10 +194,10 @@ const Navbar = () => {
                         Messenger
                       </Link>
                       <Link
-                        to="/"
+                        to="/order"
                         className="p-[8px] hover:bg-gray-300 rounded-[4px]"
                       >
-                        Cart
+                        My Orders
                       </Link>
                       <Link
                         to="/"

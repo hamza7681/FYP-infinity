@@ -110,7 +110,7 @@ const Profile = () => {
             </div>
             <div>
               <h2 className="font-bold text[18px] mx-[15px] mt-5">About me</h2>
-              <h2 className="border-b-2 mt-1"></h2>
+              <div className="border-b-2 mt-1"></div>
             </div>
             {/* <div><label className='mt-3 w-[93%]' >Biography</label> */}
             {/* <GlobalInput type="text" placeholder="student/tutor" name="firstname" className="rounded-[5px] h-6" /> */}

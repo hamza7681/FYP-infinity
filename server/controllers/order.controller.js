@@ -1,44 +1,28 @@
 const { StatusCodes } = require("http-status-codes");
 const Order = require("../models/orderModel");
-const User = require("../models/userModel");
-const stripe = require("stripe")(
-  "sk_test_51LZUB5DX6pMxBdqEOjZfyA4uIBhOWMLx2xpomjVvrBhk2cRUdC5wx9KtexNGD1MckEeV7kyf3GvVzpqPyEWAdSeR00JvvFtxqh"
-);
 
 const orderCtrl = {
   addOrder: async (req, res) => {
-    const { totalPrice, ordered_by, product } = req.body;
+    const { totalPrice, ordered_by, product, card, card_number } = req.body;
     try {
-      if (!totalPrice || !ordered_by || !product.length === 0) {
+      if (
+        !totalPrice ||
+        !ordered_by ||
+        !product.length === 0 ||
+        !card ||
+        !card_number
+      ) {
         return res
           .status(StatusCodes.BAD_REQUEST)
           .json({ msg: "Missing details" });
       } else {
-        const user = await User.findOne({ _id: ordered_by });
         const newOrder = new Order({
           totalPrice: totalPrice,
           ordered_by,
           product: product,
+          card,
+          card_number,
         });
-        await stripe.customers
-          .create({
-            email: user.email,
-          })
-          .then((customer) => {
-            return stripe.paymentIntents
-              .create({
-                customer: customer.id,
-                amount: totalPrice,
-                currency: "usd",
-                description: "One-time setup fee",
-              })
-              .then((invoice) => {
-                console.log(invoice);
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          });
         await newOrder.save();
         return res
           .status(StatusCodes.OK)

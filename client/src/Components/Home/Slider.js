@@ -19,25 +19,25 @@ const Slider = () => {
         showIndicators={false}
       >
         <div>
-          <img src={pic1} className="md:h-[500px] h-[230px]" />
+          <img src={pic1} className="md:h-[500px] h-[230px]" alt="slider pic" />
           <p className="legend" id="slider_legend">
             Python Development
           </p>
         </div>
         <div>
-          <img src={pic2} className="md:h-[500px] h-[230px]" />
+          <img src={pic2} className="md:h-[500px] h-[230px]" alt="slider pic" />
           <p className="legend" id="slider_legend">
             React Js Crash Course
           </p>
         </div>
         <div>
-          <img src={pic3} className="md:h-[500px] h-[230px]" />
+          <img src={pic3} className="md:h-[500px] h-[230px]" alt="slider pic" />
           <p className="legend" id="slider_legend">
             Introduction to Graphics Designing
           </p>
         </div>
         <div>
-          <img src={pic4} className="md:h-[500px] h-[230px]" />
+          <img src={pic4} className="md:h-[500px] h-[230px]" alt="slider pic" />
           <p className="legend" id="slider_legend">
             Game Development
           </p>

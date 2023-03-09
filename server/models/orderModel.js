@@ -9,11 +9,22 @@ const orderModel = new mongoose.Schema(
     ordered_by: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Users",
+      required: true,
     },
+    card: {
+      type: String,
+      required: true,
+    },
+    card_number: {
+      type: String,
+      required: true,
+    },
+    
     product: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "courses",
+        required: true,
       },
     ],
   },

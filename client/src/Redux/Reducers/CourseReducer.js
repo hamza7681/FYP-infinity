@@ -36,6 +36,14 @@ const CourseReducer = (state = initialState, action) => {
         cartItems: filterProducts,
         totalPrice: remPrice,
       };
+    case "CHECKOUT":
+      localStorage.removeItem("totalPrice");
+      localStorage.removeItem("cartItems");
+      return {
+        ...state,
+        cartItems: [],
+        totalPrice: 0,
+      };
     default:
       return {
         ...state,

@@ -12,7 +12,6 @@ const Chat = () => {
   const [selectChat, setSelectChat] = useState(null);
   const dispatch = useDispatch();
   const { token, user } = useSelector((s) => s.AuthReducer);
-  const { users } = useSelector((s) => s.ChatReducer);
   const socket = useRef();
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [sendMessage, setSendMessage] = useState(null);
