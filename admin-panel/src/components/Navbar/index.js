@@ -49,6 +49,8 @@ import NotificationPage from "../../pages/NotificationPage";
 import NotificationMenu from "./NotificationMenu";
 import { http } from "../../axios/config";
 import { toast } from "react-toastify";
+import OrderPage from "../../pages/OrderPage";
+import ViewOrderPage from "../../pages/ViewOrderPage";
 
 const drawerWidth = 240;
 
@@ -468,6 +470,8 @@ const Navbar = () => {
             <Route path="/students" element={<StudentPage />} />
             <Route path="/students/:id" element={<ViewStudentPage />} />
             <Route path="/notifications" element={<NotificationPage />} />
+            <Route path="/orders" element={<OrderPage />} />
+            <Route path="/orders/:id" element={<ViewOrderPage />} />
           </Route>
         </Routes>
       </Box>
