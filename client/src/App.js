@@ -18,6 +18,7 @@ import { http } from "./Axios/config";
 import AddCoursePage from "./Pages/AddCoursePage";
 import TutorPage from "./Pages/TutorPage";
 import OrderPage from "./Pages/OrderPage";
+import ViewCoursePage from "./Pages/ViewCoursePage";
 function App() {
   const { token } = useSelector((s) => s.AuthReducer);
   const dispatch = useDispatch();
@@ -53,6 +54,7 @@ function App() {
           <Route path="/chat" element={<ChatPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/add-course" element={<AddCoursePage />} />
+          <Route path="/course/:id" element={<ViewCoursePage />} />
           <Route path="/tutors" element={<TutorPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/order" element={<OrderPage />} />

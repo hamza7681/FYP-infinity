@@ -5,6 +5,7 @@ import { BsCartDash, BsCartPlus } from "react-icons/bs";
 import { BiHeart } from "react-icons/bi";
 import FormattedPrice from "../../Reuseables/FormattedPrice";
 import { useNavigate } from "react-router-dom";
+import { FaEdit } from "react-icons/fa";
 
 function Stars() {
   const stars = [];
@@ -15,7 +16,7 @@ function Stars() {
 }
 function Courses() {
   const { courses, cartItems } = useSelector((s) => s.CourseReducer);
-  const { token } = useSelector((s) => s.AuthReducer);
+  const { token, user } = useSelector((s) => s.AuthReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -30,6 +31,7 @@ function Courses() {
                 <div
                   key={val._id}
                   className="mt-2 w-full md:w-1/5 border-2 drop-shadow-xl hover:cursor-pointer mb-2 flex flex-col rounded-lg"
+                  onClick={() => navigate("/course/" + val._id)}
                 >
                   <div className="w-full">
                     <img
@@ -55,30 +57,47 @@ function Courses() {
                       <BiHeart className="relative top-[-2px]" />
                       <div> Wishlist</div>
                     </div>
-                    {!cartItems.find((item) => item._id === val._id) ? (
+                    {user.role === 2 ? (
                       <div
                         onClick={() => {
-                          if (token) {
-                            dispatch({ type: "ADD_TO_CART", payload: val });
-                          } else {
-                            navigate("/login");
-                          }
+                          navigate("/edit-course" + val._id);
                         }}
                         className="border-2 rounded-br-lg gap-2 border-black flex flex-row items-center justify-center w-full  py-[10px] text-[#fff] bg-[#03043b] hover:bg-white hover:text-black  "
                       >
-                        <BsCartPlus className="relative top-[-2px]" />
-                        <div>Cart</div>
+                        <FaEdit className="relative top-[-2px]" />
+                        <div>Edit</div>
                       </div>
                     ) : (
-                      <div
-                        onClick={() =>
-                          dispatch({ type: "REMOVE_FROM_CART", payload: val })
-                        }
-                        className="border-2 rounded-br-lg gap-2 border-black flex flex-row items-center justify-center w-full  py-[10px] text-[#fff] bg-red-500 hover:bg-white hover:text-black  "
-                      >
-                        <BsCartDash className="relative top-[-2px]" />
-                        <div>Remove</div>
-                      </div>
+                      <>
+                        {!cartItems.find((item) => item._id === val._id) ? (
+                          <div
+                            onClick={() => {
+                              if (token) {
+                                dispatch({ type: "ADD_TO_CART", payload: val });
+                              } else {
+                                navigate("/login");
+                              }
+                            }}
+                            className="border-2 rounded-br-lg gap-2 border-black flex flex-row items-center justify-center w-full  py-[10px] text-[#fff] bg-[#03043b] hover:bg-white hover:text-black  "
+                          >
+                            <BsCartPlus className="relative top-[-2px]" />
+                            <div>Cart</div>
+                          </div>
+                        ) : (
+                          <div
+                            onClick={() =>
+                              dispatch({
+                                type: "REMOVE_FROM_CART",
+                                payload: val,
+                              })
+                            }
+                            className="border-2 rounded-br-lg gap-2 border-black flex flex-row items-center justify-center w-full  py-[10px] text-[#fff] bg-red-500 hover:bg-white hover:text-black  "
+                          >
+                            <BsCartDash className="relative top-[-2px]" />
+                            <div>Remove</div>
+                          </div>
+                        )}
+                      </>
                     )}
                   </div>
                 </div>
