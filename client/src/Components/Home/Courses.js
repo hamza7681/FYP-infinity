@@ -23,13 +23,13 @@ function Courses() {
     <>
       <div className="py-[10px] px-[25px] mt-3">
         <h2 className="font-bold text-[25px] ">Courses</h2>
-        <div className="w-full flex flex-col gap-3 md:flex-row ">
+        <div className="w-full flex flex-col gap-3 md:flex-row flex-wrap">
           {courses.map((val) => {
             return (
               <>
                 <div
                   key={val._id}
-                  className="mt-2 w-full md:w-1/5 border-2 drop-shadow-xl hover:cursor-pointer mb-2 flex flex-col  rounded-lg"
+                  className="mt-2 w-full md:w-1/5 border-2 drop-shadow-xl hover:cursor-pointer mb-2 flex flex-col rounded-lg"
                 >
                   <div className="w-full">
                     <img

@@ -25,7 +25,7 @@ router.get("/get-profile", auth, getProfile);
 router.get("/all-users", auth, allUsers);
 router.get("/get-user/:id", auth, getUser);
 router.get("/search-user", auth, searchUser);
-router.get("/dashboard/:year/:month", getDashboard);
+router.get("/dashboard", getDashboard);
 router.post("/admin-login", adminLogin);
 router.get("/get-tutors", getTutors);
 router.get("/get-tutor-id/:id", getTutorById);

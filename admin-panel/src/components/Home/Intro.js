@@ -1,10 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { introArray } from "../../helpers/introArray";
 import Cards from "./Cards";
 
-const Intro = () => {
+const Intro = ({ data }) => {
   const { appBackground } = useSelector((s) => s.ThemeReducer);
+
+  console.log(data);
   return (
     <>
       <div className="pt-[50px] w-full">
@@ -24,13 +25,24 @@ const Intro = () => {
           wise, so I am changing myself.
         </p>
         <div className="flex flex-row w-full justify-start gap-4 flex-wrap">
-          {introArray.map((val) => {
-            return (
-              <>
-                <Cards data={val} newData={val.data}/>
-              </>
-            );
-          })}
+          <Cards
+            data={data.students && data.students}
+            tooltipTitle="Students"
+            title="Students"
+            subTitle="Students per year"
+          />
+          <Cards
+            data={data.tutors && data.tutors}
+            tooltipTitle="Tutors"
+            title="Tutors"
+            subTitle="Tutors per year"
+          />
+          <Cards
+            data={data.orders && data.orders}
+            tooltipTitle="Orders"
+            title="Orders"
+            subTitle="Orders per year"
+          />
         </div>
       </div>
     </>

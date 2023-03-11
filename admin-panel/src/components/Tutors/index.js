@@ -17,8 +17,8 @@ import { useNavigate } from "react-router-dom";
 const columns = [
   { id: "sr", label: "Sr No.", minWidth: 50 },
   { id: "name", label: "Name", minWidth: 270 },
-  { id: "email", label: "Email", minWidth: 200 },
   { id: "subject", label: "Subject", minWidth: 200 },
+  { id: "email", label: "Email", minWidth: 200 },
   { id: "view", label: "View", minWidth: 50 },
   { id: "delete", label: "Delete", minWidth: 50 },
 ];

@@ -4,6 +4,9 @@ const bcrypt = require("bcrypt");
 const { tokenGenerator } = require("../utils/tokenGenerator");
 const EmailSender = require("../utils/emailSender");
 const Follow = require("../models/followModel");
+const moment = require("moment");
+const Order = require("../models/orderModel");
+const Course = require("../models/courseModel");
 
 const userCtrl = {
   register: async (req, res) => {
@@ -331,89 +334,113 @@ const userCtrl = {
     }
   },
   getDashboard: async (req, res) => {
+    const startDate = moment("2023-01-01")
+    const endDate = moment('2023-12-31');
+    const pipeline = [
+      {
+        $match: {
+          role: 0,
+          createdAt: {
+            $gte: startDate.toDate(),
+            $lte: endDate.toDate(),
+          },
+        },
+      },
+      {
+        $group: {
+          _id: { $dateToString: { format: '%Y-%m-%d', date: '$createdAt' } },
+          count: { $sum: 1 },
+          createdAt: { $min: '$createdAt' },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          count: 1,
+          createdAt: { $dateToString: { format: '%Y-%m-%d', date: '$createdAt' } },
+        },
+      },
+      {
+        $sort: {
+          createdAt: 1,
+        },
+      },
+    ];
+    const pipeline2 = [
+      {
+        $match: {
+          role: 2,
+          createdAt: {
+            $gte: startDate.toDate(),
+            $lte: endDate.toDate(),
+          },
+        },
+      },
+      {
+        $group: {
+          _id: { $month: "$createdAt" },
+          count: { $sum: 1 },
+          createdAt: { $min: "$createdAt" },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          count: 1,
+          createdAt: {
+            $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
+          },
+        },
+      },
+      {
+        $sort: {
+          createdAt: 1,
+        },
+      },
+    ];
+    const pipeline3 = [
+      {
+        $match: {
+          createdAt: {
+            $gte: startDate.toDate(),
+            $lte: endDate.toDate(),
+          },
+        },
+      },
+      {
+        $group: {
+          _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
+          count: { $sum: 1 },
+          createdAt: { $min: "$createdAt" },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          count: 1,
+          createdAt: {
+            $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
+          },
+        },
+      },
+      {
+        $sort: {
+          createdAt: 1,
+        },
+      },
+    ];
     try {
-      const { year, month } = req.params;
-      const startDate = new Date(`${year}-${month}-01`);
-      const endDate = new Date(
-        startDate.getFullYear(),
-        startDate.getMonth() + 1,
-        0
-      );
-      let newArray = [];
-      //For Students
-      const result = await User.aggregate([
-        {
-          $match: {
-            role: 0,
-            createdAt: {
-              $gte: startDate,
-              $lt: endDate,
-            },
-          },
-        },
-        {
-          $group: {
-            _id: {
-              $dateToString: {
-                format: "%Y-%m-%d",
-                date: "$createdAt",
-              },
-            },
-            qty: { $sum: 1 },
-          },
-        },
-        {
-          $sort: { _id: 1 },
-        },
-      ]);
-      const data = result.map((user) => ({
-        qty: user.qty,
-        date: user._id,
-      }));
-
+      const studentsPerMonth = await User.aggregate(pipeline);
+      const tutorsPerMonth = await User.aggregate(pipeline2);
+      const orders = await Order.aggregate(pipeline3);
+      const courses = await Course.find();
       let obj = {
-        name: "Students",
-        data: data,
+        students: studentsPerMonth,
+        tutors: tutorsPerMonth,
+        orders: orders,
+        courses: courses.length,
       };
-      newArray.push(obj);
-
-      const tutor = await User.aggregate([
-        {
-          $match: {
-            role: 1,
-            createdAt: {
-              $gte: startDate,
-              $lt: endDate,
-            },
-          },
-        },
-        {
-          $group: {
-            _id: {
-              $dateToString: {
-                format: "%Y-%m-%d",
-                date: "$createdAt",
-              },
-            },
-            qty: { $sum: 1 },
-          },
-        },
-        {
-          $sort: { _id: 1 },
-        },
-      ]);
-      const tutordata = tutor.map((user) => ({
-        qty: user.qty,
-        date: user._id,
-      }));
-
-      let obj2 = {
-        name: "Tutors",
-        data: tutordata,
-      };
-      newArray.push(obj2);
-
-      return res.status(StatusCodes.OK).json(newArray);
+      return res.status(StatusCodes.OK).json(obj);
     } catch (error) {
       return res
         .status(StatusCodes.INTERNAL_SERVER_ERROR)
