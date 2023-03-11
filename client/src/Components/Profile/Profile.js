@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import pic from "../../Assets/dp.jpg";
 import GlobalButton from "../../Reuseables/GlobalButton";
 import GlobalInput from "../../Reuseables/GlobalInput";

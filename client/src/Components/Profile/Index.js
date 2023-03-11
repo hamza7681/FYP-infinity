@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Profile from './Profile';
-import Courses from './My_Courses';
+// import Courses from './My_Courses';
 import Settings from './Settings';
 import Footer from '../Footer/Footer';
 import Navbar from '../Navbar/index'
@@ -9,7 +9,7 @@ function Index () {
 
   const pages = [
     <Profile />,
-    <Courses />,
+    // <Courses />,
     <Settings />,
   ];
 
@@ -24,7 +24,7 @@ function Index () {
     <Navbar/>
       <nav className='flex flex-row ml-5 gap-7 mt-10 shadow-md'>
         <button className='hover:border-b border-black font-bold text-[20px]' onClick={() => handlePageChange(0)}>Profile</button>
-        <button className='hover:border-b border-black font-bold text-[20px]' onClick={() => handlePageChange(1)}>My-Courses</button>
+        {/* <button className='hover:border-b border-black font-bold text-[20px]' onClick={() => handlePageChange(1)}>My-Courses</button> */}
         <button className='hover:border-b border-black font-bold text-[20px]' onClick={() => handlePageChange(2)}>Settings</button>
       </nav>
       {currentPage}
