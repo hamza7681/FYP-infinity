@@ -334,8 +334,8 @@ const userCtrl = {
     }
   },
   getDashboard: async (req, res) => {
-    const startDate = moment("2023-01-01")
-    const endDate = moment('2023-12-31');
+    const startDate = moment("2023-01-01");
+    const endDate = moment("2023-12-31");
     const pipeline = [
       {
         $match: {
@@ -348,16 +348,18 @@ const userCtrl = {
       },
       {
         $group: {
-          _id: { $dateToString: { format: '%Y-%m-%d', date: '$createdAt' } },
+          _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
           count: { $sum: 1 },
-          createdAt: { $min: '$createdAt' },
+          createdAt: { $min: "$createdAt" },
         },
       },
       {
         $project: {
           _id: 0,
           count: 1,
-          createdAt: { $dateToString: { format: '%Y-%m-%d', date: '$createdAt' } },
+          createdAt: {
+            $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
+          },
         },
       },
       {
@@ -429,16 +431,47 @@ const userCtrl = {
         },
       },
     ];
+    const pipeline4 = [
+      {
+        $match: {
+          createdAt: {
+            $gte: startDate.toDate(),
+            $lte: endDate.toDate(),
+          },
+        },
+      },
+      {
+        $group: {
+          _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
+          count: { $sum: 1 },
+          createdAt: { $min: "$createdAt" },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          count: 1,
+          createdAt: {
+            $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
+          },
+        },
+      },
+      {
+        $sort: {
+          createdAt: 1,
+        },
+      },
+    ];
     try {
       const studentsPerMonth = await User.aggregate(pipeline);
       const tutorsPerMonth = await User.aggregate(pipeline2);
       const orders = await Order.aggregate(pipeline3);
-      const courses = await Course.find();
+      const courses = await Course.aggregate(pipeline4);
       let obj = {
         students: studentsPerMonth,
         tutors: tutorsPerMonth,
         orders: orders,
-        courses: courses.length,
+        courses: courses,
       };
       return res.status(StatusCodes.OK).json(obj);
     } catch (error) {

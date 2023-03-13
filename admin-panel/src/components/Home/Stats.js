@@ -1,5 +1,6 @@
 import React from "react";
 import Chart from "react-apexcharts";
+import CourseCard from "./CourseCard";
 
 const Stats = ({ data }) => {
   const studentSeries = data?.students?.map(({ count, createdAt }) => ({
@@ -29,16 +30,15 @@ const Stats = ({ data }) => {
     yaxis: {
       title: {
         text: "Number of students/tutors",
-        style:{
-          color:'#ffffff'
-        }
+        style: {
+          color: "#ffffff",
+        },
       },
       labels: {
         style: {
           colors: "#FFFFFF", // set color of x-axis labels to white
         },
       },
-    
     },
     grid: {
       show: false,
@@ -75,7 +75,9 @@ const Stats = ({ data }) => {
             />
           </div>
         </div>
-        <div className="w-2/5 flex flex-col gap-4"></div>
+        <div className="w-2/5 flex flex-col gap-4">
+          <CourseCard data={data} />
+        </div>
       </div>
     </>
   );

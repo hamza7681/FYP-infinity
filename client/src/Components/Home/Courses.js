@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AiFillStar } from "react-icons/ai";
-import { BsCartDash, BsCartPlus } from "react-icons/bs";
+import { BsArrowRight, BsCartDash, BsCartPlus } from "react-icons/bs";
 import { BiHeart } from "react-icons/bi";
 import FormattedPrice from "../../Reuseables/FormattedPrice";
 import { useNavigate } from "react-router-dom";
@@ -24,8 +24,8 @@ function Courses() {
     <>
       <div className="py-[10px] px-[25px] mt-3">
         <h2 className="font-bold text-[25px] ">Courses</h2>
-        <div className="w-full flex flex-col gap-3 md:flex-row flex-wrap">
-          {courses.map((val) => {
+        <div className="w-full flex flex-col gap-3 md:flex-row flex-wrap items-center">
+          {courses.slice(0, 4).map((val) => {
             return (
               <>
                 <div
@@ -40,7 +40,7 @@ function Courses() {
                       className=" border w-full rounded-lg md:h-[150px] h-[200px]"
                     />
                   </div>
-                  <div className="gap-2 px-[16px] flex flex-col py-[20px]">
+                  <div className="gap-2 px-[16px] h-[220px] flex flex-col py-[20px]">
                     <h2 className="text-[18px] font-bold mt-2">{val.title}</h2>
                     <p>{val.title_desc}</p>
                     <div className="flex flex-col gap-2 w-full">
@@ -104,6 +104,15 @@ function Courses() {
               </>
             );
           })}
+          <div className="flex flex-col gap-2 rounded-[5px] justify-center items-center w-[200px] border-2 drop-shadow-xl mb-2 h-[300px]">
+            <div
+              className="w-[70px] h-[70px] bg-[#03043b] rounded-full flex justify-center items-center cursor-pointer"
+              onClick={() => navigate("/courses")}
+            >
+              <BsArrowRight className="text-white text-[22px]" />
+            </div>
+            <p>Show More</p>
+          </div>
         </div>
       </div>
     </>

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
 
-const Cards = ({ data, tooltipTitle, title, subTitle }) => {
+const CourseCard = ({ data }) => {
   const [chartData, setChartData] = useState({
     options: {
       chart: {
@@ -50,14 +50,14 @@ const Cards = ({ data, tooltipTitle, title, subTitle }) => {
 
     series: [
       {
-        name: tooltipTitle,
+        name: "Courses",
         data: [],
       },
     ],
   });
 
   useEffect(() => {
-    const formattedData = data?.map((item) => ({
+    const formattedData = data?.courses?.map((item) => ({
       x: new Date(item.createdAt).getTime(),
       y: item.count,
     }));
@@ -91,18 +91,18 @@ const Cards = ({ data, tooltipTitle, title, subTitle }) => {
   }, [chartData, data]);
 
   const TotalCount = () => {
-    const totalCount = data?.reduce((total, currentValue) => {
+    const totalCount = data?.courses?.reduce((total, currentValue) => {
       return total + currentValue.count;
     }, 0);
     return totalCount;
   };
 
   return (
-    <div className=" relative w-[400px] bg-gradient-to-r from-blue-500 to-blue-800 p-[15px] rounded-[7px] overflow-hidden">
+    <div className=" relative w-[98%] bg-gradient-to-r from-green-500 to-green-800 p-[15px] rounded-[7px] overflow-hidden">
       <div className="flex flex-row justify-between items-center">
         <div>
-          <p className="text-white text-[24px]">{title}</p>
-          <p className="text-gray-300 text-[14px]">{subTitle}</p>
+          <p className="text-white text-[24px]">Courses</p>
+          <p className="text-gray-300 text-[14px]">Courses per year</p>
         </div>
         <p className="text-[32px] text-white pr-[30px]">
           <TotalCount />
@@ -118,4 +118,4 @@ const Cards = ({ data, tooltipTitle, title, subTitle }) => {
   );
 };
 
-export default Cards;
+export default CourseCard;
