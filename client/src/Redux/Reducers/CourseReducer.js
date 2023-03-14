@@ -2,6 +2,7 @@ const initialState = {
   courses: [],
   cartItems: [],
   totalPrice: 0,
+  wishlist: [],
 };
 const CourseReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -35,6 +36,11 @@ const CourseReducer = (state = initialState, action) => {
         ...state,
         cartItems: filterProducts,
         totalPrice: remPrice,
+      };
+    case "WISHLIST":
+      return {
+        ...state,
+        wishlist: action.payload,
       };
     case "CHECKOUT":
       localStorage.removeItem("totalPrice");

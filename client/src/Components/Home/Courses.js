@@ -15,7 +15,7 @@ function Stars() {
   return <>{stars}</>;
 }
 function Courses() {
-  const { courses, cartItems } = useSelector((s) => s.CourseReducer);
+  const { courses, cartItems, wishlist } = useSelector((s) => s.CourseReducer);
   const { token, user } = useSelector((s) => s.AuthReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -71,9 +71,10 @@ function Courses() {
                       <>
                         {!cartItems.find((item) => item._id === val._id) ? (
                           <div
-                            onClick={() => {
+                            onClick={(e) => {
                               if (token) {
                                 dispatch({ type: "ADD_TO_CART", payload: val });
+                                e.stopPropagation();
                               } else {
                                 navigate("/login");
                               }
@@ -85,12 +86,13 @@ function Courses() {
                           </div>
                         ) : (
                           <div
-                            onClick={() =>
+                            onClick={(e) => {
                               dispatch({
                                 type: "REMOVE_FROM_CART",
                                 payload: val,
-                              })
-                            }
+                              });
+                              e.stopPropagation();
+                            }}
                             className="border-2 rounded-br-lg gap-2 border-black flex flex-row items-center justify-center w-full  py-[10px] text-[#fff] bg-red-500 hover:bg-white hover:text-black  "
                           >
                             <BsCartDash className="relative top-[-2px]" />

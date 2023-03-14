@@ -7,5 +7,6 @@ router.use("/course", require("./course.routes"));
 router.use("/follow", require("./follow.routes"));
 router.use("/notification", require("./notification.routes"));
 router.use("/order", require("./order.routes"));
+router.use("/wishlist", require("./wishlist.routes"));
 
 module.exports = router;

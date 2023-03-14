@@ -13,6 +13,8 @@ const {
   getTutorById,
   deleteTutorById,
   getStudents,
+  updateProfile,
+  updateProfileStatus,
 } = require("../controllers/user.controller");
 const auth = require("../middlewares/auth.middleware");
 const router = require("express").Router();
@@ -31,5 +33,7 @@ router.get("/get-tutors", getTutors);
 router.get("/get-tutor-id/:id", getTutorById);
 router.delete("/delete-tutor/:id", auth, deleteTutorById);
 router.get("/get-students", getStudents);
+router.patch("/update-profile", auth, updateProfile);
+router.patch("/update-profile-status", auth, updateProfileStatus);
 
 module.exports = router;

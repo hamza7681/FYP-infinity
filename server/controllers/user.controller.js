@@ -228,6 +228,52 @@ const userCtrl = {
         .json({ msg: error.message });
     }
   },
+  updateProfile: async (req, res) => {
+    const {
+      firstName,
+      lastName,
+      qualification,
+      facebook,
+      linkedin,
+      website,
+      subject,
+      description,
+    } = req.body;
+    const id = req.user;
+    try {
+      await User.findByIdAndUpdate(id, {
+        firstName,
+        lastName,
+        qualification,
+        facebook,
+        linkedin,
+        website,
+        subject,
+        description,
+      });
+      return res
+        .status(StatusCodes.OK)
+        .json({ msg: "Profile updated Successfully" });
+    } catch (error) {
+      return res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ msg: error.message });
+    }
+  },
+  updateProfileStatus: async (req, res) => {
+    const { visibility } = req.body;
+    const id = req.user;
+    try {
+      await User.findOneAndUpdate(id, { visibility });
+      return res
+        .status(StatusCodes.OK)
+        .json({ msg: "Profile visibility updated Successfully" });
+    } catch (error) {
+      return res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ msg: error.message });
+    }
+  },
   allUsers: async (req, res) => {
     try {
       const id = req.user;
@@ -380,7 +426,7 @@ const userCtrl = {
       },
       {
         $group: {
-          _id: { $month: "$createdAt" },
+          _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
           count: { $sum: 1 },
           createdAt: { $min: "$createdAt" },
         },

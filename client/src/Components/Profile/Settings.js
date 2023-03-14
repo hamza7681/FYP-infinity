@@ -1,18 +1,57 @@
-import React from 'react'
+import React, { useState } from "react";
+import PulseLoader from "react-spinners/PulseLoader";
+import { http } from "../../Axios/config";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 const Settings = () => {
+  const { user, token } = useSelector((s) => s.AuthReducer);
+  const [visibility, setVisibility] = useState(user?.visibility);
+  const [loading, setLoading] = useState(false);
+
+  const update = async () => {
+    setLoading(true);
+    try {
+      const res = await http.patch(
+        "/auth/update-profile-status",
+        { visibility },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      toast.success(res.data.msg);
+      setLoading(false);
+    } catch (error) {
+      toast.error(error.response.data.msg);
+      setLoading(false);
+    }
+  };
   return (
     <>
-    <div className='flex lg:flex-row md:flex-row flex-col w-full'>
-      <div className='w-[30%] bg-blue-400'>
-        <h1>hello</h1>
+      <div className="flex flex-col w-full h-[50vh] p-[30px]">
+        <div className="flex flex-row items-center gap-2">
+          <input
+            type="checkbox"
+            id="privacy1"
+            checked={visibility}
+            defaultChecked={visibility}
+            onChange={(e) => setVisibility(e.target.checked)}
+          />
+          <label htmlFor="privacy1">
+            Do you want to show your profile to others?
+          </label>
+        </div>
+        <button
+          onClick={update}
+          className="w-fit mt-[20px] bg-[#04043A] text-white px-[25px] py-[10px] rounded-[5px]"
+        >
+          {loading ? <PulseLoader color="#ffffff" /> : "Save"}
+        </button>
       </div>
-      <div className='w-[70%] bg-red-500'>
-        <h1>world</h1>
-      </div>
-    </div>
     </>
-  )
-}
+  );
+};
 
-export default Settings
+export default Settings;
