@@ -79,7 +79,7 @@ const Navbar = () => {
           <div className="flex flex-row items-center gap-3 border-[2px] border-gray-500 px-[15px] py-[15px] rounded-full">
             <BsSearch className="text-[22px]" />
             <input
-              type="text"
+              type="search"
               placeholder="Search for anything"
               className="w-full focus:outline-none"
             />
