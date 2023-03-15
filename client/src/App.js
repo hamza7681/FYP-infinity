@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import ChatPage from "./Pages/ChatPage";
+import AllCoursesPage from "./Pages/AllCoursesPage";
 import HomePage from "./Pages/HomePage";
 import LoginPage from "./Pages/LoginPage";
 import ProfilePage from "./Pages/ProfilePage";
@@ -52,6 +53,7 @@ function App() {
         </Route>
         <Route element={<PrivateRoutes />}>
           <Route path="/chat" element={<ChatPage />} />
+          <Route path="/courses" element={<AllCoursesPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/add-course" element={<AddCoursePage />} />
           <Route path="/course/:id" element={<ViewCoursePage />} />
