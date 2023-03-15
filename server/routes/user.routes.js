@@ -15,8 +15,10 @@ const {
   getStudents,
   updateProfile,
   updateProfileStatus,
+  updateDp,
 } = require("../controllers/user.controller");
 const auth = require("../middlewares/auth.middleware");
+const dpImageUpload = require("../middlewares/dp.middleware");
 const router = require("express").Router();
 
 router.post("/register", register);
@@ -35,5 +37,6 @@ router.delete("/delete-tutor/:id", auth, deleteTutorById);
 router.get("/get-students", getStudents);
 router.patch("/update-profile", auth, updateProfile);
 router.patch("/update-profile-status", auth, updateProfileStatus);
+router.patch("/update-dp", auth, dpImageUpload.single("dp"), updateDp);
 
 module.exports = router;

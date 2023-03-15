@@ -274,6 +274,22 @@ const userCtrl = {
         .json({ msg: error.message });
     }
   },
+  updateDp: async (req, res) => {
+    const file = req.file;
+    const id = req.user;
+    try {
+      await User.findByIdAndUpdate(id, {
+        dp: `http://localhost:5000/${file.path}`,
+      });
+      return res
+        .status(StatusCodes.OK)
+        .json({ msg: "Profile Image updated successfully" });
+    } catch (error) {
+      return res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ msg: error.message });
+    }
+  },
   allUsers: async (req, res) => {
     try {
       const id = req.user;

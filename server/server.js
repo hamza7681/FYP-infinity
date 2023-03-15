@@ -21,6 +21,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/chatMedia", express.static("chatMedia/"));
 app.use("/courseImages", express.static("courseImages/"));
+app.use("/profileImages", express.static("profileImages/"));
 
 //socket io
 let activeUsers = [];

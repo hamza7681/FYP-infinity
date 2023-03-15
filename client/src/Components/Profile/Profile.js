@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import ProfileInput from "../../Reuseables/ProfileInput";
-import { FaFacebookF, FaLinkedin } from "react-icons/fa";
+import { FaFacebookF, FaLinkedin, FaCheck, FaTimes } from "react-icons/fa";
 import { BsGlobe } from "react-icons/bs";
 import { toast } from "react-toastify";
 import PulseLoader from "react-spinners/PulseLoader";
+import ClipLoader from "react-spinners/ClipLoader";
 import { http } from "../../Axios/config";
+import { TbCameraPlus } from "react-icons/tb";
 
 const Profile = () => {
   const { user, token } = useSelector((s) => s.AuthReducer);
@@ -18,6 +20,11 @@ const Profile = () => {
   const [linkedin, setLinkedIn] = useState(user?.linkedin);
   const [website, setWebsite] = useState(user?.website);
   const [loading, setLoading] = useState(false);
+  const [show, setShow] = useState(false);
+  const [imgFile, setImgFile] = useState(null);
+  const [img, setImg] = useState(user?.dp);
+  const [showBtn, setShowBtn] = useState(false);
+  const [loading1, setLoading1] = useState(false);
 
   const update = async () => {
     setLoading(true);
@@ -48,6 +55,36 @@ const Profile = () => {
     }
   };
 
+  const handleImage = (event) => {
+    const file = event.target.files[0];
+    setImgFile(file);
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      setImg(e.target.result);
+      setShowBtn(true);
+    };
+
+    reader.readAsDataURL(file);
+  };
+
+  const upload = async () => {
+    setLoading1(true);
+    const formData = new FormData();
+    formData.append("dp", imgFile);
+    try {
+      const res = await http.patch("/auth/update-dp", formData, {
+        headers: { Authorization: token },
+      });
+      toast.success(res.data.msg);
+      setLoading1(false);
+      setShowBtn(false);
+    } catch (error) {
+      toast.error(error.response.data.msg);
+      setLoading1(false);
+      setShowBtn(false);
+    }
+  };
   return (
     <>
       <div className="flex md:flex-row flex-col ">
@@ -55,12 +92,54 @@ const Profile = () => {
           <div className=" w-full flex justify-center items-center relative">
             <div className="w-[80%] h-[90%] gap-2 flex flex-col relative items-center border-b-[2px] py-[20px] md:border-b-[0px]">
               <div className="flex justify-center flex-col gap-2 relative items-center">
-                <div className="flex justify-center">
+                <div className="flex justify-center relative">
                   <img
-                    src={user?.dp}
+                    src={img}
                     alt="Profile Pic"
                     className="rounded-full w-[130px]"
+                    onMouseEnter={() => setShow(true)}
                   />
+                  {showBtn ? (
+                    <div className="flex flex-row items-center gap-4 absolute bottom-[-10px] z-10">
+                      <div
+                        className="bg-white flex justify-center items-center w-[30px] h-[30px] border-[2px] rounded-full cursor-pointer"
+                        onClick={upload}
+                      >
+                        {!loading1 ? (
+                          <FaCheck className="text-green-500" />
+                        ) : (
+                          <ClipLoader color="#000000" size="14px" />
+                        )}
+                      </div>
+                      <div
+                        className="bg-white  flex justify-center items-center w-[30px] h-[30px] border-[2px] rounded-full cursor-pointer"
+                        onClick={() => {
+                          setShowBtn(false);
+                          setImg(user?.dp);
+                        }}
+                      >
+                        <FaTimes className="text-red-500" />
+                      </div>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                  <div
+                    className={`absolute top-0 flex flex-col justify-center items-center w-[130px] h-[130px] rounded-full bg-black opacity-70 ${
+                      show ? "block " : "hidden"
+                    }`}
+                    onMouseLeave={() => setShow(false)}
+                  >
+                    <label htmlFor="upload" className="cursor-pointer">
+                      <TbCameraPlus className="text-white text-[24px]" />
+                    </label>
+                    <input
+                      type="file"
+                      className="hidden"
+                      id="upload"
+                      onChange={handleImage}
+                    />
+                  </div>
                 </div>
                 <div className="flex flex-col items-center justify-center">
                   <p className="text-[26px] font-semibold tracking-wider">
