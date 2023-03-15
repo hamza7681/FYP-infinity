@@ -19,6 +19,7 @@ import AddCoursePage from "./Pages/AddCoursePage";
 import TutorPage from "./Pages/TutorPage";
 import OrderPage from "./Pages/OrderPage";
 import ViewCoursePage from "./Pages/ViewCoursePage";
+import WishListPage from "./Pages/WishListPage";
 function App() {
   const { token } = useSelector((s) => s.AuthReducer);
   const dispatch = useDispatch();
@@ -58,6 +59,7 @@ function App() {
           <Route path="/tutors" element={<TutorPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/order" element={<OrderPage />} />
+          <Route path="/wishlist" element={<WishListPage />} />
         </Route>
       </Routes>
     </>

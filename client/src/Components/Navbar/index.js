@@ -40,7 +40,12 @@ const Navbar = () => {
     <>
       <div className="flex flex-row justify-between shadow-lg h-[80px] items-center sticky top-0 px-[10px] z-10 bg-white">
         <div>
-          <img src={logo} alt="logo" className="h-[70px] relative" />
+          <img
+            src={logo}
+            alt="logo"
+            className="h-[70px] relative cursor-pointer"
+            onClick={() => navigate("/")}
+          />
         </div>
         <div className="cursor-pointer md:block hidden">
           <span
@@ -50,14 +55,14 @@ const Navbar = () => {
             Categories
           </span>
           {showDiv ? (
-            <div className="absolute top-[60px] left-[160px] flex flex-col bg-white border-[1px] rounded-[4px]">
+            <div className="absolute top-[60px] h-[400px] scrollbar-hidden overflow-y-scroll left-[160px] flex flex-col bg-white border-[1px] rounded-[4px]">
               {Categories &&
                 Categories.map((val, index) => {
                   return (
                     <>
                       <Link
                         to="/"
-                        className="px-[10px] py-[15px] hover:bg-gray-300"
+                        className="text-[14px] px-[10px] py-[15px] hover:bg-gray-300"
                         onClick={() => setShowDiv(false)}
                       >
                         {val.name}
@@ -137,7 +142,7 @@ const Navbar = () => {
               {user.role === 2 ? (
                 ""
               ) : (
-                <Link to="/" className="text-[20px] ">
+                <Link to="/wishlist" className="text-[20px] ">
                   <FiHeart />
                 </Link>
               )}
