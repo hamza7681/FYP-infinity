@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AiFillStar } from "react-icons/ai";
-import { BsArrowRight, BsCartDash, BsCartPlus } from "react-icons/bs";
+import {
+  BsArrowRight,
+  BsCartDash,
+  BsCartPlus,
+  BsFillHeartFill,
+} from "react-icons/bs";
 import { BiHeart } from "react-icons/bi";
 import FormattedPrice from "../../Reuseables/FormattedPrice";
 import { useNavigate } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
+import { http } from "../../Axios/config";
+import { toast } from "react-toastify";
 
 function Stars() {
   const stars = [];
@@ -15,10 +22,48 @@ function Stars() {
   return <>{stars}</>;
 }
 function Courses() {
-  const { courses, cartItems, wishlist } = useSelector((s) => s.CourseReducer);
+  const { courses, cartItems } = useSelector((s) => s.CourseReducer);
   const { token, user } = useSelector((s) => s.AuthReducer);
+  const [wishlist, setWishlist] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [fetchAgain, setFetchAgain] = useState(false);
+
+  useEffect(() => {
+    if (token) {
+      const getWishlist = async () => {
+        try {
+          const res = await http.get("/wishlist/get-wishlist-userId", {
+            headers: { Authorization: token },
+          });
+          setWishlist(res.data);
+          setFetchAgain(false);
+        } catch (error) {
+          setFetchAgain(false);
+          console.log(error);
+        }
+      };
+      getWishlist();
+    }
+  }, [token, fetchAgain]);
+
+  const addToWishlist = async (id) => {
+    try {
+      const res = await http.post(
+        "/wishlist/add-wishlist",
+        { added_by: user._id, course: id },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      toast.success(res.data.msg);
+      setFetchAgain(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -53,10 +98,31 @@ function Courses() {
                     </div>
                   </div>
                   <div className="flex flex-row justify-between w-full">
-                    <div className="border-2 rounded-bl-lg gap-2 border-black flex flex-row  items-center justify-center w-full   py-[10px] text-[#fff] bg-[#03043b] hover:bg-white hover:text-black  ">
-                      <BiHeart className="relative top-[-2px]" />
-                      <div> Wishlist</div>
-                    </div>
+                    {wishlist &&
+                    !wishlist.find((item) => item.course._id === val._id) ? (
+                      <div
+                        onClick={(e) => {
+                          addToWishlist(val._id);
+                          e.stopPropagation();
+                        }}
+                        className="border-2 rounded-bl-lg gap-2 border-black flex flex-row  items-center justify-center w-full   py-[10px] text-[#fff] bg-[#03043b] hover:bg-white hover:text-black  "
+                      >
+                        <BiHeart className="relative top-[-2px]" />
+                        <div> Wishlist</div>
+                      </div>
+                    ) : (
+                      <div
+                        onClick={(e) => {
+                          addToWishlist(val._id);
+                          e.stopPropagation();
+                        }}
+                        className="border-2 rounded-bl-lg gap-2 border-black flex flex-row  items-center justify-center w-full   py-[10px] text-[#fff] bg-[#03043b] hover:bg-white hover:text-black  "
+                      >
+                        <BsFillHeartFill className="text-red-500 relative top-[-2px]" />
+                        <div> Remove</div>
+                      </div>
+                    )}
+
                     {user.role === 2 ? (
                       <div
                         onClick={() => {
