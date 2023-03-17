@@ -21,6 +21,7 @@ import TutorPage from "./Pages/TutorPage";
 import OrderPage from "./Pages/OrderPage";
 import ViewCoursePage from "./Pages/ViewCoursePage";
 import WishListPage from "./Pages/WishListPage";
+import EditCoursePage from "./Components/Courses/EditCourse";
 function App() {
   const { token } = useSelector((s) => s.AuthReducer);
   const dispatch = useDispatch();
@@ -57,6 +58,7 @@ function App() {
           <Route path="/courses" element={<AllCoursesPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/add-course" element={<AddCoursePage />} />
+          <Route path="/edit-course" element={<EditCoursePage />} />
           <Route path="/course/:id" element={<ViewCoursePage />} />
           <Route path="/tutors" element={<TutorPage />} />
           <Route path="/profile" element={<ProfilePage />} />
