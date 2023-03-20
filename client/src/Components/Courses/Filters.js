@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import {ImSearch} from 'react-icons/im'
 
+
 const Filters = () => {
+  
     const [showFilters, setShowFilters] = useState(true);
     const [selectedCategory, setSelectedCategory] = useState('');
     const [selectedPriceRange, setSelectedPriceRange] = useState('');
@@ -29,17 +31,34 @@ const Filters = () => {
         }
       });
     };
+ 
+    // const handleSearch = (e) => {
+    //   const searchTerm = e.target.value;
+    //   if (searchTerm === "") {
+    //     setCourses(defaultData);
+    //   } else {
+    //     const filterArray = Courses.filter((val) => {
+    //       return (
+    //         val.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    //         val.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    //         val.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    //         val.subject.toLowerCase().includes(searchTerm.toLowerCase())
+    //       );
+    //     });
+    //     setCourses(filterArray);
+    //   }
+    // };
   
   return (
     <>
     <div className='h-full w-auto'>
-      {showFilters && (
         <div className="w-25%">
           <div className="flex items-center justify-between mb-4 mt-4">
   <input
     type="text"
     placeholder="Search for anything"
-    className="px-4 py-2 border border-gray-400 rounded w-full"
+    className="px-4 py-2 border border-gray-400 rounded w-full"                 
+  
   />
   <div className="relative">
     <ImSearch className="absolute -top-5 right-0 mr-4 mt-3" />
@@ -148,7 +167,6 @@ const Filters = () => {
 
           </div>
         </div>
-      )}
     </div>
   </>
 );

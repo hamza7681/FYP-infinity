@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import Navbar from '../Navbar/index'
 import Footer from '../Footer/Footer'
 import Filters from './Filters'
-import Courses from './Courses'
+// import FilterCourses from './FilterCourses'
 
 const AllCourses = () => {
 
@@ -15,7 +15,7 @@ const AllCourses = () => {
           <Filters/>
         </div>
         <div className='lg:w-3/4 w-full'>
-             <Courses/>
+             {/* <FilterCourses/> */}
         </div>
      </div>
      <Footer/>
