@@ -162,16 +162,17 @@ const Navbar = () => {
                 onClick={() => setDropdown(!dropdown)}
               >
                 <img
-                  src="https://media.istockphoto.com/id/1316420668/vector/user-icon-human-person-symbol-social-profile-icon-avatar-login-sign-web-user-symbol.jpg?s=612x612&w=0&k=20&c=AhqW2ssX8EeI2IYFm6-ASQ7rfeBWfrFFV4E87SaFhJE="
+                  src={user && user?.dp}
                   className="h-[50px] rounded-full"
                   alt="dp"
                 />
+
                 <div className="absolute top-0 left-[38px] w-[15px] h-[15px] bg-[#36b404] flex justify-center items-center rounded-full"></div>
                 {dropdown ? (
                   <div className="absolute top-[50px] right-[30px] bg-white border-[1px] w-[350px] p-[20px] rounded-[4px] shadow-md">
                     <div className="flex flex-row items-center justify-start gap-2">
                       <img
-                        src={user.dp}
+                        src={user && user?.dp}
                         className="h-[70px] rounded-full"
                         alt="dp"
                       />
