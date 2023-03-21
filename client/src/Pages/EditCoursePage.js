@@ -1,5 +1,4 @@
 import React from 'react'
-import AddCourse from "../Components/Courses/AddCourse";
 import Navbar from "../Components/Navbar";
 import { useSelector } from "react-redux";
 import { BsExclamationTriangle } from "react-icons/bs";
