@@ -3,10 +3,11 @@ import Profile from "./Profile";
 import Settings from "./Settings";
 import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/index";
+import Whistlist from './Whishlist'
 function Index() {
   const [pageIndex, setPageIndex] = useState(0);
 
-  const pages = [<Profile />, <Settings />];
+  const pages = [<Profile />, <Settings />, <Whistlist/>];
 
   const handlePageChange = (index) => {
     setPageIndex(index);
@@ -33,6 +34,14 @@ function Index() {
           onClick={() => handlePageChange(1)}
         >
           Settings
+        </p>
+        <p
+          className={`border-b-[2px] ${
+            pageIndex === 2 ? "border-black" : "border-white"
+          } hover:border-b-[2px] font-semibold text-[20px] cursor-pointer`}
+          onClick={() => handlePageChange(2)}
+        >
+          Whishlist
         </p>
       </nav>
       {currentPage}

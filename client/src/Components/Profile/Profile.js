@@ -96,7 +96,7 @@ const Profile = () => {
                   <img
                     src={img}
                     alt="Profile Pic"
-                    className="rounded-full w-[130px]"
+                    className="rounded-full w-[150px] h-[150px]"
                     onMouseEnter={() => setShow(true)}
                   />
                   {showBtn ? (
@@ -125,7 +125,7 @@ const Profile = () => {
                     ""
                   )}
                   <div
-                    className={`absolute top-0 flex flex-col justify-center items-center w-[130px] h-[130px] rounded-full bg-black opacity-70 ${
+                    className={`absolute top-0 flex flex-col justify-center items-center w-[150px] h-[150px] rounded-full bg-black opacity-70  ${
                       show ? "block " : "hidden"
                     }`}
                     onMouseLeave={() => setShow(false)}
@@ -141,7 +141,7 @@ const Profile = () => {
                     />
                   </div>
                 </div>
-                <div className="flex flex-col items-center justify-center">
+                <div className="flex flex-col items-center justify-center  mt-6">
                   <p className="text-[26px] font-semibold tracking-wider">
                     {user?.firstName} {user?.lastName}
                   </p>
@@ -192,6 +192,8 @@ const Profile = () => {
             </div>
           </div>
         </div>
+
+
         <div className="w-full md:w-[70%]  md:border-l-[2px] md:pl-[10px]">
           <div className="flex w-full mt-12">
             <div className="w-[70%]">
@@ -243,7 +245,7 @@ const Profile = () => {
               />
               <ProfileInput
                 styleClass="w-full md:w-1/2"
-                label="LinkedIn"
+                label="Linkedin"
                 value={linkedin}
                 change={(e) => setLinkedIn(e.target.value)}
                 placeholder={linkedin === "" ? "Enter your linkedin url" : ""}
