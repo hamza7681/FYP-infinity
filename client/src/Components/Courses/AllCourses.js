@@ -89,10 +89,10 @@ const AllCourses = () => {
 
   return (
     <>
-      <div className="w-full border-b-[3px] pb-[10px]">
+      <div className="w-full border-b-[3px] p-[20px]" >
         <h1 className="text-[24px] font-semibold">Courses</h1>
       </div>
-      <div className="mx-20  w-auto flex lg:flex-row flex-col mt-10 gap-x-7">
+      <div className="px-[10px] md:mx-20  w-auto flex lg:flex-row flex-col mt-10 gap-x-7">
         <div className="lg:w-1/4 w-full">
           <Filters
             handleSearch={handleSearch}
@@ -110,7 +110,6 @@ const AllCourses = () => {
           />
         </div>
       </div>
-      <Footer />
     </>
   );
 };

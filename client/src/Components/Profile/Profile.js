@@ -9,40 +9,22 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { http } from "../../Axios/config";
 import { TbCameraPlus } from "react-icons/tb";
 
-const Profile = () => {
-  const [ user, setUser ] = useState({});
+const Profile = ({ user, setFetchAgain }) => {
   const { token } = useSelector((s) => s.AuthReducer);
-  const [firstName, setFirstName] = useState(user?.firstName);
-  const [lastName, setLastName] = useState(user?.lastName);
-  const [qualification, setQualification] = useState(user?.qualification);
-  const [subject, setSubject] = useState(user?.subject);
-  const [description, setDescription] = useState(user?.description);
-  const [facebook, setFacebook] = useState(user?.facebook);
-  const [linkedin, setLinkedIn] = useState(user?.linkedin);
-  const [website, setWebsite] = useState(user?.website);
+  const [firstName, setFirstName] = useState(user.firstName);
+  const [lastName, setLastName] = useState(user.lastName);
+  const [qualification, setQualification] = useState(user.qualification);
+  const [subject, setSubject] = useState(user.subject);
+  const [description, setDescription] = useState(user.description);
+  const [facebook, setFacebook] = useState(user.facebook);
+  const [linkedin, setLinkedIn] = useState(user.linkedin);
+  const [website, setWebsite] = useState(user.website);
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
   const [imgFile, setImgFile] = useState(null);
-  const [img, setImg] = useState(user?.dp);
+  const [img, setImg] = useState(user.dp);
   const [showBtn, setShowBtn] = useState(false);
   const [loading1, setLoading1] = useState(false);
-
-  useEffect(() => {
-    if (token) {
-      const getUser = async () => {
-        try {
-          const res = await http.get("/auth/get-profile", {
-            headers: { Authorization: token },
-          });
-          setUser(res.data.user);
-          // dispatch({ type: "GET_USER", payload: res.data.user });
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      getUser();
-    }
-  }, [token]);
 
   const update = async () => {
     setLoading(true);
@@ -67,9 +49,11 @@ const Profile = () => {
       );
       toast.success(res.data.msg);
       setLoading(false);
+      setFetchAgain(true);
     } catch (error) {
       toast.error(error.response.data.msg);
       setLoading(false);
+      setFetchAgain(true);
     }
   };
 
@@ -96,10 +80,12 @@ const Profile = () => {
       });
       toast.success(res.data.msg);
       setLoading1(false);
+      setFetchAgain(true);
       setShowBtn(false);
     } catch (error) {
       toast.error(error.response.data.msg);
       setLoading1(false);
+      setFetchAgain(true);
       setShowBtn(false);
     }
   };
@@ -112,7 +98,7 @@ const Profile = () => {
               <div className="flex justify-center flex-col gap-2 relative items-center">
                 <div className="flex justify-center relative">
                   <img
-                    src={img}
+                    src={img === undefined ? user.dp : img}
                     alt="Profile Pic"
                     className="rounded-full w-[150px] h-[150px]"
                     onMouseEnter={() => setShow(true)}
@@ -133,7 +119,7 @@ const Profile = () => {
                         className="bg-white  flex justify-center items-center w-[30px] h-[30px] border-[2px] rounded-full cursor-pointer"
                         onClick={() => {
                           setShowBtn(false);
-                          setImg(user?.dp);
+                          setImg(user.dp);
                         }}
                       >
                         <FaTimes className="text-red-500" />
@@ -161,47 +147,47 @@ const Profile = () => {
                 </div>
                 <div className="flex flex-col items-center justify-center  mt-6">
                   <p className="text-[26px] font-semibold tracking-wider">
-                    {user?.firstName} {user?.lastName}
+                    {user.firstName} {user.lastName}
                   </p>
-                  <p className="text-[15px] text-gray-500">{user?.email}</p>
+                  <p className="text-[15px] text-gray-500">{user.email}</p>
                   <p className="text-[15px]">
-                    {user?.role === 0 ? "Student" : "Tutor"}
+                    {user.role === 0 ? "Student" : "Tutor"}
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 mt-[20px]">
-                  {user?.facebook === "" ? (
+                  {user.facebook === "" ? (
                     ""
                   ) : (
                     <div className="flex justify-start flex-row items-center gap-2">
                       <FaFacebookF className="text-[#3b5998]" />
                       <a
-                        href={user?.facebook}
+                        href={user.facebook}
                         className="underline text-[13px]"
                       >
-                        {user?.facebook}
+                        {user.facebook}
                       </a>
                     </div>
                   )}
-                  {user?.linkedin === "" ? (
+                  {user.linkedin === "" ? (
                     ""
                   ) : (
                     <div className="flex justify-start flex-row items-center gap-2">
                       <FaLinkedin className="text-[#0e76a8]" />
                       <a
-                        href={user?.linkedin}
+                        href={user.linkedin}
                         className="underline text-[13px]"
                       >
-                        {user?.linkedin}
+                        {user.linkedin}
                       </a>
                     </div>
                   )}
-                  {user?.website === "" ? (
+                  {user.website === "" ? (
                     ""
                   ) : (
                     <div className="flex justify-start flex-row items-center gap-2">
                       <BsGlobe className="text-black" />
-                      <a href={user?.website} className="underline text-[13px]">
-                        {user?.website}
+                      <a href={user.website} className="underline text-[13px]">
+                        {user.website}
                       </a>
                     </div>
                   )}
@@ -210,7 +196,6 @@ const Profile = () => {
             </div>
           </div>
         </div>
-
 
         <div className="w-full md:w-[70%]  md:border-l-[2px] md:pl-[10px]">
           <div className="flex w-full mt-12">
@@ -226,13 +211,13 @@ const Profile = () => {
               <ProfileInput
                 styleClass="w-full md:w-1/2"
                 label="First Name"
-                value={user?.firstName}
+                value={user.firstName}
                 change={(e) => setFirstName(e.target.value)}
               />
               <ProfileInput
                 styleClass="w-full md:w-1/2"
                 label="Last Name"
-                value={user?.lastName}
+                value={user.lastName}
                 change={(e) => setLastName(e.target.value)}
               />
             </div>
@@ -240,7 +225,7 @@ const Profile = () => {
               <ProfileInput
                 styleClass="w-full md:w-1/2"
                 label="Email"
-                value={user?.email}
+                value={user.email}
                 disabled={true}
               />
               <ProfileInput
@@ -276,7 +261,7 @@ const Profile = () => {
                 placeholder={website === "" ? "Enter your linkedin url" : ""}
               />
             </div>
-            {user?.role === 2 ? (
+            {user.role === 2 ? (
               <div className="flex flex-col md:flex-row gap-2 w-full pb-[10px]">
                 <ProfileInput
                   styleClass="w-full"

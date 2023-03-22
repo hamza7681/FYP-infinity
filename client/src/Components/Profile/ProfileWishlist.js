@@ -5,7 +5,7 @@ import FormattedPrice from "../../Reuseables/FormattedPrice";
 import { BsCart3, BsFillHeartFill } from "react-icons/bs";
 import ReactPaginate from "react-paginate";
 
-const WishList = () => {
+const ProfileWishlist = () => {
   const { token } = useSelector((s) => s.AuthReducer);
   const [wishlist, setWishlist] = useState([]);
 
@@ -115,4 +115,4 @@ const WishList = () => {
   );
 };
 
-export default WishList;
+export default ProfileWishlist;

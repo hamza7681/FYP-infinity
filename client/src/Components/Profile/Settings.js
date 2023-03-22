@@ -4,8 +4,8 @@ import { http } from "../../Axios/config";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 
-const Settings = () => {
-  const { user, token } = useSelector((s) => s.AuthReducer);
+const Settings = ({ user }) => {
+  const { token } = useSelector((s) => s.AuthReducer);
   const [visibility, setVisibility] = useState(user?.visibility);
   const [loading, setLoading] = useState(false);
 

@@ -1,13 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Profile from "./Profile";
 import Settings from "./Settings";
-import Footer from "../Footer/Footer";
- import Navbar from "../Navbar/index";
-import Whistlist from './Whishlist'
-function Index({ user }) {
+import { useSelector } from "react-redux";
+import { http } from "../../Axios/config";
+import ProfileWishlist from "./ProfileWishlist";
+import MyCourses from "./MyCourses";
+function Index() {
   const [pageIndex, setPageIndex] = useState(0);
+  const { token } = useSelector((s) => s.AuthReducer);
+  const [user, setUser] = useState({});
+  const [fetchAgain, setFetchAgain] = useState(false);
 
-  const pages = [<Profile user={user && user}/>, <Settings user={user && user}/>, <Whistlist/>];
+  useEffect(() => {
+    if (token) {
+      const getUser = async () => {
+        try {
+          const res = await http.get("/auth/get-profile", {
+            headers: { Authorization: token },
+          });
+          setUser(res.data.user);
+          setFetchAgain(false);
+        } catch (error) {
+          console.log(error);
+          setFetchAgain(false);
+        }
+      };
+      getUser();
+    }
+  }, [token, fetchAgain]);
+
+  const pages = [
+    <Profile user={user && user} setFetchAgain={setFetchAgain} />,
+    <Settings user={user && user} setFetchAgain={setFetchAgain} />,
+    <ProfileWishlist />,
+    <MyCourses />,
+  ];
 
   const handlePageChange = (index) => {
     setPageIndex(index);
@@ -17,9 +44,6 @@ function Index({ user }) {
 
   return (
     <>
-    <div>
-  {pageIndex === 0 || pageIndex === 1 ? <Navbar /> : null}
-</div>
       <div className="flex flex-row ml-5 gap-7 shadow-md py-10">
         <p
           className={`border-b-[2px] ${
@@ -37,19 +61,27 @@ function Index({ user }) {
         >
           Settings
         </p>
-        <p
-          className={`border-b-[2px] ${
-            pageIndex === 2 ? "border-black" : "border-white"
-          } hover:border-b-[2px] font-semibold text-[20px] cursor-pointer`}
-          onClick={() => handlePageChange(2)}
-        >
-          Whishlist
-        </p>
+        {user && user?.role === 0 ? (
+          <p
+            className={`border-b-[2px] ${
+              pageIndex === 2 ? "border-black" : "border-white"
+            } hover:border-b-[2px] font-semibold text-[20px] cursor-pointer`}
+            onClick={() => handlePageChange(2)}
+          >
+            My Wishlist
+          </p>
+        ) : (
+          <p
+            className={`border-b-[2px] ${
+              pageIndex === 3 ? "border-black" : "border-white"
+            } hover:border-b-[2px] font-semibold text-[20px] cursor-pointer`}
+            onClick={() => handlePageChange(3)}
+          >
+            My Courses
+          </p>
+        )}
       </div>
       {currentPage}
-      <div>
-      {pageIndex === 0 || pageIndex === 1 ? <Footer /> : null}
-    </div>      
     </>
   );
 }
