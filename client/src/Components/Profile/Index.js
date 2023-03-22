@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Profile from "./Profile";
 import Settings from "./Settings";
 import Footer from "../Footer/Footer";
-import Navbar from "../Navbar/index";
+ import Navbar from "../Navbar/index";
 import Whistlist from './Whishlist'
 function Index({ user }) {
   const [pageIndex, setPageIndex] = useState(0);
@@ -17,8 +17,10 @@ function Index({ user }) {
 
   return (
     <>
-      <Navbar />
-      <nav className="flex flex-row ml-5 gap-7 mt-10 shadow-md pb-[10px]">
+    <div>
+  {pageIndex === 0 || pageIndex === 1 ? <Navbar /> : null}
+</div>
+      <div className="flex flex-row ml-5 gap-7 shadow-md py-10">
         <p
           className={`border-b-[2px] ${
             pageIndex === 0 ? "border-black" : "border-white"
@@ -43,9 +45,11 @@ function Index({ user }) {
         >
           Whishlist
         </p>
-      </nav>
+      </div>
       {currentPage}
-      <Footer />
+      <div>
+      {pageIndex === 0 || pageIndex === 1 ? <Footer /> : null}
+    </div>      
     </>
   );
 }
