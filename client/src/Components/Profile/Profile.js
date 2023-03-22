@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import ProfileInput from "../../Reuseables/ProfileInput";
 import { FaFacebookF, FaLinkedin, FaCheck, FaTimes } from "react-icons/fa";
@@ -10,7 +10,8 @@ import { http } from "../../Axios/config";
 import { TbCameraPlus } from "react-icons/tb";
 
 const Profile = () => {
-  const { user, token } = useSelector((s) => s.AuthReducer);
+  const [ user, setUser ] = useState({});
+  const { token } = useSelector((s) => s.AuthReducer);
   const [firstName, setFirstName] = useState(user?.firstName);
   const [lastName, setLastName] = useState(user?.lastName);
   const [qualification, setQualification] = useState(user?.qualification);
@@ -25,6 +26,23 @@ const Profile = () => {
   const [img, setImg] = useState(user?.dp);
   const [showBtn, setShowBtn] = useState(false);
   const [loading1, setLoading1] = useState(false);
+
+  useEffect(() => {
+    if (token) {
+      const getUser = async () => {
+        try {
+          const res = await http.get("/auth/get-profile", {
+            headers: { Authorization: token },
+          });
+          setUser(res.data.user);
+          // dispatch({ type: "GET_USER", payload: res.data.user });
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      getUser();
+    }
+  }, [token]);
 
   const update = async () => {
     setLoading(true);
@@ -150,7 +168,7 @@ const Profile = () => {
                     {user?.role === 0 ? "Student" : "Tutor"}
                   </p>
                 </div>
-                <div className="flex flex-col gap-2 mt-[20px]">
+                <div className="flex flex-row gap-2 mt-[20px]">
                   {user?.facebook === "" ? (
                     ""
                   ) : (

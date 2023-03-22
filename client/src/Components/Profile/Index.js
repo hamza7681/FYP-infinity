@@ -4,10 +4,10 @@ import Settings from "./Settings";
 import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/index";
 import Whistlist from './Whishlist'
-function Index() {
+function Index({ user }) {
   const [pageIndex, setPageIndex] = useState(0);
 
-  const pages = [<Profile />, <Settings />, <Whistlist/>];
+  const pages = [<Profile user={user && user}/>, <Settings user={user && user}/>, <Whistlist/>];
 
   const handlePageChange = (index) => {
     setPageIndex(index);
