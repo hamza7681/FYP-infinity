@@ -168,7 +168,7 @@ const Profile = () => {
                     {user?.role === 0 ? "Student" : "Tutor"}
                   </p>
                 </div>
-                <div className="flex flex-row gap-2 mt-[20px]">
+                <div className="flex flex-col gap-2 mt-[20px]">
                   {user?.facebook === "" ? (
                     ""
                   ) : (
@@ -226,13 +226,13 @@ const Profile = () => {
               <ProfileInput
                 styleClass="w-full md:w-1/2"
                 label="First Name"
-                value={firstName}
+                value={user?.firstName}
                 change={(e) => setFirstName(e.target.value)}
               />
               <ProfileInput
                 styleClass="w-full md:w-1/2"
                 label="Last Name"
-                value={lastName}
+                value={user?.lastName}
                 change={(e) => setLastName(e.target.value)}
               />
             </div>
