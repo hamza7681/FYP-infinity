@@ -9,9 +9,9 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { http } from "../../Axios/config";
 import { TbCameraPlus } from "react-icons/tb";
 
-const Profile = ({ user, setFetchAgain }) => {
+const Profile = () => {
   const { token } = useSelector((s) => s.AuthReducer);
-  const [firstName, setFirstName] = useState(user.firstName);
+  const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState(user.lastName);
   const [qualification, setQualification] = useState(user.qualification);
   const [subject, setSubject] = useState(user.subject);
@@ -19,12 +19,29 @@ const Profile = ({ user, setFetchAgain }) => {
   const [facebook, setFacebook] = useState(user.facebook);
   const [linkedin, setLinkedIn] = useState(user.linkedin);
   const [website, setWebsite] = useState(user.website);
+  const [img, setImg] = useState(user.dp);
+
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
   const [imgFile, setImgFile] = useState(null);
-  const [img, setImg] = useState(user.dp);
   const [showBtn, setShowBtn] = useState(false);
   const [loading1, setLoading1] = useState(false);
+
+  useEffect(() => {
+    if (token) {
+      const getUser = async () => {
+        try {
+          const res = await http.get("/auth/get-profile", {
+            headers: { Authorization: token },
+          });
+          setFirstName(res.data.user.firstName);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      getUser();
+    }
+  }, [token, fetchAgain]);
 
   const update = async () => {
     setLoading(true);
@@ -160,10 +177,7 @@ const Profile = ({ user, setFetchAgain }) => {
                   ) : (
                     <div className="flex justify-start flex-row items-center gap-2">
                       <FaFacebookF className="text-[#3b5998]" />
-                      <a
-                        href={user.facebook}
-                        className="underline text-[13px]"
-                      >
+                      <a href={user.facebook} className="underline text-[13px]">
                         {user.facebook}
                       </a>
                     </div>
@@ -173,10 +187,7 @@ const Profile = ({ user, setFetchAgain }) => {
                   ) : (
                     <div className="flex justify-start flex-row items-center gap-2">
                       <FaLinkedin className="text-[#0e76a8]" />
-                      <a
-                        href={user.linkedin}
-                        className="underline text-[13px]"
-                      >
+                      <a href={user.linkedin} className="underline text-[13px]">
                         {user.linkedin}
                       </a>
                     </div>

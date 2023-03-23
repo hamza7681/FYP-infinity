@@ -29,12 +29,7 @@ function Index() {
     }
   }, [token, fetchAgain]);
 
-  const pages = [
-    <Profile user={user && user} setFetchAgain={setFetchAgain} />,
-    <Settings user={user && user} setFetchAgain={setFetchAgain} />,
-    <ProfileWishlist />,
-    <MyCourses />,
-  ];
+  const pages = [<Profile />, <Settings />, <ProfileWishlist />, <MyCourses />];
 
   const handlePageChange = (index) => {
     setPageIndex(index);
