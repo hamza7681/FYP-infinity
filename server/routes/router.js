@@ -8,5 +8,6 @@ router.use("/follow", require("./follow.routes"));
 router.use("/notification", require("./notification.routes"));
 router.use("/order", require("./order.routes"));
 router.use("/wishlist", require("./wishlist.routes"));
+router.use("/feedback", require("./feedback.routes"));
 
 module.exports = router;
