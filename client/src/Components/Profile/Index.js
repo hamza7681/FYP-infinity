@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Profile from "./Profile";
 import Settings from "./Settings";
+import Feedbacks from './Feedbacks';
 import { useSelector } from "react-redux";
 import { http } from "../../Axios/config";
 import ProfileWishlist from "./ProfileWishlist";
 import MyCourses from "./MyCourses";
-function Index() {
+const Index = () => {
   const [pageIndex, setPageIndex] = useState(0);
   const { token } = useSelector((s) => s.AuthReducer);
   const [user, setUser] = useState({});
@@ -29,7 +30,7 @@ function Index() {
     }
   }, [token, fetchAgain]);
 
-  const pages = [<Profile />, <Settings />, <ProfileWishlist />, <MyCourses />];
+  const pages = [<Profile />, <Settings />, <ProfileWishlist />, <MyCourses />, <Feedbacks/>];
 
   const handlePageChange = (index) => {
     setPageIndex(index);
@@ -75,6 +76,14 @@ function Index() {
             My Courses
           </p>
         )}
+         <p
+            className={`border-b-[2px] ${
+              pageIndex === 4 ? "border-black" : "border-white"
+            } hover:border-b-[2px] font-semibold text-[20px] cursor-pointer`}
+            onClick={() => handlePageChange(3)}
+          >
+            Feedbacks
+          </p>
       </div>
       {currentPage}
     </>

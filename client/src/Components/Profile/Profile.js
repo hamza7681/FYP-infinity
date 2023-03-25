@@ -9,32 +9,43 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { http } from "../../Axios/config";
 import { TbCameraPlus } from "react-icons/tb";
 
-const Profile = () => {
+const Profile = ({user}) => {
   const { token } = useSelector((s) => s.AuthReducer);
   const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState(user.lastName);
-  const [qualification, setQualification] = useState(user.qualification);
-  const [subject, setSubject] = useState(user.subject);
-  const [description, setDescription] = useState(user.description);
-  const [facebook, setFacebook] = useState(user.facebook);
-  const [linkedin, setLinkedIn] = useState(user.linkedin);
-  const [website, setWebsite] = useState(user.website);
-  const [img, setImg] = useState(user.dp);
+  const [email, setEmail] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [qualification, setQualification] = useState("");
+  const [subject, setSubject] = useState("");
+  const [description, setDescription] = useState("");
+  const [facebook, setFacebook] = useState("");
+  const [linkedin, setLinkedIn] = useState("");
+  const [website, setWebsite] = useState("");
+  const [img, setImg] = useState("");
 
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
   const [imgFile, setImgFile] = useState(null);
   const [showBtn, setShowBtn] = useState(false);
   const [loading1, setLoading1] = useState(false);
+  const [fetchAgain, setFetchAgain] = useState(false);
 
   useEffect(() => {
     if (token) {
       const getUser = async () => {
         try {
-          const res = await http.get("/auth/get-profile", {
+          const res = await http.get("/aufacebookth/get-profile", {
             headers: { Authorization: token },
           });
           setFirstName(res.data.user.firstName);
+          setLastName(res.data.user.lastName);
+          setEmail(res.data.users.email);
+          setQualification(res.data.user.qualification);
+          setSubject(res.data.user.subject);
+          setDescription(res.data.user.description);
+          setFacebook(res.data.user.facebook);
+          setLinkedIn(res.data.user.linkedin);
+          setWebsite(res.data.user.website);
+          setImg(res.data.user.dp);
         } catch (error) {
           console.log(error);
         }
@@ -164,11 +175,11 @@ const Profile = () => {
                 </div>
                 <div className="flex flex-col items-center justify-center  mt-6">
                   <p className="text-[26px] font-semibold tracking-wider">
-                    {user.firstName} {user.lastName}
+                    {firstName} {lastName}
                   </p>
-                  <p className="text-[15px] text-gray-500">{user.email}</p>
+                  <p className="text-[15px] text-gray-500">{email}</p>
                   <p className="text-[15px]">
-                    {user.role === 0 ? "Student" : "Tutor"}
+                    {role === 0 ? "Student" : "Tutor"}
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 mt-[20px]">
@@ -222,13 +233,13 @@ const Profile = () => {
               <ProfileInput
                 styleClass="w-full md:w-1/2"
                 label="First Name"
-                value={user.firstName}
+                value={firstName}
                 change={(e) => setFirstName(e.target.value)}
               />
               <ProfileInput
                 styleClass="w-full md:w-1/2"
                 label="Last Name"
-                value={user.lastName}
+                value={lastName}
                 change={(e) => setLastName(e.target.value)}
               />
             </div>
@@ -236,7 +247,7 @@ const Profile = () => {
               <ProfileInput
                 styleClass="w-full md:w-1/2"
                 label="Email"
-                value={user.email}
+                value={email}
                 disabled={true}
               />
               <ProfileInput
