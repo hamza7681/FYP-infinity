@@ -9,7 +9,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { http } from "../../Axios/config";
 import { TbCameraPlus } from "react-icons/tb";
 
-const Profile = ({user}) => {
+const Profile = () => {
   const { token } = useSelector((s) => s.AuthReducer);
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
@@ -21,6 +21,7 @@ const Profile = ({user}) => {
   const [linkedin, setLinkedIn] = useState("");
   const [website, setWebsite] = useState("");
   const [img, setImg] = useState("");
+  const [user, setUser] = useState({});
 
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
@@ -33,12 +34,14 @@ const Profile = ({user}) => {
     if (token) {
       const getUser = async () => {
         try {
-          const res = await http.get("/aufacebookth/get-profile", {
+          const res = await http.get("/auth/get-profile", {
             headers: { Authorization: token },
           });
+          console.log(res.data.user);
+          setUser(res.data.user);
           setFirstName(res.data.user.firstName);
           setLastName(res.data.user.lastName);
-          setEmail(res.data.users.email);
+          setEmail(res.data.user.email);
           setQualification(res.data.user.qualification);
           setSubject(res.data.user.subject);
           setDescription(res.data.user.description);
@@ -46,8 +49,10 @@ const Profile = ({user}) => {
           setLinkedIn(res.data.user.linkedin);
           setWebsite(res.data.user.website);
           setImg(res.data.user.dp);
+          setFetchAgain(false);
         } catch (error) {
           console.log(error);
+          setFetchAgain(false);
         }
       };
       getUser();
@@ -81,7 +86,7 @@ const Profile = ({user}) => {
     } catch (error) {
       toast.error(error.response.data.msg);
       setLoading(false);
-      setFetchAgain(true);
+      setFetchAgain(false);
     }
   };
 
@@ -113,7 +118,7 @@ const Profile = ({user}) => {
     } catch (error) {
       toast.error(error.response.data.msg);
       setLoading1(false);
-      setFetchAgain(true);
+      setFetchAgain(false);
       setShowBtn(false);
     }
   };
@@ -126,7 +131,7 @@ const Profile = ({user}) => {
               <div className="flex justify-center flex-col gap-2 relative items-center">
                 <div className="flex justify-center relative">
                   <img
-                    src={img === undefined ? user.dp : img}
+                    src={img === "" ? user && user.dp : img}
                     alt="Profile Pic"
                     className="rounded-full w-[150px] h-[150px]"
                     onMouseEnter={() => setShow(true)}
@@ -179,11 +184,11 @@ const Profile = ({user}) => {
                   </p>
                   <p className="text-[15px] text-gray-500">{email}</p>
                   <p className="text-[15px]">
-                    {role === 0 ? "Student" : "Tutor"}
+                    {user && user.role === 0 ? "Student" : "Tutor"}
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 mt-[20px]">
-                  {user.facebook === "" ? (
+                  {user && user.facebook === "" ? (
                     ""
                   ) : (
                     <div className="flex justify-start flex-row items-center gap-2">
@@ -193,7 +198,7 @@ const Profile = ({user}) => {
                       </a>
                     </div>
                   )}
-                  {user.linkedin === "" ? (
+                  {user && user.linkedin === "" ? (
                     ""
                   ) : (
                     <div className="flex justify-start flex-row items-center gap-2">
@@ -203,7 +208,7 @@ const Profile = ({user}) => {
                       </a>
                     </div>
                   )}
-                  {user.website === "" ? (
+                  {user && user.website === "" ? (
                     ""
                   ) : (
                     <div className="flex justify-start flex-row items-center gap-2">

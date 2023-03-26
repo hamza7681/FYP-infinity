@@ -56,3 +56,14 @@ body::-webkit-scrollbar-thumb {
   font-weight: bold;
   font-size: 19px;
 }
+
+.star {
+  color: #d3d3d3; /* default star color */
+  display: inline-block;
+  font-size: 16px;
+  margin-right: 5px;
+}
+
+.star.filled {
+  color: #ffc107; /* filled star color */
+}

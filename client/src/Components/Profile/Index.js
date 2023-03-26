@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Profile from "./Profile";
 import Settings from "./Settings";
-import Feedbacks from './Feedbacks';
+import Feedbacks from "./Feedbacks";
 import { useSelector } from "react-redux";
 import { http } from "../../Axios/config";
 import ProfileWishlist from "./ProfileWishlist";
@@ -30,7 +30,13 @@ const Index = () => {
     }
   }, [token, fetchAgain]);
 
-  const pages = [<Profile />, <Settings />, <ProfileWishlist />, <MyCourses />, <Feedbacks/>];
+  const pages = [
+    <Profile />,
+    <Settings />,
+    <ProfileWishlist />,
+    <MyCourses />,
+    <Feedbacks />,
+  ];
 
   const handlePageChange = (index) => {
     setPageIndex(index);
@@ -58,14 +64,24 @@ const Index = () => {
           Settings
         </p>
         {user && user?.role === 0 ? (
-          <p
-            className={`border-b-[2px] ${
-              pageIndex === 2 ? "border-black" : "border-white"
-            } hover:border-b-[2px] font-semibold text-[20px] cursor-pointer`}
-            onClick={() => handlePageChange(2)}
-          >
-            My Wishlist
-          </p>
+          <>
+            <p
+              className={`border-b-[2px] ${
+                pageIndex === 2 ? "border-black" : "border-white"
+              } hover:border-b-[2px] font-semibold text-[20px] cursor-pointer`}
+              onClick={() => handlePageChange(2)}
+            >
+              My Wishlist
+            </p>
+            <p
+              className={`border-b-[2px] ${
+                pageIndex === 4 ? "border-black" : "border-white"
+              } hover:border-b-[2px] font-semibold text-[20px] cursor-pointer`}
+              onClick={() => handlePageChange(4)}
+            >
+              Feedbacks
+            </p>
+          </>
         ) : (
           <p
             className={`border-b-[2px] ${
@@ -76,18 +92,10 @@ const Index = () => {
             My Courses
           </p>
         )}
-         <p
-            className={`border-b-[2px] ${
-              pageIndex === 4 ? "border-black" : "border-white"
-            } hover:border-b-[2px] font-semibold text-[20px] cursor-pointer`}
-            onClick={() => handlePageChange(3)}
-          >
-            Feedbacks
-          </p>
       </div>
       {currentPage}
     </>
   );
-}
+};
 
 export default Index;

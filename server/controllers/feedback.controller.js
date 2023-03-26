@@ -121,7 +121,15 @@ const feedbackCtrl = {
     try {
       const findFeedback = await Feedback.find({ course: courseId });
       const average = getRatingAverage(findFeedback);
-      return res.status(StatusCodes.OK).json({ rating: average });
+      if (findFeedback.length === 0 || average === 0) {
+        return res
+          .status(StatusCodes.OK)
+          .json({ rating: 0, total: findFeedback.length });
+      } else {
+        return res
+          .status(StatusCodes.OK)
+          .json({ rating: average, total: findFeedback.length });
+      }
     } catch (error) {
       return res
         .status(StatusCodes.INTERNAL_SERVER_ERROR)
