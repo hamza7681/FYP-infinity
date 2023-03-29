@@ -49,7 +49,7 @@ const Index = () => {
       <div className="flex flex-row ml-5 gap-7 shadow-md py-10">
         <p
           className={`border-b-[2px] ${
-            pageIndex === 0 ? "border-black" : "border-white"
+            pageIndex === 0 ? "border-black" : "border-white"             
           } hover:border-b-[2px] font-semibold text-[20px] cursor-pointer`}
           onClick={() => handlePageChange(0)}
         >

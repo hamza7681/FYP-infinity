@@ -10,6 +10,7 @@ const ViewCourse = () => {
   const { id } = useParams();
   const [course, setCourse] = useState({});
   const [category, setCategory] = useState({});
+  const [feedback, setFeedback] = useState({});
   const [rating, setRating] = useState({});
   const [user, setUser] = useState({});
   const { cartItems } = useSelector((s) => s.CourseReducer);
@@ -29,6 +30,15 @@ const ViewCourse = () => {
       }
     };
     getCourse();
+     const getFeedback = async () => {
+       try {
+        const res = await http.get("/feedback/get-feedback-course/" + id);
+         setFeedback(res.data);
+       } catch (error) {
+       console.log(error);
+       }
+     };
+     getFeedback();
     const getRating = async () => {
       try {
         const res = await http.get("/feedback/get-rating/" + id);
@@ -136,8 +146,17 @@ const ViewCourse = () => {
         </div>
         
       </div>
+      <div className="bg-white w-full py-[20px] px-[10px] md:pl-[105px] flex flex-col md:flex-row gap-3">
+      <div className="w-full md:w-2/3 flex flex-col gap-3 p-[10px] border-[1px] border-gray-300">
+      <h1 className="font-semibold text-[22px]">Feedback</h1>
+      <p className="text-[15px] text-gray-600 text-justify">
+      {feedback.text}
+            </p>
+      </div>
+      </div>
     </>
   );
 };
 
 export default ViewCourse;
+

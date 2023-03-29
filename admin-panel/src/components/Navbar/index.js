@@ -42,6 +42,7 @@ import CategoryPage from "../../pages/CategoryPage";
 import CoursesPage from "../../pages/CoursesPage";
 import ViewCoursePage from "../../pages/ViewCoursePage";
 import TutorPage from "../../pages/TutorPage";
+import FeedbackPage from '../../pages/FeedbackPage';
 import ViewTutorPage from "../../pages/ViewTutorPage";
 import StudentPage from "../../pages/StudentPage";
 import ViewStudentPage from "../../pages/ViewStudentPage";
@@ -464,6 +465,7 @@ const Navbar = () => {
             <Route path="/dashboard" element={<HomePage />} />
             <Route path="/categories" element={<CategoryPage />} />
             <Route path="/courses" element={<CoursesPage />} />
+            <Route path="/feedbacks" element={<FeedbackPage />} />
             <Route path="/courses/:id" element={<ViewCoursePage />} />
             <Route path="/tutors" element={<TutorPage />} />
             <Route path="/tutors/:id" element={<ViewTutorPage />} />
