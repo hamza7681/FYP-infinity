@@ -1,10 +1,10 @@
 import React from 'react';
-import Feedback from '../components/Feedback/Feedback';
+import Feedbacks from '../components/Feedback';
 
 const FeedbackPage = () => {
   return (
      <div className=" w-full pl-[60px]">
-      <Feedback />
+      <Feedbacks />
     </div>      
   )
 }

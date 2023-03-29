@@ -42,7 +42,7 @@ import CategoryPage from "../../pages/CategoryPage";
 import CoursesPage from "../../pages/CoursesPage";
 import ViewCoursePage from "../../pages/ViewCoursePage";
 import TutorPage from "../../pages/TutorPage";
-import FeedbackPage from '../../pages/FeedbackPage';
+import FeedbackPage from "../../pages/FeedbackPage";
 import ViewTutorPage from "../../pages/ViewTutorPage";
 import StudentPage from "../../pages/StudentPage";
 import ViewStudentPage from "../../pages/ViewStudentPage";
@@ -52,6 +52,7 @@ import { http } from "../../axios/config";
 import { toast } from "react-toastify";
 import OrderPage from "../../pages/OrderPage";
 import ViewOrderPage from "../../pages/ViewOrderPage";
+import ViewFeedbackPage from "../../pages/ViewFeedbackPage";
 
 const drawerWidth = 240;
 
@@ -466,6 +467,7 @@ const Navbar = () => {
             <Route path="/categories" element={<CategoryPage />} />
             <Route path="/courses" element={<CoursesPage />} />
             <Route path="/feedbacks" element={<FeedbackPage />} />
+            <Route path="/feedbacks/:id" element={<ViewFeedbackPage />} />
             <Route path="/courses/:id" element={<ViewCoursePage />} />
             <Route path="/tutors" element={<TutorPage />} />
             <Route path="/tutors/:id" element={<ViewTutorPage />} />
