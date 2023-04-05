@@ -12,7 +12,6 @@ const Tutors = () => {
   const [defaultData, setDefault] = useState([]);
   const dispatch = useDispatch();
   const { token, user, followings } = useSelector((s) => s.AuthReducer);
-
   useEffect(() => {
     const fetchTutors = async () => {
       try {

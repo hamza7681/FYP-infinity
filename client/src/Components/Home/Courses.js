@@ -33,7 +33,7 @@ function Courses() {
     if (token) {
       const getWishlist = async () => {
         try {
-          const res = await http.get("/wishlist/get-wishlist-userId", {
+          const res = await http.get("/wishlist/get-wishlist-usrId", {
             headers: { Authorization: token },
           });
           setWishlist(res.data);

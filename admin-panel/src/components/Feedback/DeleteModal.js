@@ -49,7 +49,7 @@ const DeleteModal = ({
               <button
                 className="bg-red-600 text-white py-[7px] px-[15px] rounded-[5px]"
                 onClick={deleteClick}
-                
+
               >
                 {btn2}
               </button>

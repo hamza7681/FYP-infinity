@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
 import { useDispatch } from "react-redux";
 import FormattedPrice from "../../Reuseables/FormattedPrice";
+import { useNavigate } from "react-router-dom";
 
 const FilterCourses = ({ courses, inputFiltered, show1 }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [itemOffset, setItemOffset] = useState(0);
   const itemsPerPage = 6;
@@ -18,6 +20,7 @@ const FilterCourses = ({ courses, inputFiltered, show1 }) => {
   };
 
   const Items = ({ currentItems }) => {
+
     return (
       <>
         {show1 ? (
@@ -51,7 +54,27 @@ const FilterCourses = ({ courses, inputFiltered, show1 }) => {
                         <div className="flex flex-row justify-start w-full items-center">
                           <div className="w-1/2 flex flex-row justify-center items-center gap-2 py-[10px] cursor-pointer border-t-[1px] border-r-[1px] border-t-gray-300 border-r-gray-300">
                             {/* <AiOutlineEye /> */}
-                            <span>View</span>
+                            {/* {courses.map((val) =>{
+                              <span>
+                                <button 
+                                key={val._id}
+                                onClick={() => console.log("hello")}>View</button></span>
+
+                            }
+                           ) } */}
+                            {FilterCourses.map((val) => {
+                              return (
+                                <span>
+                                  <button
+                                    key={val._id}
+                                    onClick={() => console.log("hello")}
+                                  >
+                                    View
+                                  </button>
+                                </span>
+                              );
+                            })}
+
                           </div>
                           <div className="w-1/2 flex flex-row justify-center items-center gap-2 py-[10px] cursor-pointer border-t-[1px] border-l-[1px] border-t-gray-300 border-l-gray-300">
                             Follow
@@ -59,6 +82,7 @@ const FilterCourses = ({ courses, inputFiltered, show1 }) => {
                         </div>
                       </div>
                     </>
+
                   );
                 })}
               </>
@@ -96,7 +120,7 @@ const FilterCourses = ({ courses, inputFiltered, show1 }) => {
                           <div className="flex flex-row justify-start w-full items-center">
                             <div className="w-1/2 flex flex-row justify-center items-center gap-2 py-[10px] cursor-pointer border-t-[1px] border-r-[1px] border-t-gray-300 border-r-gray-300">
                               {/* <AiOutlineEye /> */}
-                              <span>View</span>
+                              <span><button>View</button></span>
                             </div>
                             <div className="w-1/2 flex flex-row justify-center items-center gap-2 py-[10px] cursor-pointer border-t-[1px] border-l-[1px] border-t-gray-300 border-l-gray-300">
                               Follow

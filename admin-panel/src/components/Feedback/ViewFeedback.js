@@ -3,142 +3,52 @@ import { useSelector } from "react-redux";
 import { http } from "../../axios/config";
 import { useParams } from "react-router-dom";
 import ViewInput from "../../reuseables/ViewInput";
-import { FaFacebookSquare, FaLinkedin } from "react-icons/fa";
-import { BsGlobe2 } from "react-icons/bs";
 
 const ViewFeedback = () => {
   const { token } = useSelector((s) => s.AuthReducer);
-  const [tutor, setTutor] = useState({});
+  const [feedback, setFeedback] = useState({});
+  const [course, setCourse] = useState({});
   const { id } = useParams();
   useEffect(() => {
     if (token) {
-      const getTutor = async () => {
-        const res = await http.get("/feedback/get-feedback/" + id);
-        setTutor(res.data);
+      const getFeedback = async () => {
+        const res = await http.get("/feedback/get-feedback-user/" + id);
+        setFeedback(res.data);
       };
-      getTutor();
+      getFeedback();
+    }
+  }, [token, id]);
+  useEffect(() => {
+    if (token) {
+      const getCourse = async () => {
+        const res = await http.get("/course/course-by-id/" + id);
+        setCourse(res.data);
+      };
+      getCourse();
     }
   }, [token, id]);
   return (
-    <>
-      <div className="pt-[50px] h-screen">
-        <div className="bg-[#39405a] py-[10px] flex justify-between items-center rounded-[7px] px-[30px]">
-          <h1 className="text-white text-[26px]">
-            {tutor?.firstName} {tutor?.lastName}
-          </h1>
+    <div className="pt-[50px] h-auto">
+      <div className="bg-[#39405a] py-[10px] flex justify-between items-center rounded-[7px] px-[30px]">
+        <h1 className="text-white text-[26px]">{feedback?.text}</h1>
+      </div>
+      <div className="bg-[#39405a] my-[10px] py-[10px] flex flex-col rounded-[7px] px-[30px]">
+        <div className="w-full flex justify-center items-center">
+        <img src={course?.image} alt="course" className="h-[300px]" />
         </div>
-        <div className="bg-[#39405a] my-[10px] py-[10px] flex flex-row justify-between rounded-[7px] px-[30px]">
-          <div className="flex flex-col py-[30px] border-r-[1px] border-r-white px-[10px]">
-            <div className="flex flex-col justify-center items-center">
-              <img
-                src={tutor?.dp || "http://localhost:5000" + tutor?.dp}
-                alt="dp"
-                className="w-[150px] rounded-full"
-              />
-            </div>
-            <div className="mt-[30px]">
-              <p className="text-white text-[24px] font-semibold">
-                {tutor?.firstName} {tutor?.lastName}
-              </p>
-              <p className="text-gray-400">{tutor?.email}</p>
-            </div>
-            <div className="mt-[10px] flex flex-col gap-2">
-              {tutor?.facebook === "" &&
-              tutor?.linkedin === "" &&
-              tutor.website === "" ? (
-                ""
-              ) : (
-                <h1 className="text-white underline text-[18px] my-[10px]">
-                  Social Contacts
-                </h1>
-              )}
-              {tutor?.facebook === "" ? (
-                ""
-              ) : (
-                <div className="flex flex-row justify-start items-center gap-2">
-                  <FaFacebookSquare className="text-[#4267B2] text-[24px]" />
-                  <a
-                    href={tutor?.facebook}
-                    target="_blank"
-                    className="text-white text-[13px] underline"
-                    rel="noreferrer"
-                  >
-                    {tutor?.facebook}
-                  </a>
-                </div>
-              )}
-              {tutor?.linkedin === "" ? (
-                ""
-              ) : (
-                <div className="flex flex-row justify-start items-center gap-2">
-                  <FaLinkedin className="text-[#0077b5] text-[24px]" />
-                  <a
-                    href={tutor?.linkedin}
-                    target="_blank"
-                    className="text-white text-[13px] underline"
-                    rel="noreferrer"
-                  >
-                    {tutor?.linkedin}
-                  </a>
-                </div>
-              )}
-              {tutor?.website === "" ? (
-                ""
-              ) : (
-                <div className="flex flex-row justify-start items-center gap-2">
-                  <BsGlobe2 className="text-[#0077b5] text-[24px]" />
-                  <a
-                    href={tutor?.website}
-                    target="_blank"
-                    className="text-white text-[13px] underline"
-                    rel="noreferrer"
-                  >
-                    {tutor?.website}
-                  </a>
-                </div>
-              )}
-            </div>
-          </div>
-          <div className="w-full flex flex-col px-[10px]">
-            {tutor?.role === 0 ? (
-              ""
-            ) : (
-              <ViewInput
-                label="Subject"
-                value={
-                  tutor?.subject === ""
-                    ? "<No subject added yet>"
-                    : tutor?.subject
-                }
-              />
-            )}
-            <ViewInput
-              label="Qualification"
-              value={
-                tutor?.qualification === ""
-                  ? "<No Qualification added yet>"
-                  : tutor?.qualification
-              }
-            />
-            <div className="flex flex-col w-full py-[10px]">
-              <label className="text-white font-semibold py-[3px]">
-                Description
-              </label>
-              <textarea
-                className="w-full py-[10px] rounded-[4px] px-[10px] text-white "
-                value={
-                  tutor?.description === ""
-                    ? "<No Description added yet>"
-                    : tutor?.description
-                }
-                disabled
-                rows={10}
-              ></textarea>
-            </div>
-          </div>
+        <ViewInput label="Added by" value={feedback?.added_by} />
+        <div className="flex flex-col w-full py-[10px]">
+          <label className="text-white font-semibold py-[3px]">
+            Feedback Description
+          </label>
+          <textarea
+            className="w-full py-[10px] rounded-[4px] px-[10px] text-white resize-none"
+            value={feedback?.text}
+            disabled
+          ></textarea>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

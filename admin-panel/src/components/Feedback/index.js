@@ -12,6 +12,7 @@ import { http } from "../../axios/config";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import DeleteModal from "./DeleteModal";
+import ViewFeedback from "./ViewFeedback"
 import { useNavigate } from "react-router-dom";
 import Rating from "../../reuseables/Rating";
 
@@ -99,7 +100,7 @@ const Feedbacks = () => {
       <DeleteModal
         open={open2}
         handleClose={handleClose2}
-        heading="Do you want to delete this course?"
+        heading="Do you want to delete this Feedback?"
         btn1="Cancel"
         deleteClick={deleteCategory}
         btn2="Delete"
