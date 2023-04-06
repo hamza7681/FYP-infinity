@@ -12,7 +12,6 @@ import { http } from "../../axios/config";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import DeleteModal from "./DeleteModal";
-import ViewFeedback from "./ViewFeedback"
 import { useNavigate } from "react-router-dom";
 import Rating from "../../reuseables/Rating";
 
