@@ -7,36 +7,36 @@ import ViewInput from "../../reuseables/ViewInput";
 const ViewFeedback = () => {
   const { token } = useSelector((s) => s.AuthReducer);
   const [feedback, setFeedback] = useState({});
-  const [course, setCourse] = useState({});
   const { id } = useParams();
   useEffect(() => {
     if (token) {
       const getFeedback = async () => {
-        const res = await http.get("/feedback/get-feedback-user/" + id);
+        const res = await http.get("/feedback/get-feedback/" + id);
         setFeedback(res.data);
       };
       getFeedback();
     }
   }, [token, id]);
-  useEffect(() => {
-    if (token) {
-      const getCourse = async () => {
-        const res = await http.get("/course/course-by-id/" + id);
-        setCourse(res.data);
-      };
-      getCourse();
-    }
-  }, [token, id]);
+
   return (
     <div className="pt-[50px] h-auto">
       <div className="bg-[#39405a] py-[10px] flex justify-between items-center rounded-[7px] px-[30px]">
-        <h1 className="text-white text-[26px]">{feedback?.text}</h1>
+        <h1 className="text-white text-[26px]">{feedback?.course?.title}</h1>
       </div>
       <div className="bg-[#39405a] my-[10px] py-[10px] flex flex-col rounded-[7px] px-[30px]">
         <div className="w-full flex justify-center items-center">
-        <img src={course?.image} alt="course" className="h-[300px]" />
+          <img
+            src={feedback?.course?.image}
+            alt="course"
+            className="h-[300px]"
+          />
         </div>
-        <ViewInput label="Added by" value={feedback?.added_by} />
+        <ViewInput
+          label="Added by"
+          value={
+            feedback?.added_by?.firstName + " " + feedback?.added_by?.lastName
+          }
+        />
         <div className="flex flex-col w-full py-[10px]">
           <label className="text-white font-semibold py-[3px]">
             Feedback Description
