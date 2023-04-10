@@ -58,7 +58,8 @@ function App() {
           <Route path="/courses" element={<AllCoursesPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/add-course" element={<AddCoursePage />} />
-          <Route path="/edit-course" element={<EditCoursePage />} />
+          <Route path="edit-course/:id" element={<EditCoursePage />} />
+          {/* <Route path="edit-course/:id" element={<EditCoursePage />} /> */}
           <Route path="/course/:id" element={<ViewCoursePage />} />
           <Route path="/tutors" element={<TutorPage />} />
           <Route path="/profile" element={<ProfilePage />} />

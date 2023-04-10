@@ -125,8 +125,9 @@ function Courses() {
 
                     {user.role === 2 ? (
                       <div
-                        onClick={() => {
-                          navigate("/edit-course" + val._id);
+                        onClick={(e) => {
+                          navigate("/edit-course/" + val._id);
+                          e.stopPropagation();
                         }}
                         className="border-2 rounded-br-lg gap-2 border-black flex flex-row items-center justify-center w-full  py-[10px] text-[#fff] bg-[#03043b] hover:bg-white hover:text-black  "
                       >

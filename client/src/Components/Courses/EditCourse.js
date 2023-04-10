@@ -6,6 +6,7 @@ import { FaTimes } from "react-icons/fa";
 import PulseLoader from "react-spinners/PulseLoader";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 
 const EditCourse = () => {
@@ -13,6 +14,7 @@ const EditCourse = () => {
   const [title, setTitle] = useState("");
   const [titleDesc, setTitleDesc] = useState("");
   const [lang, setLang] = useState("");
+  const [course, setCourse] = useState("");
   const [price, setPrice] = useState(0);
   const [categories, setCategories] = useState([]);
   const [category, setCategory] = useState("");
@@ -21,11 +23,21 @@ const EditCourse = () => {
   const [img, setImg] = useState(null);
   const [loading, setLoading] = useState(false);
   const { user, token } = useSelector((s) => s.AuthReducer);
+  const { id } = useParams();
 
   useEffect(() => {
+    const getCourse = async () => {
+      try {
+       const res = await http.get("course/course-by-id/" + id);
+        setCourse(res.data);
+      } catch (error) {
+      console.log(error);
+      }
+    };
+    getCourse();
     const fetchCategories = async () => {
       try {
-        const res = await http.get("/category/get-category");
+        const res = await http.get("/category/get-category/");
         setCategories(res.data);
       } catch (error) {
         console.log(error);
