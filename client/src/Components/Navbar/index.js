@@ -21,7 +21,7 @@ const Navbar = () => {
   const { cartItems } = useSelector((s) => s.CourseReducer);
   const logout = () => {
     dispatch({ type: "LOGOUT" });
-    localStorage.removeItem("token");
+    localStorage.clear();
   };
 
   useEffect(() => {
