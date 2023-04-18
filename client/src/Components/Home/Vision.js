@@ -1,23 +1,33 @@
 import React from 'react'
-import pic from "../../Assets/onlinelearning.png";
+import pic from "../../Assets/onlinelearning.jpg";
+import GlobalButton from "../../Reuseables/GlobalButton";
+import { useNavigate } from 'react-router-dom';
+
 const Vision = () => {
+  const navigate = useNavigate();
+
   return (
     <>
-        <div className='py-[10px] px-[25px] mt-3'>
-            <h2 className='text-[25px] font-bold'>Our Vision</h2>
-            <div className='flex flex-col md:flex-row'>
-                <div className='w-full md:w-1/2'>
-                <p className='w-full py-[5px] text-[20px]'>
-                    Our vision is to provide education irrespective of boundries. Our vision is to provide an accessible, flexible, and high-quality education to students of all ages and backgrounds, regardless of their location or schedule.Our goal is  to provide wider range of courses at one plateform
-                </p>
-                </div>
-                <div className='md:w-1/2 justify-center hidden sm:block'>
-                <img src={pic} alt='pic' className='w-[70%]'/>
-                </div>
-            </div>
+
+      <div className='flex lg:flex-row md:flex-col mx-16 w-auto gap-x-40'>
+        <div className='lg:w-2/4 md:w-2/4 w-full '>
+          <h2 className='text-[25px] font-bold mt-20'>Our Vision</h2>
+          <p className='w-full py-[5px] text-[20px] mt-3'>
+            Our vision is to provide education irrespective of boundries. Our vision is to provide an accessible, flexible, and high-quality education to students of all ages and backgrounds, regardless of their location or schedule.Our goal is  to provide wider range of courses at one plateform
+          </p>
+          <GlobalButton
+            title="About us"
+            styleClass="bg-white border-[2px] cursor-pointer hover:bg-black hover:text-white border-black py-[10px] px-[30px] font-semibold mt-7"
+            click={() => navigate("/about_us")}
+          />
         </div>
+        <div className='lg:w-2/4  md:w-2/4 hidden lg:block md:block'>
+          <img src={pic} alt='pic' className='rounded-lg' />
+
+        </div>
+      </div>
     </>
   )
 }
 
-export default Vision
+export default Vision;

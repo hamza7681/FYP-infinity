@@ -36,17 +36,23 @@ const Sidebar = ({ setShowSidebar }) => {
         </div>
         <div className="border-[1px] my-[20px]"></div>
         <div className="flex flex-col gap-2">
-          <Link to="/" className="p-[8px] hover:bg-gray-300 rounded-[4px]">
+          <Link to="/profile" className="p-[8px] hover:bg-gray-300 rounded-[4px]">
             My Profile
           </Link>
           <Link to="/chat" className="p-[8px] hover:bg-gray-300 rounded-[4px]">
             Messenger
           </Link>
-          <Link to="/" className="p-[8px] hover:bg-gray-300 rounded-[4px]">
+          <Link to="/cart" className="p-[8px] hover:bg-gray-300 rounded-[4px]">
             Cart
           </Link>
-          <Link to="/" className="p-[8px] hover:bg-gray-300 rounded-[4px]">
+          <Link to="/wishlist" className="p-[8px] hover:bg-gray-300 rounded-[4px]">
             Wishlist
+          </Link>
+          <Link to="/about_us" className="p-[8px] hover:bg-gray-300 rounded-[4px]">
+            About us
+          </Link>
+          <Link to="/contact_us" className="p-[8px] hover:bg-gray-300 rounded-[4px]">
+            Contact us
           </Link>
         </div>
         <div className="border-[1px] my-[20px]"></div>

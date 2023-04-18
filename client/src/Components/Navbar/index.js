@@ -38,12 +38,12 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="flex flex-row justify-between shadow-lg h-[80px] items-center sticky top-0 px-[10px] z-10 bg-white">
+      <div className="flex flex-row justify-between shadow-lg h-[70px] items-center sticky top-0 px-[10px] z-10 bg-white">
         <div>
           <img
             src={logo}
             alt="logo"
-            className="h-[70px] relative cursor-pointer"
+            className="h-[55px] relative ml-7 cursor-pointer"
             onClick={() => navigate("/")}
           />
         </div>
@@ -75,8 +75,8 @@ const Navbar = () => {
             ""
           )}
         </div>
-        <div className="w-[600px] md:block hidden ">
-          <div className="flex flex-row items-center gap-3 border-[2px] border-gray-500 px-[15px] py-[15px] rounded-full">
+        <div className="w-[600px] md:block sm:hidden flex justify-center ml-32 items-center">
+          <div className="flex flex-row items-center gap-3 border-[2px] border-gray-500 px-[15px] py-[12px] rounded-full">
             <BsSearch className="text-[22px]" />
             <input
               type="search"
@@ -85,6 +85,7 @@ const Navbar = () => {
             />
           </div>
         </div>
+        
         <div className=" flex-row gap-3 md:flex hidden">
           {token ? (
             <>
@@ -102,6 +103,7 @@ const Navbar = () => {
                   >
                     My Courses
                   </Link>
+
                 </>
               ) : (
                 <>
@@ -126,48 +128,35 @@ const Navbar = () => {
             </Link>
           )}
         </div>
-        <div className=" flex-row gap-6 md:flex hidden">
-          {user.role === 2 ? (
-            ""
-          ) : (
-            <Link to="/cart" className="text-[20px] relative ">
-              <BsCart3 />
-              <div className="absolute top-[-10px] left-[10px] w-[20px] h-[20px] bg-[#f5822a] flex justify-center items-center rounded-full text-white text-[12px]">
-                {cartItems.length}
-              </div>
-            </Link>
-          )}
-          {token ? (
-            <>
-              {user.role === 2 ? (
-                ""
-              ) : (
-                <Link to="/wishlist" className="text-[20px] ">
-                  <FiHeart />
+        <div className="mt-5 flex gap-3">
+            <Link to="/about_us" className="text-[15px] hover:text-[#f5822a]">
+                  About us
                 </Link>
-              )}
-              <Link to="/chat" className="text-[22px] ">
-                <BiChat />
-              </Link>
-            </>
-          ) : (
-            ""
-          )}
-        </div>
+                <Link to="/contact_us" className="text-[15px] hover:text-[#f5822a]">
+                  Contact us
+                </Link>
+            </div>
+
         <div className="md:block hidden">
           {token ? (
             <>
+            <div className=" flex-row gap-6 md:flex hidden"> {user.role === 2 ? ( "" ) :
+             ( <Link to="/cart" className="text-[20px] relative "> <BsCart3 /> 
+            <div className="absolute top-[-10px] left-[10px] w-[20px] h-[20px] bg-[#f5822a] flex justify-center items-center rounded-full
+             text-white text-[12px]"> {cartItems.length} </div> </Link> )}
+             {token ? ( <> {user.role === 2 ? ( "" ) : ( <Link to="/wishlist" className="text-[20px] "> <FiHeart /> </Link> )} 
+             <Link to="/chat" className="text-[22px] "> <BiChat /> </Link> </> ) : ( "" )} </div>            
               <div
-                className="relative cursor-pointer"
+                className="relative cursor-pointer my-auto"
                 onClick={() => setDropdown(!dropdown)}
               >
                 <img
                   src={user && user?.dp}
-                  className="h-[50px] rounded-full"
+                  className="h-[50px] ml-72 rounded-full"
                   alt="dp"
                 />
 
-                <div className="absolute top-0 left-[38px] w-[15px] h-[15px] bg-[#36b404] flex justify-center items-center rounded-full"></div>
+                <div className="absolute top-0 left-[38px] w-[15px] h-[15px] ml-72 bg-[#36b404] flex justify-center items-center rounded-full"></div>
                 {dropdown ? (
                   <div className="absolute top-[50px] right-[30px] bg-white border-[1px] w-[350px] p-[20px] rounded-[4px] shadow-md">
                     <div className="flex flex-row items-center justify-start gap-2">

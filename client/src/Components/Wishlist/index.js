@@ -4,7 +4,7 @@ import { http } from "../../Axios/config";
 import FormattedPrice from "../../Reuseables/FormattedPrice";
 import { BsCart3, BsFillHeartFill } from "react-icons/bs";
 import ReactPaginate from "react-paginate";
-
+import Footer from '../Footer/Footer'
 const WishList = () => {
   const { token } = useSelector((s) => s.AuthReducer);
   const [wishlist, setWishlist] = useState([]);
@@ -85,6 +85,7 @@ const WishList = () => {
   };
 
   return (
+    <>
     <div className=" px-[10px] md:px-[40px] pt-[20px] md:pt-[50px] ">
       <h2 className="text-[22px] font-semibold pb-[10px] border-b-[3px] mb-[20px]">
         My WishList
@@ -112,6 +113,8 @@ const WishList = () => {
         </div>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 };
 

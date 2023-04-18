@@ -9,7 +9,7 @@ import { FaTwitter } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <div className="bg-gradient-to-r from-[#03043b] to-[#35050c] text-white flex flex-col md:w-full border-bl-2 px-[10px] pt-[20px] rounded-tl-[70px] mt-[30px]">
+    <div className="bottom-0 bg-gradient-to-r from-[#03043b] to-[#35050c] text-white flex flex-col md:w-full border-bl-2 px-[10px] pt-[20px] rounded-tl-[70px] mt-[30px]">
       <div className="flex flex-col md:flex-row w-full py-[10px] px-[30px] border-b-2">
         <div className="flex flex-col w-full md:flex-row md:w-1/2">
           <div className="md:w-1/2">
