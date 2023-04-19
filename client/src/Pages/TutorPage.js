@@ -1,17 +1,17 @@
 import React from "react";
 import Tutors from "../Components/Tutors";
-import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer/Footer";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { BsExclamationTriangle } from "react-icons/bs";
+import MainNavbar from "../Components/Navbar/MainNavbar";
 
 const TutorPage = () => {
   const { user } = useSelector((s) => s.AuthReducer);
 
   return (
     <>
-      <Navbar />
+      <MainNavbar />
       {user.role === 0 ? (
         <Tutors />
       ) : (

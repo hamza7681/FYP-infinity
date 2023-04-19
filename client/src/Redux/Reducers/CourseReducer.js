@@ -3,6 +3,8 @@ const initialState = {
   cartItems: [],
   totalPrice: 0,
   wishlist: [],
+  globalSearch: "",
+  searching: false,
 };
 const CourseReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -49,6 +51,26 @@ const CourseReducer = (state = initialState, action) => {
         ...state,
         cartItems: [],
         totalPrice: 0,
+      };
+    case "GLOBAL_SEARCH":
+      if (action.payload !== "") {
+        return {
+          ...state,
+          globalSearch: action.payload,
+          searching: true,
+        };
+      } else {
+        return {
+          ...state,
+          globalSearch: "",
+          searching: false,
+        };
+      }
+    case "CLOSE_SEARCH":
+      return {
+        ...state,
+        globalSearch: "",
+        searching: false,
       };
     default:
       return {

@@ -37,7 +37,6 @@ const Profile = () => {
           const res = await http.get("/auth/get-profile", {
             headers: { Authorization: token },
           });
-          console.log(res.data.user);
           setUser(res.data.user);
           setFirstName(res.data.user.firstName);
           setLastName(res.data.user.lastName);

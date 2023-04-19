@@ -1,16 +1,16 @@
 import React from "react";
 import AddCourse from "../Components/Courses/AddCourse";
-import Navbar from "../Components/Navbar";
 import { useSelector } from "react-redux";
 import { BsExclamationTriangle } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import Footer from "../Components/Footer/Footer";
+import MainNavbar from "../Components/Navbar/MainNavbar";
 
 const AddCoursePage = () => {
   const { user } = useSelector((s) => s.AuthReducer);
   return (
     <>
-      <Navbar />
+      <MainNavbar />
       {user.role === 2 ? (
         <AddCourse />
       ) : (
@@ -28,7 +28,7 @@ const AddCoursePage = () => {
           </div>
         </>
       )}
-      <Footer/>
+      <Footer />
     </>
   );
 };

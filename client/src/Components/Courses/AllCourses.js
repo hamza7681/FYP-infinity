@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../Navbar/index";
-import Footer from "../Footer/Footer";
 import Filters from "./Filters";
 import FilterCourses from "./FilterCourses";
 import { http } from "../../Axios/config";
@@ -36,7 +34,7 @@ const AllCourses = () => {
       }
     };
     fetchCategories();
-  }, []);
+  }, [token]);
 
   const handleSearch = (e) => {
     const searchTerm = e.target.value;
@@ -89,7 +87,7 @@ const AllCourses = () => {
 
   return (
     <>
-      <div className="w-full border-b-[3px] p-[20px]" >
+      <div className="w-full border-b-[3px] p-[20px]">
         <h1 className="text-[24px] font-semibold">Courses</h1>
       </div>
       <div className="px-[10px] md:mx-20  w-auto flex lg:flex-row flex-col mt-10 gap-x-7">

@@ -6,15 +6,13 @@ import { FaTimes } from "react-icons/fa";
 import PulseLoader from "react-spinners/PulseLoader";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { Link, useNavigate, useParams } from "react-router-dom";
-
+import { useParams } from "react-router-dom";
 
 const EditCourse = () => {
   const [count, setCount] = useState(0);
   const [title, setTitle] = useState("");
   const [titleDesc, setTitleDesc] = useState("");
   const [lang, setLang] = useState("");
-  const [course, setCourse] = useState("");
   const [price, setPrice] = useState(0);
   const [categories, setCategories] = useState([]);
   const [category, setCategory] = useState("");
@@ -23,15 +21,24 @@ const EditCourse = () => {
   const [img, setImg] = useState(null);
   const [loading, setLoading] = useState(false);
   const { user, token } = useSelector((s) => s.AuthReducer);
+  const [catTitle, setCatTitle] = useState("");
   const { id } = useParams();
 
   useEffect(() => {
     const getCourse = async () => {
       try {
-       const res = await http.get("course/course-by-id/" + id);
-        setCourse(res.data);
+        const res = await http.get("course/course-by-id/" + id);
+        setTitle(res.data.title);
+        setLang(res.data.language);
+        setPrice(res.data.price);
+        setTitleDesc(res.data.title_desc);
+        setCategory(res.data.category._id);
+        setCatTitle(res.data.category.name);
+        setDescription(res.data.description);
+        setImg(res.data.image);
+        setCount(res.data.title_desc.length);
       } catch (error) {
-      console.log(error);
+        console.log(error);
       }
     };
     getCourse();
@@ -44,7 +51,7 @@ const EditCourse = () => {
       }
     };
     fetchCategories();
-  }, []);
+  }, [id]);
 
   const handleImage = (event) => {
     const file = event.target.files[0];
@@ -76,18 +83,10 @@ const EditCourse = () => {
     );
     formData.append("image", imgFile);
     try {
-      const res = await http.post("/course/add-course", formData, {
+      const res = await http.patch(`/course/update-course/${id}`, formData, {
         headers: { Authorization: token },
       });
       toast.success(res.data.msg);
-      setTitle("");
-      setTitleDesc("");
-      setLang("");
-      setPrice(0);
-      setCategory("");
-      setDescription("");
-      setImgFile(null);
-      setImg(null);
       setLoading(false);
     } catch (error) {
       toast.error(error.response.data.msg);
@@ -96,7 +95,7 @@ const EditCourse = () => {
   };
   return (
     <>
-    <div className="w-full p-[20px]">
+      <div className="w-full p-[20px]">
         <h1 className="text-[22px] font-semibold pb-[10px] border-b-[3px]">
           Edit Course
         </h1>
@@ -128,7 +127,12 @@ const EditCourse = () => {
                 className="w-full focus:outline-none border-[1px] py-[7px] px-[15px] rounded-[4px] border-gray-400"
                 onChange={(e) => setCategory(e.target.value)}
               >
-                <option>Select Category</option>
+                {catTitle && catTitle ? (
+                  <option>{catTitle && catTitle}</option>
+                ) : (
+                  <option>Select Category</option>
+                )}
+
                 {categories &&
                   categories.map((val) => {
                     return (
@@ -210,11 +214,11 @@ const EditCourse = () => {
           className="md:ml-[20px] bg-purple-600 text-white py-[10px] px-[30px] rounded-[3px] md:w-fit w-full my-[10px] "
           onClick={add}
         >
-          {loading ? <PulseLoader color="#ffffff" /> : "Save"}
+          {loading ? <PulseLoader color="#ffffff" /> : "Update"}
         </button>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default EditCourse
+export default EditCourse;

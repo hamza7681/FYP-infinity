@@ -1,12 +1,12 @@
 import React from "react";
 import AllCourses from "../Components/Courses/AllCourses";
-import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer/Footer";
+import MainNavbar from "../Components/Navbar/MainNavbar";
 
 const AllCoursesPage = () => {
   return (
     <div>
-      <Navbar />
+      <MainNavbar />
       <AllCourses />
       <Footer />
     </div>

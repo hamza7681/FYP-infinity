@@ -1,12 +1,12 @@
 import React from "react";
 import ViewCourse from "../Components/Courses/ViewCourse";
-import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer/Footer";
+import MainNavbar from "../Components/Navbar/MainNavbar";
 
 const ViewCoursePage = () => {
   return (
     <>
-      <Navbar />
+      <MainNavbar />
       <ViewCourse />
       <Footer />
     </>

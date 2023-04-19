@@ -21,9 +21,10 @@ import TutorPage from "./Pages/TutorPage";
 import OrderPage from "./Pages/OrderPage";
 import ViewCoursePage from "./Pages/ViewCoursePage";
 import WishListPage from "./Pages/WishListPage";
-import EditCoursePage from "./Components/Courses/EditCourse";
-import AboutPage from './Components/About us/About'
-import ContactPage from './Components/Contact us/Contact'
+import AboutPage from "./Components/About us/About";
+import ContactPage from "./Components/Contact us/Contact";
+import EditCoursePage from "./Pages/EditCoursePage";
+
 function App() {
   const { token } = useSelector((s) => s.AuthReducer);
   const dispatch = useDispatch();
@@ -58,11 +59,11 @@ function App() {
         <Route element={<PrivateRoutes />}>
           <Route path="/chat" element={<ChatPage />} />
           <Route path="/courses" element={<AllCoursesPage />} />
-          <Route path="/about_us" element={<AboutPage/>} />
-          <Route path="/contact_us" element={<ContactPage/>} />
+          <Route path="/about-us" element={<AboutPage />} />
+          <Route path="/contact-us" element={<ContactPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/add-course" element={<AddCoursePage />} />
-          <Route path="edit-course/:id" element={<EditCoursePage />} />
+          <Route path="/edit-course/:id" element={<EditCoursePage />} />
           <Route path="/course/:id" element={<ViewCoursePage />} />
           <Route path="/tutors" element={<TutorPage />} />
           <Route path="/profile" element={<ProfilePage />} />

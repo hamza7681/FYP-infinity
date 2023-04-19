@@ -1,12 +1,12 @@
 import React from "react";
 import Order from "../Components/Orders";
-import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer/Footer";
+import MainNavbar from "../Components/Navbar/MainNavbar";
 
 const OrderPage = () => {
   return (
     <>
-      <Navbar />
+      <MainNavbar />
       <Order />
       <Footer />
     </>

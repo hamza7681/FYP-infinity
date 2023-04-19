@@ -1,16 +1,16 @@
-import React from 'react'
-import Profile from '../Components/Profile/Index'
-import Footer from '../Components/Footer/Footer'
-import Navbar from '../Components/Navbar'
+import React from "react";
+import Profile from "../Components/Profile/Index";
+import Footer from "../Components/Footer/Footer";
+import MainNavbar from "../Components/Navbar/MainNavbar";
 
 const ProfilePage = () => {
   return (
     <>
-    <Navbar/>
-    <Profile/>   
-    <Footer/>    
+      <MainNavbar />
+      <Profile />
+      <Footer />
     </>
-  )
-}
+  );
+};
 
 export default ProfilePage;

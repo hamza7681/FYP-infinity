@@ -1,15 +1,11 @@
-import React from 'react';
-import Navbar from '../Navbar/index';
-import Footer from '../Footer/Footer';
+import React from "react";
 
 const Contact = () => {
   return (
     <>
-    <Navbar/>
       <h2>Conatct pg</h2>
-      <Footer/>
     </>
-  )
-}
+  );
+};
 
 export default Contact;
