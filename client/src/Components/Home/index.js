@@ -5,10 +5,12 @@ import Features from "./Features";
 import { useDispatch, useSelector } from "react-redux";
 import { http } from "../../Axios/config";
 import Slider from "./Slider";
+import { motion, useScroll } from "framer-motion";
 
 const Home = () => {
   const { token } = useSelector((s) => s.AuthReducer);
   const dispatch = useDispatch();
+  const { scrollYProgress } = useScroll();
   useEffect(() => {
     const getCourses = async () => {
       try {
@@ -35,6 +37,10 @@ const Home = () => {
   return (
     <>
       <div>
+        <motion.div
+          className="md:block hidden bg-[#03043B] z-10 fixed top-[70px] right-0 left-0 h-[10px] transform origin-[0%]"
+          style={{ scaleX: scrollYProgress }}
+        ></motion.div>
         <Slider />
         <Vision />
         <Courses />

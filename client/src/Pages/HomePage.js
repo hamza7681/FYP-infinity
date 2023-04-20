@@ -9,7 +9,7 @@ const HomePage = () => {
   const { searching } = useSelector((s) => s.CourseReducer);
   return (
     <>
-    <MainNavbar/>
+      <MainNavbar />
       {searching ? <GlobalSearch /> : <Home />}
       <Footer />
     </>

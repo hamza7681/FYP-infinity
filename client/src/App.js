@@ -21,9 +21,9 @@ import TutorPage from "./Pages/TutorPage";
 import OrderPage from "./Pages/OrderPage";
 import ViewCoursePage from "./Pages/ViewCoursePage";
 import WishListPage from "./Pages/WishListPage";
-import AboutPage from "./Components/About us/About";
-import ContactPage from "./Components/Contact us/Contact";
 import EditCoursePage from "./Pages/EditCoursePage";
+import AboutPage from "./Pages/AboutPage";
+import ContactPage from "./Pages/ContactPage";
 
 function App() {
   const { token } = useSelector((s) => s.AuthReducer);

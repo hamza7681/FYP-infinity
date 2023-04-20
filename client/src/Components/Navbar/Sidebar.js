@@ -7,7 +7,7 @@ import logo from "../../Assets/I.png";
 const Sidebar = ({ setShowSidebar }) => {
   return (
     <>
-      <div className="md:hidden block bg-white border-[1px] w-[350px] p-[20px] shadow-md absolute top-0 h-screen z-11 left-[-10px]">
+      <div className="md:hidden block bg-white border-[1px] w-[350px] p-[20px] shadow-md absolute top-0 h-screen z-50 left-[-10px]">
         <div className=" flex flex-row justify-between items-center py-[20px]">
           <img
             src={logo}

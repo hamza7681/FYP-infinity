@@ -9,6 +9,8 @@ import Sidebar from "./Sidebar";
 import { BiChat } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { http } from "../../Axios/config";
+import { motion } from "framer-motion";
+import { NavbarAnimate } from "../../Animations";
 
 const MainNavbar = () => {
   const navigate = useNavigate();
@@ -38,7 +40,12 @@ const MainNavbar = () => {
 
   return (
     <>
-      <div className="flex flex-row justify-between gap-3 shadow-lg h-[70px] items-center sticky top-0 px-[20px] z-10 bg-white w-full">
+      <motion.div
+        variants={NavbarAnimate}
+        initial="hidden"
+        whileInView="show"
+        className="flex flex-row justify-between gap-3 shadow-lg h-[70px] items-center sticky top-0 px-[20px] z-10 bg-white w-full"
+      >
         <div className="md:w-1/12">
           <img
             src={logo}
@@ -217,7 +224,7 @@ const MainNavbar = () => {
           />
         </div>
         {showSidebar ? <Sidebar setShowSidebar={setShowSidebar} /> : ""}
-      </div>
+      </motion.div>
     </>
   );
 };

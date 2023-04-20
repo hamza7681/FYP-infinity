@@ -13,6 +13,8 @@ import { useNavigate } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
 import { http } from "../../Axios/config";
 import { toast } from "react-toastify";
+import { motion } from "framer-motion";
+import { CoursesAnimate } from "../../Animations";
 
 function Stars() {
   const stars = [];
@@ -69,11 +71,17 @@ function Courses() {
     <>
       <div className="py-[10px] px-[25px] mt-3">
         <h2 className="font-bold text-[25px] ">Courses</h2>
-        <div className="w-full flex flex-col gap-3 md:flex-row flex-wrap items-center">
+        <motion.div
+          variants={CoursesAnimate}
+          initial="hidden"
+          whileInView="show"
+          className="w-full flex flex-col gap-3 md:flex-row flex-wrap items-center"
+        >
           {courses.slice(0, 4).map((val) => {
             return (
               <>
-                <div
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
                   key={val._id}
                   className="mt-2 w-full md:w-1/5 border-2 drop-shadow-xl hover:cursor-pointer mb-2 flex flex-col rounded-lg"
                   onClick={() => navigate("/course/" + val._id)}
@@ -163,7 +171,7 @@ function Courses() {
                       </>
                     )}
                   </div>
-                </div>
+                </motion.div>
               </>
             );
           })}
@@ -176,7 +184,7 @@ function Courses() {
             </div>
             <p>Show More</p>
           </div>
-        </div>
+        </motion.div>
       </div>
     </>
   );
