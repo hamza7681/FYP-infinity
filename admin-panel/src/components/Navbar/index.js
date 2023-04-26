@@ -13,6 +13,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import logo from "../../Assets/I.png";
 import { HiBars3CenterLeft } from "react-icons/hi2";
 import {
+  FaAddressBook,
   FaBell,
   FaChevronLeft,
   FaChevronRight,
@@ -91,6 +92,11 @@ const routes = [
     name: "Categories",
     path: "/categories",
     icon: <MdCategory />,
+  },
+  {
+    name: "Contacts",
+    path: "/contacts",
+    icon: <FaAddressBook />,
   },
   {
     name: "Notifications",
