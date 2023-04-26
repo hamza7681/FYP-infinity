@@ -3,6 +3,8 @@ import PulseLoader from "react-spinners/PulseLoader";
 import { http } from "../../Axios/config";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import { BsExclamationTriangle } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const Settings = () => {
   const { token } = useSelector((s) => s.AuthReducer);
@@ -71,6 +73,17 @@ const Settings = () => {
           {loading ? <PulseLoader color="#ffffff" /> : "Save"}
         </button>
       </div>
+      <div className="flex h-[70vh] justify-center items-center bg-red-400">
+            <div className="flex flex-col justify-center items-center">
+              <BsExclamationTriangle className="text-gray-400 text-[62px]" />
+              <p className="text-gray-400 text-[42px]">
+                Only Tutors can access this page!
+              </p>
+              <Link to="/" className="text-purple-500 font-semibold underline">
+                Back to Home
+              </Link>
+            </div>
+          </div>
     </>
   );
 };

@@ -24,7 +24,7 @@ const Vision = () => {
             <GlobalButton
               title="About us"
               styleClass="bg-white border-[2px] cursor-pointer hover:bg-black hover:text-white border-black py-[10px] px-[30px] font-semibold mt-7"
-              click={() => navigate("/about_us")}
+              click={() => navigate("/about-us")}
             />
           </motion.div>
         </div>

@@ -48,10 +48,10 @@ const Sidebar = ({ setShowSidebar }) => {
           <Link to="/wishlist" className="p-[8px] hover:bg-gray-300 rounded-[4px]">
             Wishlist
           </Link>
-          <Link to="/about_us" className="p-[8px] hover:bg-gray-300 rounded-[4px]">
+          <Link to="/about-us" className="p-[8px] hover:bg-gray-300 rounded-[4px]">
             About us
           </Link>
-          <Link to="/contact_us" className="p-[8px] hover:bg-gray-300 rounded-[4px]">
+          <Link to="/contact-us" className="p-[8px] hover:bg-gray-300 rounded-[4px]">
             Contact us
           </Link>
         </div>
