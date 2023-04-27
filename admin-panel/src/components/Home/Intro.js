@@ -16,7 +16,7 @@ const Intro = ({ data }) => {
         >
           Welcome back, Admin!
         </h1>
-        <div className="flex flex-row w-full justify-start gap-4 flex-wrap">
+        <div className="flex flex-row w-full justify-between gap-4 flex-wrap">
           <Cards
             data={data.students && data.students}
             tooltipTitle="Students"

@@ -1,6 +1,8 @@
 import React from "react";
 import Chart from "react-apexcharts";
 import CourseCard from "./CourseCard";
+import FeedbackCard from "./FeedbackCard";
+import ContactCard from "./ContactCard";
 
 const Stats = ({ data }) => {
   const studentSeries = data?.students?.map(({ count, createdAt }) => ({
@@ -66,17 +68,19 @@ const Stats = ({ data }) => {
           <div className="border-b-[1px] p-[20px] border-b-gray-500">
             <p className="text-white text-[18px]  ">User Statistics</p>
           </div>
-          <div>
+          <div className="absolute bottom-0 w-full">
             <Chart
               options={chartOptions}
               series={series}
               type="line"
-              height={350}
+              height={450}
             />
           </div>
         </div>
         <div className="w-2/5 flex flex-col gap-4">
           <CourseCard data={data} />
+          <FeedbackCard data={data} />
+          <ContactCard data={data} />
         </div>
       </div>
     </>

@@ -7,6 +7,8 @@ const Follow = require("../models/followModel");
 const moment = require("moment");
 const Order = require("../models/orderModel");
 const Course = require("../models/courseModel");
+const Feedback = require("../models/feedbackModel");
+const Contact = require("../models/contactModel");
 
 const userCtrl = {
   register: async (req, res) => {
@@ -529,11 +531,15 @@ const userCtrl = {
       const tutorsPerMonth = await User.aggregate(pipeline2);
       const orders = await Order.aggregate(pipeline3);
       const courses = await Course.aggregate(pipeline4);
+      const feedbacks = await Feedback.aggregate(pipeline4);
+      const contacts = await Contact.aggregate(pipeline4);
       let obj = {
         students: studentsPerMonth,
         tutors: tutorsPerMonth,
         orders: orders,
         courses: courses,
+        feedbacks: feedbacks,
+        contacts: contacts,
       };
       return res.status(StatusCodes.OK).json(obj);
     } catch (error) {

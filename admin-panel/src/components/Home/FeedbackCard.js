@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
 
-const CourseCard = ({ data }) => {
+const FeedbackCard = ({ data }) => {
   const [chartData, setChartData] = useState({
     options: {
       chart: {
@@ -57,7 +57,7 @@ const CourseCard = ({ data }) => {
   });
 
   useEffect(() => {
-    const formattedData = data?.courses?.map((item) => ({
+    const formattedData = data?.feedbacks?.map((item) => ({
       x: new Date(item.createdAt).getTime(),
       y: item.count,
     }));
@@ -91,7 +91,7 @@ const CourseCard = ({ data }) => {
   }, [chartData, data]);
 
   const TotalCount = () => {
-    const totalCount = data?.courses?.reduce((total, currentValue) => {
+    const totalCount = data?.feedbacks?.reduce((total, currentValue) => {
       return total + currentValue.count;
     }, 0);
     return totalCount;
@@ -101,8 +101,8 @@ const CourseCard = ({ data }) => {
     <div className=" relative w-full bg-gradient-to-r from-green-500 to-green-800 p-[15px] rounded-[7px] overflow-hidden">
       <div className="flex flex-row justify-between items-center">
         <div>
-          <p className="text-white text-[24px]">Courses</p>
-          <p className="text-gray-300 text-[14px]">Courses per year</p>
+          <p className="text-white text-[24px]">Feedbacks</p>
+          <p className="text-gray-300 text-[14px]">Feedbacks per year</p>
         </div>
         <p className="text-[32px] text-white pr-[30px]">
           <TotalCount />
@@ -118,4 +118,4 @@ const CourseCard = ({ data }) => {
   );
 };
 
-export default CourseCard;
+export default FeedbackCard;
