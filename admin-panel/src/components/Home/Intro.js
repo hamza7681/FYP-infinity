@@ -16,14 +16,6 @@ const Intro = ({ data }) => {
         >
           Welcome back, Admin!
         </h1>
-        <p
-          className={`${
-            appBackground === "#ffffff" ? "text-black" : "text-gray-400"
-          } my-[15px]`}
-        >
-          Yesterday I was clever, so I wanted to change the world. Today I am
-          wise, so I am changing myself.
-        </p>
         <div className="flex flex-row w-full justify-start gap-4 flex-wrap">
           <Cards
             data={data.students && data.students}

@@ -54,6 +54,8 @@ import { toast } from "react-toastify";
 import OrderPage from "../../pages/OrderPage";
 import ViewOrderPage from "../../pages/ViewOrderPage";
 import ViewFeedbackPage from "../../pages/ViewFeedbackPage";
+import ContactPage from "../../pages/ContactPage";
+import ViewContactPage from "../../pages/ViewContactPage";
 
 const drawerWidth = 240;
 
@@ -482,6 +484,8 @@ const Navbar = () => {
             <Route path="/notifications" element={<NotificationPage />} />
             <Route path="/orders" element={<OrderPage />} />
             <Route path="/orders/:id" element={<ViewOrderPage />} />
+            <Route path="/contacts" element={<ContactPage />} />
+            <Route path="/contact/:id" element={<ViewContactPage />} />
           </Route>
         </Routes>
       </Box>
