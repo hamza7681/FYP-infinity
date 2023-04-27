@@ -58,7 +58,7 @@ const CounterUp = () => {
   };
 
   return (
-    <div className="flex lg:flex-row w-full flex-col  lg:72 h-auto justify-center mt-20 mb-20 bg-blue-700">
+    <div className="flex lg:flex-row w-full flex-col  lg:72 h-auto justify-center mt-20 mb-20 bg-[#03043b]">
       <div className="mx-20 w-auto gap-x-44 flex lg:flex-row flex-col lg:h-72 h-auto  justify-center items-center">
         {counters.map((counter, index) => (
           <div

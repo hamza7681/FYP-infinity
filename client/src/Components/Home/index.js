@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { http } from "../../Axios/config";
 import Slider from "./Slider";
 import { motion, useScroll } from "framer-motion";
-
+import ImageFiltering from './ImageFiltering';
 const Home = () => {
   const { token } = useSelector((s) => s.AuthReducer);
   const dispatch = useDispatch();
@@ -43,6 +43,7 @@ const Home = () => {
         ></motion.div>
         <Slider />
         <Vision />
+        <ImageFiltering/>
         <Courses />
         <Features />
       </div>

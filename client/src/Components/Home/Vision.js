@@ -14,7 +14,7 @@ const Vision = () => {
         <div className="lg:w-2/4 md:w-2/4 w-full ">
           <h2 className="text-[25px] font-bold mt-20">Our Vision</h2>
           <p className="w-full py-[5px] text-[20px] mt-3 text-justify">
-            Our vision is to provide education irrespective of boundries. Our
+            Our vision is to provide education irrespective of boundries. Our 
             vision is to provide an accessible, flexible, and high-quality
             education to students of all ages and backgrounds, regardless of
             their location or schedule. Our goal is to provide wider range of
