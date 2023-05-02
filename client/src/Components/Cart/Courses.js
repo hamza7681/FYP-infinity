@@ -11,9 +11,6 @@ const Courses = () => {
     <>
       <div className="w-full flex justify-center  items-center relative">
         <div className="w-full px-[10px] md:px-[40px] pt-[20px] md:pt-[50px]  flex flex-col relative ">
-          <h2 className="text-[22px] font-semibold pb-[10px] border-b-[3px] mb-[20px]">
-            Cart
-          </h2>
           {cartItems.length === 0 ? (
             <p>Your cart is empty!</p>
           ) : (

@@ -4,7 +4,10 @@ import { http } from "../../Axios/config";
 import FormattedPrice from "../../Reuseables/FormattedPrice";
 import { BsCart3, BsFillHeartFill } from "react-icons/bs";
 import ReactPaginate from "react-paginate";
-import Footer from '../Footer/Footer'
+import Footer from "../Footer/Footer";
+import BreadCrumbs from "../../Reuseables/BreadCrumbs";
+import logo from "../../Assets/wishlist.jpg";
+
 const WishList = () => {
   const { token } = useSelector((s) => s.AuthReducer);
   const [wishlist, setWishlist] = useState([]);
@@ -86,34 +89,38 @@ const WishList = () => {
 
   return (
     <>
-    <div className=" px-[10px] md:px-[40px] pt-[20px] md:pt-[50px] ">
-      <h2 className="text-[22px] font-semibold pb-[10px] border-b-[3px] mb-[20px]">
-        My WishList
-      </h2>
-      <div className="p-[10px]">
-        <div className="flex flex-col gap-4 py-[20px] px-[40px] border-[2px] my-[20px]">
-          <Items currentItems={currentItems} />
-        </div>
-        <div className="w-full flex justify-center items-center mt-[100px]">
-          <ReactPaginate
-            breakLabel="..."
-            nextLabel="Next >"
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={5}
-            pageCount={pageCount}
-            previousLabel="< Previous"
-            renderOnZeroPageCount={null}
-            activeClassName="w-[25px] h-[25px]  bg-gray-500 w-fit text-white rounded-full"
-            containerClassName="flex flex-row items-center gap-3  w-full justify-center py-[6px] rounded-full bg-gray-200"
-            pageClassName="w-[25px] h-[25px] flex justify-center items-center rounded-full font-semibold"
-            previousClassName="text-[#292a77] font-semibold"
-            nextClassName="text-[#292a77] font-semibold"
-            disabledClassName="text-gray-300 font-normal"
-          />
+      <BreadCrumbs
+        parent="Home"
+        parentPath="/"
+        active="Wishlist"
+        image={logo}
+        pageName="Your Courses Wishlist"
+      />
+      <div className=" px-[10px] md:px-[40px] pt-[20px] md:pt-[50px] ">
+        <div className="p-[10px]">
+          <div className="flex flex-col gap-4 py-[20px] px-[40px] border-[2px] my-[20px]">
+            <Items currentItems={currentItems} />
+          </div>
+          <div className="w-full flex justify-center items-center mt-[100px]">
+            <ReactPaginate
+              breakLabel="..."
+              nextLabel="Next >"
+              onPageChange={handlePageClick}
+              pageRangeDisplayed={5}
+              pageCount={pageCount}
+              previousLabel="< Previous"
+              renderOnZeroPageCount={null}
+              activeClassName="w-[25px] h-[25px]  bg-gray-500 w-fit text-white rounded-full"
+              containerClassName="flex flex-row items-center gap-3  w-full justify-center py-[6px] rounded-full bg-gray-200"
+              pageClassName="w-[25px] h-[25px] flex justify-center items-center rounded-full font-semibold"
+              previousClassName="text-[#292a77] font-semibold"
+              nextClassName="text-[#292a77] font-semibold"
+              disabledClassName="text-gray-300 font-normal"
+            />
+          </div>
         </div>
       </div>
-    </div>
-    <Footer/>
+      <Footer />
     </>
   );
 };

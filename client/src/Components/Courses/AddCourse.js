@@ -94,9 +94,6 @@ const AddCourse = () => {
         pageName="Add New Course"
       />
       <div className="w-full p-[20px]">
-        <h1 className="text-[22px] font-semibold pb-[10px] border-b-[3px]">
-          Add Course
-        </h1>
         <div className="w-full flex flex-col md:flex-row md:p-[20px] pt-[30px] gap-6">
           <div className="flex flex-col md:w-1/2 gap-4">
             <CourseInput

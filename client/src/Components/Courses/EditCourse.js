@@ -7,6 +7,8 @@ import PulseLoader from "react-spinners/PulseLoader";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
+import BreadCrumbs from "../../Reuseables/BreadCrumbs";
+import logo from "../../Assets/add-course.jpg";
 
 const EditCourse = () => {
   const [count, setCount] = useState(0);
@@ -95,10 +97,14 @@ const EditCourse = () => {
   };
   return (
     <>
+      <BreadCrumbs
+        parent="Home"
+        parentPath="/"
+        active="Edit Course"
+        image={logo}
+        pageName="Edit Existing Course"
+      />
       <div className="w-full p-[20px]">
-        <h1 className="text-[22px] font-semibold pb-[10px] border-b-[3px]">
-          Edit Course
-        </h1>
         <div className="w-full flex flex-col md:flex-row md:p-[20px] pt-[30px] gap-6">
           <div className="flex flex-col md:w-1/2 gap-4">
             <CourseInput

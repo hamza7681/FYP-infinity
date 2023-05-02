@@ -4,7 +4,7 @@ import FilterCourses from "./FilterCourses";
 import { http } from "../../Axios/config";
 import { useSelector } from "react-redux";
 import BreadCrumbs from "../../Reuseables/BreadCrumbs";
-import logo from '../../Assets/courses.jpg'
+import logo from "../../Assets/courses.jpg";
 
 const AllCourses = () => {
   const [courses, setCourses] = useState([]);
@@ -96,9 +96,6 @@ const AllCourses = () => {
         image={logo}
         pageName="Courses for you"
       />
-      <div className="w-full border-b-[3px] p-[20px]">
-        <h1 className="text-[24px] font-semibold">Courses</h1>
-      </div>
       <div className="px-[10px] md:mx-20  w-auto flex lg:flex-row flex-col mt-10 gap-x-7">
         <div className="lg:w-1/4 w-full">
           <Filters

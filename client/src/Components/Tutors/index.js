@@ -171,9 +171,6 @@ const Tutors = () => {
         pageName="Available Tutors for you"
       />
       <div className="w-full p-[10px] md:p-[30px]">
-        <div className="w-full border-b-[3px] pb-[10px]">
-          <h1 className="text-[24px] font-semibold">Tutors</h1>
-        </div>
         <div className="w-full flex flex-col md:flex-row mt-[30px]">
           <div className="w-full md:w-[30%] flex justify-center h-[200px] md:border-r-gray-400 md:border-r-[1px]">
             <div className="flex flex-col justify-center items-center bg-gray-200 p-[50px] rounded-[5px] shadow-lg">

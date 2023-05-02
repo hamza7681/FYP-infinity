@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import logo from "../../Assets/I.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { BsCart3, BsJournalPlus, BsSearch } from "react-icons/bs";
 import GlobalButton from "../../Reuseables/GlobalButton";
 import { FiHeart, FiLogOut } from "react-icons/fi";
@@ -21,6 +21,8 @@ const MainNavbar = () => {
   const [Categories, setCategories] = useState([]);
   const { token, user } = useSelector((s) => s.AuthReducer);
   const { cartItems, globalSearch } = useSelector((s) => s.CourseReducer);
+  const location = useLocation();
+
   const logout = () => {
     dispatch({ type: "LOGOUT" });
     localStorage.clear();
@@ -98,29 +100,75 @@ const MainNavbar = () => {
               ""
             )}
           </div>
-          <Link to="/tutors" className="text-[15px] hover:text-[#f5822a]">
+          <Link
+            to="/tutors"
+            className={`text-[15px] px-[10px] py-[5px] rounded-[3px]  ${
+              location.pathname === "/tutors"
+                ? "bg-[#f5822a] text-white"
+                : "hover:text-[#f5822a]"
+            }`}
+          >
             Tutors
           </Link>
-          <Link to="/courses" className="text-[15px] hover:text-[#f5822a]">
+          <Link
+            to="/courses"
+            className={`text-[15px] px-[10px] py-[5px] rounded-[3px]  ${
+              location.pathname === "/courses"
+                ? "bg-[#f5822a] text-white"
+                : "hover:text-[#f5822a]"
+            }`}
+          >
             Courses
           </Link>
 
-          <Link to="/about-us" className="text-[15px] hover:text-[#f5822a]">
+          <Link
+            to="/about-us"
+            className={`text-[15px] px-[10px] py-[5px] rounded-[3px]  ${
+              location.pathname === "/about-us"
+                ? "bg-[#f5822a] text-white"
+                : "hover:text-[#f5822a]"
+            }`}
+          >
             About us
           </Link>
-          <Link to="/contact-us" className="text-[15px] hover:text-[#f5822a]">
+          <Link
+            to="/contact-us"
+            className={`text-[15px] px-[10px] py-[5px] rounded-[3px]  ${
+              location.pathname === "/contact-us"
+                ? "bg-[#f5822a] text-white"
+                : "hover:text-[#f5822a]"
+            }`}
+          >
             Contact us
           </Link>
           {user.role === 0 ? (
             <>
-              <Link to="/cart" className="text-[20px] relative ">
+              <Link
+                to="/cart"
+                className={`text-[20px] relative px-[10px] py-[5px] rounded-[3px]  ${
+                  location.pathname === "/cart"
+                    ? "bg-[#f5822a] text-white"
+                    : "hover:text-[#f5822a]"
+                }`}
+              >
                 <BsCart3 />
-                <div className="absolute top-[-10px] left-[10px] w-[20px] h-[20px] bg-[#f5822a] flex justify-center items-center rounded-full text-white text-[12px]">
+                <div
+                  className={`absolute top-[-8px] left-[20px] w-[20px] h-[20px] ${
+                    location.pathname === "/cart" ? "bg-black" : "bg-[#f5822a]"
+                  } flex justify-center items-center rounded-full text-white text-[12px]`}
+                >
                   {cartItems.length}
                 </div>
               </Link>
 
-              <Link to="/wishlist" className="text-[20px] ">
+              <Link
+                to="/wishlist"
+                className={`text-[20px] relative px-[8px] py-[5px] rounded-[3px]  ${
+                  location.pathname === "/wishlist"
+                    ? "bg-[#f5822a] text-white"
+                    : "hover:text-[#f5822a]"
+                }`}
+              >
                 <FiHeart />
               </Link>
             </>
@@ -128,7 +176,14 @@ const MainNavbar = () => {
             ""
           )}
           {user.role === 2 ? (
-            <Link to="/add-course" className="text-[22px] hover:text-[#f5822a]">
+            <Link
+              to="/add-course"
+              className={`text-[22px] px-[10px] py-[5px] rounded-[3px]  ${
+                location.pathname === "/add-course"
+                  ? "bg-[#f5822a] text-white"
+                  : "hover:text-[#f5822a]"
+              }`}
+            >
               <BsJournalPlus />
             </Link>
           ) : (
