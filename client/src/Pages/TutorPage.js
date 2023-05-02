@@ -12,7 +12,7 @@ const TutorPage = () => {
   return (
     <>
       <MainNavbar />
-      {user.role === 0 ? (
+      {/* {user.role === 0 ? (
         <Tutors />
       ) : (
         <>
@@ -28,8 +28,8 @@ const TutorPage = () => {
             </div>
           </div>
         </>
-      )}
-
+      )} */}
+      <Tutors />
       <Footer />
     </>
   );

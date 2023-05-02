@@ -50,6 +50,12 @@ function App() {
       <ToastContainer />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/about-us" element={<AboutPage />} />
+        <Route path="/contact-us" element={<ContactPage />} />
+        <Route path="/tutors" element={<TutorPage />} />
+        <Route path="/courses" element={<AllCoursesPage />} />
+        <Route path="/course/:id" element={<ViewCoursePage />} />
+
         <Route element={<ProtectedRoutes />}>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
@@ -58,14 +64,9 @@ function App() {
         </Route>
         <Route element={<PrivateRoutes />}>
           <Route path="/chat" element={<ChatPage />} />
-          <Route path="/courses" element={<AllCoursesPage />} />
-          <Route path="/about-us" element={<AboutPage />} />
-          <Route path="/contact-us" element={<ContactPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/add-course" element={<AddCoursePage />} />
           <Route path="/edit-course/:id" element={<EditCoursePage />} />
-          <Route path="/course/:id" element={<ViewCoursePage />} />
-          <Route path="/tutors" element={<TutorPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/order" element={<OrderPage />} />
           <Route path="/wishlist" element={<WishListPage />} />

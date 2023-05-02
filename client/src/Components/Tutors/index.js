@@ -6,6 +6,8 @@ import { http } from "../../Axios/config";
 import ReactPaginate from "react-paginate";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import BreadCrumbs from "../../Reuseables/BreadCrumbs";
+import logo from "../../Assets/tutors.jpg";
 
 const Tutors = () => {
   const [tutors, setTutors] = useState([]);
@@ -161,6 +163,13 @@ const Tutors = () => {
 
   return (
     <>
+      <BreadCrumbs
+        parent="Home"
+        parentPath="/"
+        active="Tutors"
+        image={logo}
+        pageName="Available Tutors for you"
+      />
       <div className="w-full p-[10px] md:p-[30px]">
         <div className="w-full border-b-[3px] pb-[10px]">
           <h1 className="text-[24px] font-semibold">Tutors</h1>

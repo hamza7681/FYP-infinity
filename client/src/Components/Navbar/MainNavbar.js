@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import logo from "../../Assets/I.png";
 import { Link, useNavigate } from "react-router-dom";
-import { BsCart3, BsSearch } from "react-icons/bs";
+import { BsCart3, BsJournalPlus, BsSearch } from "react-icons/bs";
 import GlobalButton from "../../Reuseables/GlobalButton";
 import { FiHeart, FiLogOut } from "react-icons/fi";
 import { FaBars } from "react-icons/fa";
@@ -98,15 +98,13 @@ const MainNavbar = () => {
               ""
             )}
           </div>
-          {user.role === 0 ? (
-            <Link to="/tutors" className="text-[15px] hover:text-[#f5822a]">
-              Tutors
-            </Link>
-          ) : (
-            <Link to="/add-course" className="text-[15px] hover:text-[#f5822a]">
-              Add Course
-            </Link>
-          )}
+          <Link to="/tutors" className="text-[15px] hover:text-[#f5822a]">
+            Tutors
+          </Link>
+          <Link to="/courses" className="text-[15px] hover:text-[#f5822a]">
+            Courses
+          </Link>
+
           <Link to="/about-us" className="text-[15px] hover:text-[#f5822a]">
             About us
           </Link>
@@ -121,6 +119,7 @@ const MainNavbar = () => {
                   {cartItems.length}
                 </div>
               </Link>
+
               <Link to="/wishlist" className="text-[20px] ">
                 <FiHeart />
               </Link>
@@ -128,9 +127,20 @@ const MainNavbar = () => {
           ) : (
             ""
           )}
-          <Link to="/chat" className="text-[22px] ">
-            <BiChat />
-          </Link>
+          {user.role === 2 ? (
+            <Link to="/add-course" className="text-[22px] hover:text-[#f5822a]">
+              <BsJournalPlus />
+            </Link>
+          ) : (
+            ""
+          )}
+          {token ? (
+            <Link to="/chat" className="text-[22px] ">
+              <BiChat />
+            </Link>
+          ) : (
+            ""
+          )}
           {token ? (
             <div
               className="relative cursor-pointer my-auto"

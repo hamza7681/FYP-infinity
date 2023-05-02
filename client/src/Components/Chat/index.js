@@ -50,7 +50,7 @@ const Chat = () => {
       }
     };
     getUsers();
-  }, [token, dispatch, fetchAgain]);
+  }, [token, dispatch, user._id, fetchAgain]);
 
   const checkStatus = (chat) => {
     const findMembers = chat?.members?.find((id) => id !== user._id);

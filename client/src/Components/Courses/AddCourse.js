@@ -6,6 +6,8 @@ import { FaTimes } from "react-icons/fa";
 import PulseLoader from "react-spinners/PulseLoader";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import BreadCrumbs from "../../Reuseables/BreadCrumbs";
+import logo from "../../Assets/add-course.jpg";
 
 const AddCourse = () => {
   const [count, setCount] = useState(0);
@@ -84,6 +86,13 @@ const AddCourse = () => {
 
   return (
     <>
+      <BreadCrumbs
+        parent="Home"
+        parentPath="/"
+        active="Add Course"
+        image={logo}
+        pageName="Add New Course"
+      />
       <div className="w-full p-[20px]">
         <h1 className="text-[22px] font-semibold pb-[10px] border-b-[3px]">
           Add Course
