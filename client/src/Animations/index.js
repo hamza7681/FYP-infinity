@@ -35,7 +35,7 @@ export const picAnimate = {
     transition: {
       type: "spring",
       stiffness: 80,
-      delay: 1,
+      delay: 0.4,
     },
   },
 };

@@ -8,11 +8,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import BreadCrumbs from "../../Reuseables/BreadCrumbs";
 import logo from "../../Assets/tutors.jpg";
+import { useNavigate } from "react-router-dom";
 
 const Tutors = () => {
   const [tutors, setTutors] = useState([]);
   const [defaultData, setDefault] = useState([]);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { token, user, followings } = useSelector((s) => s.AuthReducer);
   useEffect(() => {
     const fetchTutors = async () => {
@@ -92,24 +94,28 @@ const Tutors = () => {
   };
 
   const addFollowing = async (following) => {
-    try {
-      const res = await http.post(
-        "/follow/add-follower",
-        {
-          user: user?._id,
-          following: following,
-        },
-        {
-          headers: {
-            Authorization: token,
+    if (token) {
+      try {
+        const res = await http.post(
+          "/follow/add-follower",
+          {
+            user: user?._id,
+            following: following,
           },
-        }
-      );
-      toast.success(res.data.msg);
-      window.location.reload();
-    } catch (error) {
-      toast.error(error.response.data.msg);
-      window.location.reload();
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
+        );
+        toast.success(res.data.msg);
+        window.location.reload();
+      } catch (error) {
+        toast.error(error.response.data.msg);
+        window.location.reload();
+      }
+    } else {
+      toast.warn("You need to be login for follow this tutor");
     }
   };
 

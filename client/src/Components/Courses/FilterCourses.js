@@ -3,11 +3,12 @@ import ReactPaginate from "react-paginate";
 import { useDispatch, useSelector } from "react-redux";
 import FormattedPrice from "../../Reuseables/FormattedPrice";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const FilterCourses = ({ courses, inputFiltered, show1 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user } = useSelector((s) => s.AuthReducer);
+  const { user, token } = useSelector((s) => s.AuthReducer);
 
   const [itemOffset, setItemOffset] = useState(0);
   const itemsPerPage = 6;
@@ -64,9 +65,18 @@ const FilterCourses = ({ courses, inputFiltered, show1 }) => {
                           </div>
                           {user?.role !== 2 ? (
                             <div
-                              onClick={() =>
-                                dispatch({ type: "ADD_TO_CART", payload: val })
-                              }
+                              onClick={() => {
+                                if (token) {
+                                  dispatch({
+                                    type: "ADD_TO_CART",
+                                    payload: val,
+                                  });
+                                } else {
+                                  toast.warn(
+                                    "You need to be login for follow this tutor"
+                                  );
+                                }
+                              }}
                               className="w-1/2 flex flex-row justify-center items-center gap-2 py-[10px] cursor-pointer border-t-[1px] border-l-[1px] border-t-gray-300 border-l-gray-300"
                             >
                               Add to Cart
@@ -124,12 +134,18 @@ const FilterCourses = ({ courses, inputFiltered, show1 }) => {
                             </div>
                             {user?.role !== 2 ? (
                               <div
-                                onClick={() =>
-                                  dispatch({
-                                    type: "ADD_TO_CART",
-                                    payload: val,
-                                  })
-                                }
+                                onClick={() => {
+                                  if (token) {
+                                    dispatch({
+                                      type: "ADD_TO_CART",
+                                      payload: val,
+                                    });
+                                  } else {
+                                    toast.warn(
+                                      "You need to be login for follow this tutor"
+                                    );
+                                  }
+                                }}
                                 className="w-1/2 flex flex-row justify-center items-center gap-2 py-[10px] cursor-pointer border-t-[1px] border-l-[1px] border-t-gray-300 border-l-gray-300"
                               >
                                 Add to Cart

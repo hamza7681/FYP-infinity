@@ -17,17 +17,17 @@ const About = () => {
           image={logo}
           pageName="About us"
         />
-        <div className="flex lg:flex-row flex-col px-[20px] md:px-16 w-auto gap-x-40 mt-8">
-          <div className="lg:w-2/4 md:w-2/4 w-full ">
-            <h2 className="text-[25px] font-bold mt-10">Our Vision</h2>
-            <p className="w-full py-[5px] text-[15px] mt-3 text-justify">
+        <div className="flex lg:flex-row flex-col px-[20px] md:px-16 py-[40px] w-auto gap-x-40 mt-8 items-center">
+          <div className="lg:w-2/4 md:w-2/4 w-full flex flex-col gap-4 ">
+            <h2 className="text-[25px] font-bold">Our Vision</h2>
+            <p className="w-full py-[5px] text-[15px] text-justify">
               Our vision is to provide education irrespective of boundries. Our
               vision is to provide an accessible, flexible, and high-quality
               education to students of all ages and backgrounds, regardless of
               their location or schedule. Our goal is to provide wider range of
               courses at one platform.
             </p>
-            <p className="w-full py-[5px] text-[15px] mt-3 text-justify">
+            <p className="w-full py-[5px] text-[15px] text-justify">
               The courses are tailored to suit learners' needs, whether they are
               beginners or advanced learners. The website offers a wide range of
               courses in each language, covering different aspects of language
@@ -38,14 +38,16 @@ const About = () => {
               anytime, anywhere, and on any device, making learning flexible and
               convenient.
             </p>
-            <motion.div
+          </div>
+          <div className="lg:w-2/4 w-full">
+            <motion.img
               variants={picAnimate}
               initial="hidden"
               whileInView="show"
-            ></motion.div>
-          </div>
-          <div className="lg:w-2/4  w-full block">
-            <img src={pic} alt="pic" className="rounded-lg" />
+              src={pic}
+              alt="pic"
+              className="rounded-lg"
+            />
           </div>
         </div>
         <CounterUp />
