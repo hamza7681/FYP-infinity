@@ -8,13 +8,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import BreadCrumbs from "../../Reuseables/BreadCrumbs";
 import logo from "../../Assets/tutors.jpg";
-import { useNavigate } from "react-router-dom";
 
 const Tutors = () => {
   const [tutors, setTutors] = useState([]);
   const [defaultData, setDefault] = useState([]);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { token, user, followings } = useSelector((s) => s.AuthReducer);
   useEffect(() => {
     const fetchTutors = async () => {

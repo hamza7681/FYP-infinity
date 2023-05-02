@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import logo from "../../Assets/I.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { BsCart3, BsJournalPlus, BsSearch } from "react-icons/bs";
@@ -8,17 +8,14 @@ import { FaBars } from "react-icons/fa";
 import Sidebar from "./Sidebar";
 import { BiChat } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
-import { http } from "../../Axios/config";
 import { motion } from "framer-motion";
 import { NavbarAnimate } from "../../Animations";
 
 const MainNavbar = () => {
   const navigate = useNavigate();
-  const [showDiv, setShowDiv] = useState(false);
   const [dropdown, setDropdown] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
   const dispatch = useDispatch();
-  const [Categories, setCategories] = useState([]);
   const { token, user } = useSelector((s) => s.AuthReducer);
   const { cartItems, globalSearch } = useSelector((s) => s.CourseReducer);
   const location = useLocation();
@@ -27,18 +24,6 @@ const MainNavbar = () => {
     dispatch({ type: "LOGOUT" });
     localStorage.clear();
   };
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const res = await http.get("/category/get-category");
-        setCategories(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchCategories();
-  }, []);
 
   return (
     <>
@@ -72,34 +57,6 @@ const MainNavbar = () => {
           </div>
         </div>
         <div className="w-7/12 md:flex hidden flex-row justify-around gap-2 items-center">
-          <div className="md:block hidden relative">
-            <span
-              className="text-[15px] hover:text-[#f5822a] cursor-pointer"
-              onClick={() => setShowDiv(!showDiv)}
-            >
-              Categories
-            </span>
-            {showDiv ? (
-              <div className="absolute top-[40px] h-[400px] w-[250px] scrollbar-hidden overflow-y-scroll flex flex-col bg-white border-[1px] rounded-[4px]">
-                {Categories &&
-                  Categories.map((val, index) => {
-                    return (
-                      <>
-                        <Link
-                          to="/"
-                          className="text-[14px] px-[10px] py-[15px] hover:bg-gray-300"
-                          onClick={() => setShowDiv(false)}
-                        >
-                          {val.name}
-                        </Link>
-                      </>
-                    );
-                  })}
-              </div>
-            ) : (
-              ""
-            )}
-          </div>
           <Link
             to="/tutors"
             className={`text-[15px] px-[10px] py-[5px] rounded-[3px]  ${
