@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import pic from "../../Assets/user-logo.jpg";
 import { AiOutlineEye } from "react-icons/ai";
 import { FiUserMinus, FiUserPlus } from "react-icons/fi";
 import { http } from "../../Axios/config";
@@ -8,11 +7,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import BreadCrumbs from "../../Reuseables/BreadCrumbs";
 import logo from "../../Assets/tutors.jpg";
+import { useNavigate } from "react-router-dom";
 
 const Tutors = () => {
   const [tutors, setTutors] = useState([]);
   const [defaultData, setDefault] = useState([]);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { token, user, followings } = useSelector((s) => s.AuthReducer);
   useEffect(() => {
     const fetchTutors = async () => {
@@ -134,7 +135,7 @@ const Tutors = () => {
                       className="w-full md:w-[280px] border-[1px] rounded-[5px] border-gray-200 shadow-xl"
                       key={val._id}
                     >
-                      <img src={pic} alt="tutor pic" className="w-full" />
+                      <img src={val.dp} alt="tutor pic" className="w-full" />
                       <div className="px-[15px] py-[10px]">
                         <h1 className="text-[22px] font-semibold">
                           {val.firstName} {val.lastName}
@@ -144,7 +145,12 @@ const Tutors = () => {
                         </p>
                       </div>
                       <div className="flex flex-row justify-start w-full items-center">
-                        <div className="w-1/2 flex flex-row justify-center items-center gap-2 py-[10px] cursor-pointer border-t-[1px] border-r-[1px] border-t-gray-300 border-r-gray-300">
+                        <div
+                          className="w-1/2 flex flex-row justify-center items-center gap-2 py-[10px] cursor-pointer border-t-[1px] border-r-[1px] border-t-gray-300 border-r-gray-300"
+                          onClick={() => {
+                            navigate(`/tutor/${val._id}`);
+                          }}
+                        >
                           <AiOutlineEye />
                           <span>View</span>
                         </div>

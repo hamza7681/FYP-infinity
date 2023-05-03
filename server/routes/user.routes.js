@@ -27,7 +27,7 @@ router.post("/forgot", forgot);
 router.patch("/reset", auth, reset);
 router.get("/get-profile", auth, getProfile);
 router.get("/all-users", auth, allUsers);
-router.get("/get-user/:id", auth, getUser);
+router.get("/get-user/:id", getUser);
 router.get("/search-user", auth, searchUser);
 router.get("/dashboard", getDashboard);
 router.post("/admin-login", adminLogin);
@@ -36,7 +36,7 @@ router.get("/get-tutor-id/:id", getTutorById);
 router.delete("/delete-tutor/:id", auth, deleteTutorById);
 router.get("/get-students", getStudents);
 router.patch("/update-profile", auth, updateProfile);
-router.patch("/update-profile-status", auth, updateProfileStatus);
+router.post("/update-profile-status", auth, updateProfileStatus);
 router.patch("/update-dp", auth, dpImageUpload.single("dp"), updateDp);
 
 module.exports = router;

@@ -24,6 +24,7 @@ import WishListPage from "./Pages/WishListPage";
 import EditCoursePage from "./Pages/EditCoursePage";
 import AboutPage from "./Pages/AboutPage";
 import ContactPage from "./Pages/ContactPage";
+import ViewTutorPage from "./Pages/ViewTutorPage";
 
 function App() {
   const { token } = useSelector((s) => s.AuthReducer);
@@ -55,6 +56,7 @@ function App() {
         <Route path="/tutors" element={<TutorPage />} />
         <Route path="/courses" element={<AllCoursesPage />} />
         <Route path="/course/:id" element={<ViewCoursePage />} />
+        <Route path="/tutor/:id" element={<ViewTutorPage />} />
 
         <Route element={<ProtectedRoutes />}>
           <Route path="/login" element={<LoginPage />} />

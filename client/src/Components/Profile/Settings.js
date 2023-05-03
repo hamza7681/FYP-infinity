@@ -33,9 +33,9 @@ const Settings = () => {
   const update = async () => {
     setLoading(true);
     try {
-      const res = await http.patch(
+      const res = await http.post(
         "/auth/update-profile-status",
-        { visibility },
+        {},
         {
           headers: {
             Authorization: token,
@@ -58,7 +58,6 @@ const Settings = () => {
           <input
             type="checkbox"
             id="privacy1"
-            checked={visibility}
             defaultChecked={visibility}
             onChange={(e) => setVisibility(e.target.checked)}
           />
@@ -73,17 +72,6 @@ const Settings = () => {
           {loading ? <PulseLoader color="#ffffff" /> : "Save"}
         </button>
       </div>
-      <div className="flex h-[70vh] justify-center items-center bg-red-400">
-            <div className="flex flex-col justify-center items-center">
-              <BsExclamationTriangle className="text-gray-400 text-[62px]" />
-              <p className="text-gray-400 text-[42px]">
-                Only Tutors can access this page!
-              </p>
-              <Link to="/" className="text-purple-500 font-semibold underline">
-                Back to Home
-              </Link>
-            </div>
-          </div>
     </>
   );
 };

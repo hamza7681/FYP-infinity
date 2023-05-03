@@ -263,10 +263,11 @@ const userCtrl = {
     }
   },
   updateProfileStatus: async (req, res) => {
-    const { visibility } = req.body;
     const id = req.user;
     try {
-      await User.findOneAndUpdate(id, { visibility });
+      let visibility = await User.findById(id);
+      visibility.visibility = !visibility.visibility;
+      await visibility.save();
       return res
         .status(StatusCodes.OK)
         .json({ msg: "Profile visibility updated Successfully" });

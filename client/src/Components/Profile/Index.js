@@ -6,6 +6,9 @@ import { useSelector } from "react-redux";
 import { http } from "../../Axios/config";
 import ProfileWishlist from "./ProfileWishlist";
 import MyCourses from "./MyCourses";
+import BreadCrumbs from "../../Reuseables/BreadCrumbs";
+import logo from "../../Assets/profile.jpg";
+
 const Index = () => {
   const [pageIndex, setPageIndex] = useState(0);
   const { token } = useSelector((s) => s.AuthReducer);
@@ -46,10 +49,17 @@ const Index = () => {
 
   return (
     <>
+      <BreadCrumbs
+        parent="Home"
+        parentPath="/"
+        active={user.firstName + " " + user.lastName}
+        image={logo}
+        pageName={user.firstName + " " + user.lastName}
+      />
       <div className="flex flex-row ml-5 gap-7 shadow-md py-10">
         <p
           className={`border-b-[2px] ${
-            pageIndex === 0 ? "border-black" : "border-white"             
+            pageIndex === 0 ? "border-black" : "border-white"
           } hover:border-b-[2px] font-semibold text-[20px] cursor-pointer`}
           onClick={() => handlePageChange(0)}
         >
