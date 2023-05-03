@@ -56,11 +56,11 @@ const Index = () => {
         image={logo}
         pageName={user.firstName + " " + user.lastName}
       />
-      <div className="flex flex-row ml-5 gap-7 shadow-md py-10">
+      <div className="flex flex-row gap-4 md:gap-7 shadow-md py-10 w-full overflow-x-scroll">
         <p
           className={`border-b-[2px] ${
             pageIndex === 0 ? "border-black" : "border-white"
-          } hover:border-b-[2px] font-semibold text-[20px] cursor-pointer`}
+          } hover:border-b-[2px] font-semibold text-[14px] md:text-[20px] cursor-pointer`}
           onClick={() => handlePageChange(0)}
         >
           Profile
@@ -68,7 +68,7 @@ const Index = () => {
         <p
           className={`border-b-[2px] ${
             pageIndex === 1 ? "border-black" : "border-white"
-          } hover:border-b-[2px] font-semibold text-[20px] cursor-pointer`}
+          } hover:border-b-[2px] font-semibold text-[14px] md:text-[20px] cursor-pointer`}
           onClick={() => handlePageChange(1)}
         >
           Settings
@@ -78,7 +78,7 @@ const Index = () => {
             <p
               className={`border-b-[2px] ${
                 pageIndex === 2 ? "border-black" : "border-white"
-              } hover:border-b-[2px] font-semibold text-[20px] cursor-pointer`}
+              } hover:border-b-[2px] font-semibold text-[14px] md:text-[20px] cursor-pointer`}
               onClick={() => handlePageChange(2)}
             >
               My Wishlist
@@ -86,7 +86,7 @@ const Index = () => {
             <p
               className={`border-b-[2px] ${
                 pageIndex === 4 ? "border-black" : "border-white"
-              } hover:border-b-[2px] font-semibold text-[20px] cursor-pointer`}
+              } hover:border-b-[2px] font-semibold text-[14px] md:text-[20px] cursor-pointer`}
               onClick={() => handlePageChange(4)}
             >
               Feedbacks
@@ -96,7 +96,7 @@ const Index = () => {
           <p
             className={`border-b-[2px] ${
               pageIndex === 3 ? "border-black" : "border-white"
-            } hover:border-b-[2px] font-semibold text-[20px] cursor-pointer`}
+            } hover:border-b-[2px] font-semibold text-[14px] md:text-[20px] cursor-pointer`}
             onClick={() => handlePageChange(3)}
           >
             My Courses

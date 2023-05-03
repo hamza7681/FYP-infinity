@@ -228,7 +228,7 @@ const ViewTutor = () => {
           <div className="h-[400px] flex justify-center items-center">
             <div className="flex flex-col justify-center items-center gap-4">
               <BsExclamationTriangle className="text-gray-500 text-[62px]" />
-              <p className="text-gray-500 text-[32px]">
+              <p className="text-gray-500 text-center text-[32px]">
                 This user has restrict its information
               </p>
             </div>

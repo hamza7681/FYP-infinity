@@ -3,8 +3,6 @@ import PulseLoader from "react-spinners/PulseLoader";
 import { http } from "../../Axios/config";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
-import { BsExclamationTriangle } from "react-icons/bs";
-import { Link } from "react-router-dom";
 
 const Settings = () => {
   const { token } = useSelector((s) => s.AuthReducer);
@@ -54,7 +52,7 @@ const Settings = () => {
   return (
     <>
       <div className="flex flex-col w-full h-[50vh] p-[30px]">
-        <div className="flex flex-row items-center gap-2">
+        <div className="flex flex-row items-baseline md:items-center gap-2">
           <input
             type="checkbox"
             id="privacy1"

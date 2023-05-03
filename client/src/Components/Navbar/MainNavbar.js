@@ -4,12 +4,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { BsCart3, BsJournalPlus, BsSearch } from "react-icons/bs";
 import GlobalButton from "../../Reuseables/GlobalButton";
 import { FiHeart, FiLogOut } from "react-icons/fi";
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaRegUserCircle } from "react-icons/fa";
 import Sidebar from "./Sidebar";
 import { BiChat } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import { NavbarAnimate } from "../../Animations";
+import { RiShoppingBag3Line } from "react-icons/ri";
 
 const MainNavbar = () => {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ const MainNavbar = () => {
 
   const logout = () => {
     dispatch({ type: "LOGOUT" });
+    navigate("/");
     localStorage.clear();
   };
 
@@ -186,32 +188,54 @@ const MainNavbar = () => {
                   <div className="flex flex-col gap-2">
                     <Link
                       to="/profile"
-                      className="p-[8px] hover:bg-gray-300 rounded-[4px]"
+                      className="p-[8px] text-gray-600 hover:bg-gray-300 rounded-[4px] text-[14px] flex flex-row items-center justify-start gap-3"
                     >
-                      My Profile
+                      <FaRegUserCircle className="text-[22px]" /> My Profile
                     </Link>
                     <Link
                       to="/chat"
-                      className="p-[8px] hover:bg-gray-300 rounded-[4px]"
+                      className="p-[8px] text-gray-600 hover:bg-gray-300 rounded-[4px] text-[14px] flex flex-row items-center justify-start gap-3"
                     >
+                      <BiChat className="text-[22px]" />
                       Messenger
                     </Link>
-                    <Link
-                      to="/order"
-                      className="p-[8px] hover:bg-gray-300 rounded-[4px]"
-                    >
-                      My Orders
-                    </Link>
-                    <Link
-                      to="/"
-                      className="p-[8px] hover:bg-gray-300 rounded-[4px]"
-                    >
-                      Wishlist
-                    </Link>
+                    {user?.role === 0 ? (
+                      <>
+                        <Link
+                          to="/cart"
+                          className="p-[8px] text-gray-600 hover:bg-gray-300 rounded-[4px] text-[14px] flex flex-row items-center justify-start gap-3"
+                        >
+                          <BsCart3 className="text-[22px]" />
+                          My Cart
+                        </Link>
+                        <Link
+                          to="/order"
+                          className="p-[8px] text-gray-600 hover:bg-gray-300 rounded-[4px] text-[14px] flex flex-row items-center justify-start gap-3"
+                        >
+                          <RiShoppingBag3Line className="text-[22px]" />
+                          My Orders
+                        </Link>
+                        <Link
+                          to="/wishlist"
+                          className="p-[8px] text-gray-600 hover:bg-gray-300 rounded-[4px] text-[14px] flex flex-row items-center justify-start gap-3"
+                        >
+                          <FiHeart className="text-[22px]" />
+                          Wishlist
+                        </Link>
+                      </>
+                    ) : (
+                      <Link
+                        to="/add-course"
+                        className="p-[8px] text-gray-600 hover:bg-gray-300 rounded-[4px] text-[14px] flex flex-row items-center justify-start gap-3"
+                      >
+                        <BsJournalPlus className="text-[22px]" />
+                        Add Course
+                      </Link>
+                    )}
                   </div>
                   <div className="border-[1px] my-[20px]"></div>
                   <div
-                    className="flex flex-row gap-3 items-center p-[8px]"
+                    className="flex flex-row gap-3 items-center p-[8px] text-gray-600"
                     onClick={logout}
                   >
                     <FiLogOut />
@@ -223,7 +247,7 @@ const MainNavbar = () => {
               )}
             </div>
           ) : (
-            <div>
+            <>
               <div className="flex flex-row gap-2">
                 <GlobalButton
                   title="Login"
@@ -236,7 +260,7 @@ const MainNavbar = () => {
                   click={() => navigate("/register")}
                 />
               </div>
-            </div>
+            </>
           )}
         </div>
         <div className="md:hidden block">

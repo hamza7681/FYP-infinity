@@ -136,7 +136,7 @@ const Tutors = () => {
                       key={val._id}
                     >
                       <img src={val.dp} alt="tutor pic" className="w-full" />
-                      <div className="px-[15px] py-[10px]">
+                      <div className="px-[15px] py-[10px] h-[100px] flex flex-col justify-center">
                         <h1 className="text-[22px] font-semibold">
                           {val.firstName} {val.lastName}
                         </h1>
