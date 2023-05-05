@@ -23,6 +23,10 @@ app.use("/chatMedia", express.static("chatMedia/"));
 app.use("/courseImages", express.static("courseImages/"));
 app.use("/profileImages", express.static("profileImages/"));
 
+app.get("/", (req, res) => {
+  res.send({ msg: "Hello Infinity" });
+});
+
 //socket io
 let activeUsers = [];
 io.on("connection", (socket) => {
