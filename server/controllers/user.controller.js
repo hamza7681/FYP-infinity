@@ -282,7 +282,7 @@ const userCtrl = {
     const id = req.user;
     try {
       await User.findByIdAndUpdate(id, {
-        dp: `http://localhost:5000/${file.path}`,
+        dp: `https://infinity-server.herokuapp.com/${file.path}`,
       });
       return res
         .status(StatusCodes.OK)

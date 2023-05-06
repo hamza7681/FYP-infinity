@@ -90,7 +90,7 @@ const chatCtrl = {
           chatId,
           senderId,
           text,
-          media: `http://localhost:5000/${file.path}`,
+          media: `https://infinity-server.herokuapp.com/${file.path}`,
         });
         const message = await newMessage.save();
         return res.status(StatusCodes.OK).json(message);
