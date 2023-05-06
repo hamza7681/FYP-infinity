@@ -12,8 +12,8 @@ const Vision = () => {
     <>
       <div className="flex lg:flex-row md:flex-col px-[20px] md:px-16 w-auto gap-x-40">
         <div className="lg:w-2/4 md:w-2/4 w-full ">
-          <h2 className="text-[25px] font-bold mt-20">Our Vision</h2>
-          <p className="w-full py-[5px] text-[20px] mt-3 text-justify">
+          <h2 className="text-[25px] font-bold mt-10">Our Vision</h2>
+          <p className="w-full py-[5px] text-[15px] mt-3 text-justify">
             Our vision is to provide education irrespective of boundries. Our 
             vision is to provide an accessible, flexible, and high-quality
             education to students of all ages and backgrounds, regardless of

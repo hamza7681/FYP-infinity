@@ -43,9 +43,9 @@ const Home = () => {
         ></motion.div>
         <Slider />
         <Vision />
-        <ImageFiltering/>
         <Courses />
         <Features />
+        <ImageFiltering/>
       </div>
     </>
   );

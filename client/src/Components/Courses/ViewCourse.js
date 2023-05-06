@@ -33,12 +33,16 @@ const ViewCourse = () => {
      const getFeedback = async () => {
        try {
         const res = await http.get("/feedback/get-feedback-course/" + id);
-         setFeedback(res.data);
+        console.log(res.data);
+        setFeedback(res.data);
        } catch (error) {
        console.log(error);
        }
      };
      getFeedback();
+    }, [id]);
+    useEffect(() => {
+
     const getRating = async () => {
       try {
         const res = await http.get("/feedback/get-rating/" + id);

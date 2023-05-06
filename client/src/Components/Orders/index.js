@@ -7,6 +7,8 @@ import visa from "../../Assets/visa.png";
 import GlobalButton from "../../Reuseables/GlobalButton";
 import DeleteModal from "./DeleteModal";
 import ViewModal from "./ViewModal";
+import BreadCrumbs from "../../Reuseables/BreadCrumbs";
+import img1 from '../../Assets/Order.jpeg';
 
 const Order = () => {
   const { token, user } = useSelector((s) => s.AuthReducer);
@@ -55,10 +57,17 @@ const Order = () => {
       ) : (
         ""
       )}
+      <BreadCrumbs
+          parent="Home"
+          parentPath="/"
+          active="Orders"
+          image={img1}
+          pageName="Orders"
+        />
       <div className="p-[10px] md:p-[30px] ">
-        <div className="pb-[10px] border-b-[2px]">
+        {/* <div className="pb-[10px] border-b-[2px]">
           <h2 className="text-[26px] font-semibold">My Orders</h2>
-        </div>
+        </div> */}
         <div className="w-full flex flex-col md:flex-row mt-[30px]">
           <div className="w-full md:w-[30%] flex justify-center h-[200px] ">
             <div className="flex flex-col justify-center items-center bg-gray-200 p-[50px] rounded-[5px] shadow-lg">
