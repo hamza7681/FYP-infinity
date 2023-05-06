@@ -31,7 +31,7 @@ const ViewTutor = () => {
           <div className="flex flex-col py-[30px] border-r-[1px] border-r-white px-[10px]">
             <div className="flex flex-col justify-center items-center">
               <img
-                src={tutor?.dp || "http://localhost:5000" + tutor?.dp}
+                src={tutor?.dp || "https://infinity-server.herokuapp.com/" + tutor?.dp}
                 alt="dp"
                 className="w-[150px] rounded-full"
               />
