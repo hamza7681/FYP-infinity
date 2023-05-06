@@ -14,7 +14,7 @@ const Home = () => {
   useEffect(() => {
     const getCourses = async () => {
       try {
-        const res = await http.get("https://infinity-server.herokuapp.com//course/get-course");
+        const res = await http.get("https://infinity-server.herokuapp.com/course/get-course");
         dispatch({ type: "GET_COURSES", payload: res.data });
       } catch (error) {
         console.log(error);
@@ -23,7 +23,7 @@ const Home = () => {
     const getWishList = async () => {
       try {
         const res = await http.get(
-          "https://infinity-server.herokuapp.com//wishlist/get-wishlist-userId",
+          "https://infinity-server.herokuapp.com/wishlist/get-wishlist-userId",
           { headers: { Authorization: token } }
         );
         dispatch({ type: "WISHLIST", payload: res.data });

@@ -38,7 +38,7 @@ const courseCtrl = {
           category,
           description,
           created_by,
-          image: `https://infinity-server.herokuapp.com//${file.path}`,
+          image: `https://infinity-server.herokuapp.com/${file.path}`,
         });
         await newCourse.save();
         return res.status(StatusCodes.OK).json({ msg: "Course Added" });
@@ -124,7 +124,7 @@ const courseCtrl = {
           category,
           description,
           created_by,
-          image: `https://infinity-server.herokuapp.com//${file.path}`,
+          image: `https://infinity-server.herokuapp.com/${file.path}`,
         });
       } else {
         await Course.findByIdAndUpdate(id, {
