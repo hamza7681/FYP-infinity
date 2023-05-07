@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AiFillStar } from "react-icons/ai";
 import {
   BsArrowRight,
   BsCartDash,
@@ -16,13 +15,6 @@ import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import { CoursesAnimate } from "../../Animations";
 
-function Stars() {
-  const stars = [];
-  for (let i = 0; i < 4; i++) {
-    stars.push(<AiFillStar key={i} />);
-  }
-  return <>{stars}</>;
-}
 function Courses() {
   const { courses, cartItems } = useSelector((s) => s.CourseReducer);
   const { token, user } = useSelector((s) => s.AuthReducer);
@@ -99,9 +91,6 @@ function Courses() {
                     <div className="flex flex-col gap-2 w-full">
                       <p className="font-bold">
                         <FormattedPrice price={val.price} />
-                      </p>
-                      <p className="text-[#ffd700] flex flex-row items-center text-[18px] ">
-                        <Stars />
                       </p>
                     </div>
                   </div>

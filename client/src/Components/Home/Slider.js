@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import pic1 from "../../Assets/e learning.jpg";
 import pic2 from "../../Assets/game.jpeg";
 import pic3 from "../../Assets/python-1.jpeg";
-import pic4 from "../../Assets/iot.jpeg";
 
 // const images = [
 //   { src: pic1, text: "First image" },
