@@ -65,7 +65,7 @@ const Contact = () => {
                 </div>
               </div>
               <div className="mt-7 flex flex-row items-center gap-4">
-                <FaMapMarkerAlt className="p-3 rounded-full text-white bg-[#03043B] w-14 h-14" />
+                <FaMapMarkerAlt className="p-5 rounded-full text-white bg-[#03043B] lg:w-14 lg:h-14" />
                 <div className="flex flex-col">
                   <h2 className="font-bold block text-[20px] ">Location</h2>
                   <div>University of Agriculture, Faisalabad, Pakistan</div>

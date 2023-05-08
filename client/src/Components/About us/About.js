@@ -46,7 +46,7 @@ const About = () => {
               whileInView="show"
               src={pic}
               alt="pic"
-              className="rounded-lg"
+              className="rounded-lg h-full"
             />
           </div>
         </div>
