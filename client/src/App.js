@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import ChatPage from "./Pages/ChatPage";
@@ -25,21 +25,26 @@ import EditCoursePage from "./Pages/EditCoursePage";
 import AboutPage from "./Pages/AboutPage";
 import ContactPage from "./Pages/ContactPage";
 import ViewTutorPage from "./Pages/ViewTutorPage";
+import GlobalLoader from "./Reuseables/GlobalLoader";
 
 function App() {
   const { token } = useSelector((s) => s.AuthReducer);
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (token) {
+      setLoading(true);
       const getUser = async () => {
         try {
           const res = await http.get("/auth/get-profile", {
             headers: { Authorization: token },
           });
           dispatch({ type: "GET_USER", payload: res.data.user });
+          setLoading(false);
         } catch (error) {
           console.log(error);
+          setLoading(false);
         }
       };
       getUser();
@@ -49,6 +54,7 @@ function App() {
   return (
     <>
       <ToastContainer />
+      {loading && <GlobalLoader />}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about-us" element={<AboutPage />} />

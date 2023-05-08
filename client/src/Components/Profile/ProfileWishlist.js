@@ -4,6 +4,7 @@ import { http } from "../../Axios/config";
 import FormattedPrice from "../../Reuseables/FormattedPrice";
 import { BsCart3, BsFillHeartFill } from "react-icons/bs";
 import ReactPaginate from "react-paginate";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const ProfileWishlist = () => {
   const { token } = useSelector((s) => s.AuthReducer);
@@ -41,7 +42,9 @@ const ProfileWishlist = () => {
       <>
         {currentItems.length === 0 ? (
           <>
-            <p>No wishlist found!</p>
+            <div className="flex justify-center items-center">
+              <ClipLoader color="#000000" />
+            </div>
           </>
         ) : (
           <>

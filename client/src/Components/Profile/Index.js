@@ -8,15 +8,18 @@ import ProfileWishlist from "./ProfileWishlist";
 import MyCourses from "./MyCourses";
 import BreadCrumbs from "../../Reuseables/BreadCrumbs";
 import logo from "../../Assets/profile.jpg";
+import GlobalLoader from "../../Reuseables/GlobalLoader";
 
 const Index = () => {
   const [pageIndex, setPageIndex] = useState(0);
   const { token } = useSelector((s) => s.AuthReducer);
   const [user, setUser] = useState({});
   const [fetchAgain, setFetchAgain] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (token) {
+      setLoading(true);
       const getUser = async () => {
         try {
           const res = await http.get("/auth/get-profile", {
@@ -24,9 +27,11 @@ const Index = () => {
           });
           setUser(res.data.user);
           setFetchAgain(false);
+          setLoading(false);
         } catch (error) {
           console.log(error);
           setFetchAgain(false);
+          setLoading(false);
         }
       };
       getUser();
@@ -49,6 +54,7 @@ const Index = () => {
 
   return (
     <>
+      {loading && <GlobalLoader />}
       <BreadCrumbs
         parent="Home"
         parentPath="/"

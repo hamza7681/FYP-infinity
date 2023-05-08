@@ -8,7 +8,8 @@ import GlobalButton from "../../Reuseables/GlobalButton";
 import DeleteModal from "./DeleteModal";
 import ViewModal from "./ViewModal";
 import BreadCrumbs from "../../Reuseables/BreadCrumbs";
-import img1 from '../../Assets/Order.jpeg';
+import img1 from "../../Assets/Order.jpeg";
+import GlobalLoader from "../../Reuseables/GlobalLoader";
 
 const Order = () => {
   const { token, user } = useSelector((s) => s.AuthReducer);
@@ -21,15 +22,23 @@ const Order = () => {
   const handleClose1 = () => setOpen1(false);
   const [id, setId] = useState(null);
   const [fetchAgain, setFetchAgain] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     const getOrders = async () => {
-      const res = await http.get(`/order/get-order-userId/${user._id}`, {
-        headers: { Authorization: token },
-      });
-      setOrders(res.data);
-      setFetchAgain(false);
-      console.log(res.data);
+      try {
+        const res = await http.get(`/order/get-order-userId/${user._id}`, {
+          headers: { Authorization: token },
+        });
+        setOrders(res.data);
+        setFetchAgain(false);
+        console.log(res.data);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+      }
     };
     getOrders();
   }, [token, fetchAgain, user._id]);
@@ -57,17 +66,15 @@ const Order = () => {
       ) : (
         ""
       )}
+      {loading && <GlobalLoader />}
       <BreadCrumbs
-          parent="Home"
-          parentPath="/"
-          active="Orders"
-          image={img1}
-          pageName="Orders"
-        />
-      <div className="p-[10px] md:p-[30px] ">
-        {/* <div className="pb-[10px] border-b-[2px]">
-          <h2 className="text-[26px] font-semibold">My Orders</h2>
-        </div> */}
+        parent="Home"
+        parentPath="/"
+        active="Orders"
+        image={img1}
+        pageName="Orders"
+      />
+      <div className="p-[10px] md:p-[30px]">
         <div className="w-full flex flex-col md:flex-row mt-[30px]">
           <div className="w-full md:w-[30%] flex justify-center h-[200px] ">
             <div className="flex flex-col justify-center items-center bg-gray-200 p-[50px] rounded-[5px] shadow-lg">

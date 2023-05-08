@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import PulseLoader from "react-spinners/PulseLoader";
 
 const DeleteModal = ({ open, handleClose, id, setFetchAgain }) => {
-  const { token } = useSelector((s) => s.AuthReducer);
+  const { token, user } = useSelector((s) => s.AuthReducer);
   const [loading, setLoading] = useState(false);
   const style = {
     position: "absolute",
@@ -26,6 +26,11 @@ const DeleteModal = ({ open, handleClose, id, setFetchAgain }) => {
     try {
       const res = await http.delete(`/order/delete-order/${id}`, {
         headers: { Authorization: token },
+      });
+      await http.post("/notification/add-notification", {
+        title: "Order has been deleted!",
+        action_by: user._id,
+        section: "Orders",
       });
       toast.success(res.data.msg);
       setFetchAgain(true);

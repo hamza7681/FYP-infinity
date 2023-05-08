@@ -68,6 +68,11 @@ const AddCourse = () => {
       const res = await http.post("/course/add-course", formData, {
         headers: { Authorization: token },
       });
+      await http.post("/notification/add-notification", {
+        title: "New course has been added!",
+        action_by: user._id,
+        section: "Courses",
+      });
       toast.success(res.data.msg);
       setTitle("");
       setTitleDesc("");

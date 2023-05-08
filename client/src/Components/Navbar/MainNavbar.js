@@ -158,6 +158,7 @@ const MainNavbar = () => {
           {token ? (
             <div
               className="relative cursor-pointer my-auto"
+              style={{ width: "50px", height: "50px" }}
               onClick={() => setDropdown(!dropdown)}
             >
               <img
@@ -172,7 +173,7 @@ const MainNavbar = () => {
                   <div className="flex flex-row items-center justify-start gap-2">
                     <img
                       src={user && user?.dp}
-                      className="h-[70px] rounded-full"
+                      className="h-[70px] w-[70px] rounded-full"
                       alt="dp"
                     />
                     <div>
