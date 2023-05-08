@@ -8,6 +8,7 @@ import { FaTimes } from "react-icons/fa";
 import { http } from "../../Axios/config";
 import { useSelector } from "react-redux";
 import moment from "moment-timezone";
+import { toast } from "react-toastify";
 
 const Chatbox = ({
   setShowDiv,
@@ -35,7 +36,7 @@ const Chatbox = ({
     if (recieveMessage !== null && recieveMessage?.chatId === selectChat?._id) {
       setMessages([...messages, recieveMessage]);
     }
-  }, [recieveMessage]);
+  }, [recieveMessage, messages, selectChat?._id]);
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -49,7 +50,7 @@ const Chatbox = ({
       }
     };
     fetchMessages();
-  }, [select, selectChat]);
+  }, [select, selectChat, token]);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -65,74 +66,76 @@ const Chatbox = ({
 
   const sendMessage = async (e) => {
     e.preventDefault();
-    let obj;
-    if (message.media !== null) {
-      obj = {
-        text: message.msg,
-        senderId: user._id,
-        chatId: selectChat._id,
-        media: message.media,
-      };
+    if (message.msg !== "") {
+      let obj;
+      if (message.media !== null) {
+        obj = {
+          text: message.msg,
+          senderId: user._id,
+          chatId: selectChat._id,
+          media: message.media,
+        };
+      } else {
+        obj = {
+          text: message.msg,
+          senderId: user._id,
+          chatId: selectChat._id,
+          media: null,
+        };
+      }
+
+      const formData = new FormData();
+      formData.append(
+        "data",
+        JSON.stringify({
+          text: obj.text,
+          chatId: obj.chatId,
+          senderId: obj.senderId,
+        })
+      );
+      formData.append("image", imgFile);
+
+      try {
+        const res = await http.post("/chat/create-message", formData, {
+          headers: { Authorization: token },
+        });
+        setMessages([...messages, res.data]);
+        setImgFile(null);
+        setMessage({ msg: "", media: null });
+        // setMessages([...messages, obj]);
+      } catch (error) {
+        console.log(error);
+      }
+
+      const recieverId = selectChat.members.find((id) => id !== user._id);
+      setSendMessage({ ...obj, recieverId });
     } else {
-      obj = {
-        text: message.msg,
-        senderId: user._id,
-        chatId: selectChat._id,
-        media: null,
-      };
+      toast.warn("Please write something to send");
     }
-
-    const formData = new FormData();
-    formData.append(
-      "data",
-      JSON.stringify({
-        text: obj.text,
-        chatId: obj.chatId,
-        senderId: obj.senderId,
-      })
-    );
-    formData.append("image", imgFile);
-
-    try {
-      const res = await http.post("/chat/create-message", formData, {
-        headers: { Authorization: token },
-      });
-      setMessages([...messages, res.data]);
-      // setMessages([...messages, obj]);
-    } catch (error) {
-      console.log(error);
-    }
-
-    setMessage({ msg: "", media: null });
-    const recieverId = selectChat.members.find((id) => id !== user._id);
-    setSendMessage({ ...obj, recieverId });
   };
 
   const Time = ({ time }) => {
-    const date = moment(time).tz("Asia/Karachi").format("h:mm A");
-    return date;
+    const date = moment(time).tz("Asia/Karachi").format("D MMM YYYY");
+    const timeStr = moment(time).tz("Asia/Karachi").format("h:mm A");
+    return `${date} | ${timeStr}`;
   };
 
   return (
     <div className="relative">
-      <div className="relative p-[10px] border-b-[2px] h-[20%] flex flex-row items-center w-full justify-between px-[20px]">
+      <div className="relative p-[10px] border-b-[2px] h-[19%] flex flex-row items-center w-full justify-between px-[20px]">
         <div className="md:hidden block items-center">
           <BiArrowBack onClick={() => setShowDiv(false)} />
         </div>
         <div className="flex flex-row items-center gap-2">
-          <img className="h-[39px] rounded-full " src={select.dp} alt="pic" />
+          <div className="w-[45px] h-[45px] flex justify-center bg-[#03043B] text-white font-semibold items-center rounded-full overflow-hidden">
+            {select.firstName.substring(0, 1)}
+            {select.lastName.substring(0, 1)}
+          </div>
           <div>
             <div className="flex flex-row gap-1 items-center">
               <p className="font-semibold">{select.firstName}</p>
               <p className="font-semibold">{select.lastName}</p>
             </div>
-            {select.online ? (
-              <p className="text-[#36b404] font-semibold text-[12px] relative top-[-5px]">
-                Online
-              </p>
-            ) : (
-              <p className="text-red-600 font-semibold text-[12px] relative top-[-5px]">Offline</p>
-            )}
           </div>
         </div>
         <div>
@@ -145,7 +148,7 @@ const Chatbox = ({
           <div className="absolute top-[50px] right-[30px] p-[10px] w-[200px] bg-white z-10 border-[1px] rounded-[4px] ">
             <Link
               className="hover:bg-gray-300 block p-[7px] rounded-[3px]"
-              to="/profile"
+              to={"/tutor/" + select._id}
               onClick={() => setShow(true)}
             >
               View Profile
@@ -221,11 +224,11 @@ const Chatbox = ({
         </div>
       ) : (
         <div className="p-[10px] border-b-[2px] md:h-[510px] w-full overflow-y-scroll scrollbar-hidden h-[600px] flex flex-col justify-center items-center">
-          <div className="w-[500px] relative">
+          <div className="w-full md:w-[500px] relative">
             <img
               src={message.media}
               alt="pic"
-              className="border-[3px] border-gray-600 "
+              className="border-[3px] border-gray-600 w-full"
             />
             <div
               className=" cursor-pointer absolute top-[10px] right-[10px] flex items-center justify-center bg-slate-500 p-[4px] text-white rounded-full opacity-80"

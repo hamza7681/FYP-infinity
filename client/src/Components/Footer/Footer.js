@@ -4,9 +4,11 @@ import { FaEnvelope, FaMapMarked, FaPhone } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import logo from "../../Assets/whilte.png";
 import { motion } from "framer-motion";
-import {  LocationAnimate } from "../../Animations";
+import { LocationAnimate } from "../../Animations";
+import { useSelector } from "react-redux";
 
 const Footer = () => {
+  const { token } = useSelector((s) => s.AuthReducer);
   return (
     <>
       <div className="bottom-0 bg-gradient-to-r from-[#03043b] to-[#35050c] text-white flex flex-col md:w-full border-bl-2 pt-[50px] mt-[30px] gap-2">
@@ -47,17 +49,21 @@ const Footer = () => {
                     Courses
                   </Link>
                   <Link
-                    to="/chat"
+                    to="/tutors"
                     className="text-gray-200 text-[14px] hover:underline"
                   >
-                    Messenger
+                    Tutors
                   </Link>
-                  <Link
-                    to="/cart"
-                    className="text-gray-200 text-[14px] hover:underline"
-                  >
-                    Shopping Cart
-                  </Link>
+                  {token ? (
+                    <Link
+                      to="/chat"
+                      className="text-gray-200 text-[14px] hover:underline"
+                    >
+                      Messenger
+                    </Link>
+                  ) : (
+                    ""
+                  )}
                   <Link
                     to="/contact-us"
                     className="text-gray-200 text-[14px] hover:underline"
@@ -93,10 +99,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div
-          
-          className="flex flex-row justify-between items-center pt-[30px] pb-[60px] border-t-[1px] mt-[10px] px-[30px]"
-        >
+        <div className="flex flex-row justify-between items-center pt-[30px] pb-[30px] border-t-[1px] mt-[10px] px-[30px]">
           <div>
             <img src={logo} className="w-[70px]" alt="logo" />
           </div>

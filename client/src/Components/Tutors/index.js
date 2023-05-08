@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import BreadCrumbs from "../../Reuseables/BreadCrumbs";
 import logo from "../../Assets/tutors.jpg";
 import { useNavigate } from "react-router-dom";
+import GlobalLoader from "../../Reuseables/GlobalLoader";
 
 const Tutors = () => {
   const [tutors, setTutors] = useState([]);
@@ -15,13 +16,18 @@ const Tutors = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { token, user, followings } = useSelector((s) => s.AuthReducer);
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
+    setLoading(true);
     const fetchTutors = async () => {
       try {
         const res = await http.get("/auth/get-tutors");
         setTutors(res.data);
         setDefault(res.data);
+        setLoading(false);
       } catch (error) {
+        setLoading(false);
         console.log(error);
       }
     };
@@ -173,6 +179,7 @@ const Tutors = () => {
 
   return (
     <>
+      {loading && <GlobalLoader />}
       <BreadCrumbs
         parent="Home"
         parentPath="/"

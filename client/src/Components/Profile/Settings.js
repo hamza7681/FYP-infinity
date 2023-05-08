@@ -3,15 +3,18 @@ import PulseLoader from "react-spinners/PulseLoader";
 import { http } from "../../Axios/config";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const Settings = () => {
   const { token } = useSelector((s) => s.AuthReducer);
   const [visibility, setVisibility] = useState(false);
   const [loading, setLoading] = useState(false);
   const [fetchAgain, setFetchAgain] = useState(false);
+  const [gLoading, setGloading] = useState(false);
 
   useEffect(() => {
     if (token) {
+      setGloading(true);
       const getUser = async () => {
         try {
           const res = await http.get("/auth/get-profile", {
@@ -19,9 +22,11 @@ const Settings = () => {
           });
           setVisibility(res.data.user.visibility);
           setFetchAgain(false);
+          setGloading(false);
         } catch (error) {
           console.log(error);
           setFetchAgain(false);
+          setGloading(false);
         }
       };
       getUser();
@@ -53,12 +58,18 @@ const Settings = () => {
     <>
       <div className="flex flex-col w-full h-[50vh] p-[30px]">
         <div className="flex flex-row items-baseline md:items-center gap-2">
-          <input
-            type="checkbox"
-            id="privacy1"
-            defaultChecked={visibility}
-            onChange={(e) => setVisibility(e.target.checked)}
-          />
+          {gLoading ? (
+            <>
+              <ClipLoader color="#000000" size={14}/>
+            </>
+          ) : (
+            <input
+              type="checkbox"
+              id="privacy1"
+              defaultChecked={visibility}
+              onChange={(e) => setVisibility(e.target.checked)}
+            />
+          )}
           <label htmlFor="privacy1">
             Do you want to show your profile to others?
           </label>

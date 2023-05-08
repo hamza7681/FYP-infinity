@@ -97,6 +97,11 @@ const ViewCourse = () => {
             },
           }
         );
+        await http.post("/notification/add-notification", {
+          title: "New feedback added!",
+          action_by: user._id,
+          section: "Feedbacks",
+        });
         toast.success(res.data.msg);
         setText("");
         setRatingForm(0);
@@ -260,14 +265,15 @@ const ViewCourse = () => {
               return (
                 <>
                   <div
-                    className="py-[30px] flex flex-col gap-7 w-full md:w-1/2 border-t-[1px]"
+                    className="py-[30px] flex flex-col gap-7 w-full md:w-1/2 border-t-[1px] md:pr-[15px]"
                     key={val._id}
                   >
                     <div className="flex flex-row gap-3 items-center">
                       <img
                         src={val?.added_by?.dp}
                         alt="dp"
-                        className="w-[60px] rounded-full"
+                        className="rounded-full"
+                        style={{ width: "50px", height: "50px" }}
                       />
                       <div>
                         <p className="font-semibold text-[18px]">

@@ -27,13 +27,13 @@ const UserTab = ({
       }
     };
     getUser();
-  }, []);
+  }, [token, user._id, val.members]);
 
   return (
     <>
       <div
         key={index}
-        className={`relative flex flex-row w-full hover:bg-gray-300 cursor-pointer p-[4px] py-[7px] rounded-[4px] ${
+        className={`relative flex flex-row w-full justify-start items-center gap-2 hover:bg-gray-300 cursor-pointer p-[4px] py-[7px] rounded-[4px] ${
           index === newIndex ? "bg-gray-300" : ""
         }`}
         onClick={() => {
@@ -43,23 +43,18 @@ const UserTab = ({
           setSelectChat(val);
         }}
       >
-        <img
-          src={userData && userData.dp}
-          alt="dp"
-          className="rounded-full w-1/5 mr-[10px] "
-        />
-        {online && (
-          <div className="absolute bg-[#36b404] w-[15px] h-[15px] rounded-full left-[40px]"></div>
-        )}
-        <div className="flex flex-col w-full ">
+        <div className="w-[50px] h-[50px] bg-[#03043B] text-white font-semibold flex justify-center items-center rounded-full overflow-hidden">
+          {userData && userData.firstName.substring(0, 1)}
+          {userData && userData.lastName.substring(0, 1)}
+        </div>
+        <div className="flex flex-col justify-between ">
           <div className="flex flex-row justify-between items-center ">
             <p className="text-[16px] font-semibold ">
               {userData && userData.firstName} {userData && userData.lastName}
             </p>
-            <p className="text-xs text-gray-500">12:00</p>
           </div>
           <div>
-            <p className="text-[15px] text-gray-600">
+            <p className="text-[12px] text-gray-600">
               This is last message sent...
             </p>
           </div>

@@ -5,6 +5,7 @@ import { http } from "../../Axios/config";
 import { useSelector } from "react-redux";
 import BreadCrumbs from "../../Reuseables/BreadCrumbs";
 import logo from "../../Assets/courses.jpg";
+import GlobalLoader from "../../Reuseables/GlobalLoader";
 
 const AllCourses = () => {
   const [courses, setCourses] = useState([]);
@@ -13,15 +14,19 @@ const AllCourses = () => {
   const { token } = useSelector((s) => s.AuthReducer);
   const [show1, setShow1] = useState(false);
   const [inputFiltered, setInputFiltered] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     const fetchCourses = async () => {
       try {
         const res = await http.get("/course/get-course");
         setCourses(res.data);
         setDefault(res.data);
+        setLoading(false);
       } catch (error) {
         console.log(error);
+        setLoading(false);
       }
     };
     fetchCourses();
@@ -89,6 +94,7 @@ const AllCourses = () => {
 
   return (
     <>
+      {loading && <GlobalLoader />}
       <BreadCrumbs
         parent="Home"
         parentPath="/"

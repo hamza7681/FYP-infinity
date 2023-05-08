@@ -49,6 +49,11 @@ const Payment = () => {
           },
         }
       );
+      await http.post("/notification/add-notification", {
+        title: "New order placed!",
+        action_by: user._id,
+        section: "Orders",
+      });
       toast.success(res.data.msg);
       dispatch({ type: "CHECKOUT" });
       setCard("");

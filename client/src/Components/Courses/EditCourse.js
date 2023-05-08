@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 import BreadCrumbs from "../../Reuseables/BreadCrumbs";
 import logo from "../../Assets/add-course.jpg";
+import GlobalLoader from "../../Reuseables/GlobalLoader";
 
 const EditCourse = () => {
   const [count, setCount] = useState(0);
@@ -25,8 +26,10 @@ const EditCourse = () => {
   const { user, token } = useSelector((s) => s.AuthReducer);
   const [catTitle, setCatTitle] = useState("");
   const { id } = useParams();
+  const [gLoading, setGLoading] = useState(false);
 
   useEffect(() => {
+    setGLoading(true);
     const getCourse = async () => {
       try {
         const res = await http.get("course/course-by-id/" + id);
@@ -39,8 +42,10 @@ const EditCourse = () => {
         setDescription(res.data.description);
         setImg(res.data.image);
         setCount(res.data.title_desc.length);
+        setGLoading(false);
       } catch (error) {
         console.log(error);
+        setGLoading(false);
       }
     };
     getCourse();
@@ -88,6 +93,11 @@ const EditCourse = () => {
       const res = await http.patch(`/course/update-course/${id}`, formData, {
         headers: { Authorization: token },
       });
+      await http.post("/notification/add-notification", {
+        title: "Course has been updated!",
+        action_by: user._id,
+        section: "Orders",
+      });
       toast.success(res.data.msg);
       setLoading(false);
     } catch (error) {
@@ -97,6 +107,7 @@ const EditCourse = () => {
   };
   return (
     <>
+      {gLoading && <GlobalLoader />}
       <BreadCrumbs
         parent="Home"
         parentPath="/"
