@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { BiArrowBack } from "react-icons/bi";
 import { FaSearch } from "react-icons/fa";
 import { useSelector } from "react-redux";

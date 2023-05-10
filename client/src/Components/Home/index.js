@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { http } from "../../Axios/config";
 import Slider from "./Slider";
 import { motion, useScroll } from "framer-motion";
-import ImageFiltering from './ImageFiltering';
+import HeaderCarousel from "./HeaderCarousel";
+
 const Home = () => {
   const { token } = useSelector((s) => s.AuthReducer);
   const dispatch = useDispatch();
@@ -14,7 +15,9 @@ const Home = () => {
   useEffect(() => {
     const getCourses = async () => {
       try {
-        const res = await http.get("https://infinity-server.herokuapp.com/course/get-course");
+        const res = await http.get(
+          "https://infinity-server.herokuapp.com/course/get-course"
+        );
         dispatch({ type: "GET_COURSES", payload: res.data });
       } catch (error) {
         console.log(error);
@@ -41,11 +44,11 @@ const Home = () => {
           className="md:block hidden bg-[#03043B] z-10 fixed top-[70px] right-0 left-0 h-[10px] transform origin-[0%]"
           style={{ scaleX: scrollYProgress }}
         ></motion.div>
+        <HeaderCarousel />
         <Slider />
         <Vision />
         <Courses />
         <Features />
-        <ImageFiltering/>
       </div>
     </>
   );

@@ -147,3 +147,53 @@ body::-webkit-scrollbar-thumb {
 .icon4 {
   animation: move 8s linear infinite;
 }
+
+.carousel {
+  width: 100%;
+  height: 500px;
+  position: relative;
+  background: url("./Assets/bg-slider.jpg");
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  position: absolute;
+}
+
+.firstImage {
+  z-index: 1;
+}
+
+.firstImage[data-animate="left"] {
+  transform: translateX(100%);
+  transition: transform 1s ease-in-out;
+}
+
+.firstImage[data-animate="right"] {
+  transform: translateX(-100%);
+  transition: transform 1s ease-in-out;
+}
+
+.btn {
+  position: absolute;
+  border: 0;
+  border-radius: 5px;
+  bottom: 40px;
+  z-index: 2;
+  transition: 0.5s all ease;
+}
+
+.btn:hover {
+  cursor: pointer;
+  transition: 0.5s all ease;
+}
+
+.prevBtn {
+  left: 64px;
+}
+
+.nextBtn {
+  right: 64px;
+}

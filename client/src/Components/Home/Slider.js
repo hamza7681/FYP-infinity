@@ -8,23 +8,23 @@ import float4 from "../../Assets/float4.png";
 const Slider = () => {
   return (
     <div className="w-full flex flex-col md:flex-row items-center gap-3 md:gap-0 py-[50px] md:py-[70px] px-[15px] md:px-[30px]">
-      <img
-        src={float1}
-        alt="floating"
-        className="absolute top-[120px] left-[50px] z-[-1] md:top-[160px] md:left-[100px] w-[70px] icon"
-      />
-      <img
-        src={float2}
-        alt="floating"
-        className="absolute top-[250px] z-[-1] left-[230px] md:top-[130px] md:left-[600px] w-[70px] icon2"
-      />
-      <img
-        src={float3}
-        alt="floating"
-        className="absolute bottom-[250px] md:block hidden left-[340px] w-[70px] z-[-1] icon3"
-      />
+      <div className="relative md:w-1/2 w-full flex flex-col p-[10px] gap-6">
+        <img
+          src={float1}
+          alt="floating"
+          className="absolute top-[120px] left-[50px] z-[-1] md:top-[160px] md:left-[100px] w-[70px] icon"
+        />
+        <img
+          src={float2}
+          alt="floating"
+          className="absolute top-[250px] z-[-1] left-[230px] md:top-[130px] md:left-[600px] w-[70px] icon2"
+        />
+        <img
+          src={float3}
+          alt="floating"
+          className="absolute bottom-[250px] md:block hidden left-[340px] w-[70px] z-[-1] icon3"
+        />
 
-      <div className="md:w-1/2 w-full flex flex-col p-[10px] gap-6">
         <p className="text-[15px] text-justify">
           <span className="text-[22px] font-bold">"</span>You might not think
           that programmers are artists, but programming is an extremely creative

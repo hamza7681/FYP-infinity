@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { ImSearch } from "react-icons/im";
 
 const Filters = ({
