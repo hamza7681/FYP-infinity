@@ -142,7 +142,7 @@ const userCtrl = {
         const findUser = await User.findOne({ email: email });
         if (findUser) {
           const token = await tokenGenerator(findUser.id);
-          const url = `http://localhost:3000/reset/${token}`;
+          const url = `https://infinity10.netlify.app/reset/${token}`;
           await EmailSender(
             email,
             "Reset Password",
@@ -392,6 +392,27 @@ const userCtrl = {
       return res
         .status(StatusCodes.OK)
         .json({ msg: "Tutor deleted successfully" });
+    } catch (error) {
+      return res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ msg: error.message });
+    }
+  },
+  changeUserRole: async (req, res) => {
+    try {
+      const id = req.user;
+      const findUser = await User.findById(id);
+      if (findUser.role === 0) {
+        await User.findByIdAndUpdate(id, { role: 2 });
+        return res
+          .status(StatusCodes.OK)
+          .json({ msg: "You need to login again to interact as Tutor" });
+      } else {
+        await User.findByIdAndUpdate(id, { role: 0 });
+        return res
+          .status(StatusCodes.OK)
+          .json({ msg: "You need to login again to interact as Student" });
+      }
     } catch (error) {
       return res
         .status(StatusCodes.INTERNAL_SERVER_ERROR)

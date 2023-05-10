@@ -16,6 +16,7 @@ const {
   updateProfile,
   updateProfileStatus,
   updateDp,
+  changeUserRole,
 } = require("../controllers/user.controller");
 const auth = require("../middlewares/auth.middleware");
 const dpImageUpload = require("../middlewares/dp.middleware");
@@ -38,5 +39,6 @@ router.get("/get-students", getStudents);
 router.patch("/update-profile", auth, updateProfile);
 router.post("/update-profile-status", auth, updateProfileStatus);
 router.patch("/update-dp", auth, dpImageUpload.single("dp"), updateDp);
+router.patch("/update-role", auth, changeUserRole);
 
 module.exports = router;
