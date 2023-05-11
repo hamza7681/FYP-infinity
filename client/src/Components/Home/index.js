@@ -45,10 +45,10 @@ const Home = () => {
           style={{ scaleX: scrollYProgress }}
         ></motion.div>
         <HeaderCarousel />
-        <Slider />
         <Vision />
         <Courses />
         <Features />
+        <Slider />
       </div>
     </>
   );

@@ -4,6 +4,9 @@ import float1 from "../../Assets/float1.png";
 import float2 from "../../Assets/float2.png";
 import float3 from "../../Assets/float3.png";
 import float4 from "../../Assets/float4.png";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { picAnimate } from "../../Animations";
 
 const Slider = () => {
   return (
@@ -12,7 +15,7 @@ const Slider = () => {
         <img
           src={float1}
           alt="floating"
-          className="absolute top-[120px] left-[50px] z-[-1] md:top-[160px] md:left-[100px] w-[70px] icon"
+          className="absolute top-[120px] left-[50px] z-[-1] md:top-[160px] md:left-[140px] w-[70px] icon"
         />
         <img
           src={float2}
@@ -36,6 +39,14 @@ const Slider = () => {
         <p className="text-[16px] font-semibold text-right">
           -- John Romero & Ellen Ullman
         </p>
+        <motion.div variants={picAnimate} initial="hidden" whileInView="show">
+          <Link
+            to="/contact-us"
+            className="bg-[#2A2F5B] w-fit text-white px-[10px] py-[13px] rounded-[3px]"
+          >
+            Contact Us
+          </Link>
+        </motion.div>
       </div>
       <div className="md:w-1/2 relative w-full flex justify-center items-center p-[10px]">
         <div className="absolute w-[300px] md:block hidden h-[400px]">
