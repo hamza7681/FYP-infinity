@@ -13,7 +13,7 @@ const Vision = () => {
       <div className="flex lg:flex-row md:flex-col py-[50px] md:py-[180px] px-[20px] md:px-16 w-auto gap-x-40">
         <div className="lg:w-2/4 md:w-2/4 w-full ">
           <h2 className="text-[25px] font-bold mt-10">Welcome to Infinity</h2>
-          <p className="w-full py-[5px] text-[15px] mt-1 text-justify">
+          <p className="w-full py-[5px] text-[15px] mt-1 text-justify text-gray-500">
             Our vision is to provide education irrespective of boundries. Our
             vision is to provide an accessible, flexible, and high-quality
             education to students of all ages and backgrounds, regardless of
@@ -28,8 +28,14 @@ const Vision = () => {
             />
           </motion.div>
         </div>
-        <div className="lg:w-2/4  md:w-2/4 hidden lg:block md:block">
-          <img src={pic} alt="pic" />
+        <div className="lg:w-2/4  md:w-2/4 hidden lg:block md:block ">
+          <div className="clip_pic overflow-hidden w-[400px] h-[400px] border-[1px]">
+            <img
+              src={pic}
+              alt="pic"
+              className="relative top-[60px] scale-[1.6] left-[30px]"
+            />
+          </div>
         </div>
       </div>
     </>

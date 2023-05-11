@@ -28,7 +28,6 @@ import ContactPage from "./Pages/ContactPage";
 import ViewTutorPage from "./Pages/ViewTutorPage";
 import GlobalLoader from "./Reuseables/GlobalLoader";
 
-
 function App() {
   const { token } = useSelector((s) => s.AuthReducer);
   const dispatch = useDispatch();
@@ -52,6 +51,36 @@ function App() {
       getUser();
     }
   }, [token, dispatch]);
+
+  useEffect(() => {
+    const getStudents = async () => {
+      try {
+        const res = await http.get("/auth/get-students");
+        dispatch({ type: "GET_STUDENTS", payload: res.data });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getStudents();
+    const getTutors = async () => {
+      try {
+        const res = await http.get("/auth/get-tutors");
+        dispatch({ type: "GET_TUTORS", payload: res.data });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getTutors();
+    const getFeedbacks = async () => {
+      try {
+        const res = await http.get("/feedback/all-feedbacks");
+        dispatch({ type: "GET_FEEDBACKS", payload: res.data });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getFeedbacks();
+  }, [dispatch]);
 
   return (
     <>
@@ -80,7 +109,7 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/order" element={<OrderPage />} />
           <Route path="/wishlist" element={<WishListPage />} />
-          <Route path="/switchaccount" element={<SwitchAccountPage />} />
+          <Route path="/switch-account" element={<SwitchAccountPage />} />
         </Route>
       </Routes>
     </>

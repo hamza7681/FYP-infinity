@@ -216,11 +216,11 @@ const MainNavbar = () => {
                           Wishlist
                         </Link>
                         <Link
-                          to="/switchaccount"
+                          to="/switch-account"
                           className="p-[8px] text-gray-600 hover:bg-gray-300 rounded-[4px] text-[14px] flex flex-row items-center justify-start gap-3"
                         >
                           <AiOutlineLogin className="text-[22px]" />
-                          Login as Tutor
+                          Switch To Tutor
                         </Link>
                       </>
                     ) : (
@@ -233,11 +233,11 @@ const MainNavbar = () => {
                           Add Course
                         </Link>
                         <Link
-                          to="/switchaccount"
+                          to="/switch-account"
                           className="p-[8px] text-gray-600 hover:bg-gray-300 rounded-[4px] text-[14px] flex flex-row items-center justify-start gap-3"
                         >
                           <AiOutlineLogin className="text-[22px]" />
-                          Login as Student
+                          Switch To Student
                         </Link>
                       </>
                     )}

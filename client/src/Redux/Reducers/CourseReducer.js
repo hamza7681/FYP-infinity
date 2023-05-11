@@ -5,6 +5,9 @@ const initialState = {
   wishlist: [],
   globalSearch: "",
   searching: false,
+  feedbacks:[],
+  students:[],
+  tutors:[]
 };
 const CourseReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -72,6 +75,21 @@ const CourseReducer = (state = initialState, action) => {
         globalSearch: "",
         searching: false,
       };
+    case "GET_STUDENTS":
+      return{
+        ...state,
+        students:action.payload
+      }
+      case "GET_TUTORS":
+      return{
+        ...state,
+        tutors:action.payload
+      }
+      case "GET_FEEDBACKS":
+      return{
+        ...state,
+        feedbacks:action.payload
+      }
     default:
       return {
         ...state,

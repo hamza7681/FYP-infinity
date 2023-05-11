@@ -1,5 +1,4 @@
 import React from "react";
-import CounterUp from "../../Reuseables/CounterUp";
 import pic from "../../Assets/onlinelearning.jpg";
 import { motion } from "framer-motion";
 import { picAnimate } from "../../Animations";
@@ -50,7 +49,6 @@ const About = () => {
             />
           </div>
         </div>
-        <CounterUp />
       </div>
     </>
   );

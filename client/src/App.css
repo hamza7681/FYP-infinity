@@ -197,3 +197,7 @@ body::-webkit-scrollbar-thumb {
 .nextBtn {
   right: 64px;
 }
+
+.clip_pic{
+  border-radius: 37% 63% 44% 56% / 77% 65% 35% 23% ;
+}

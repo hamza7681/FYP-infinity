@@ -7,6 +7,7 @@ import { http } from "../../Axios/config";
 import Slider from "./Slider";
 import { motion, useScroll } from "framer-motion";
 import HeaderCarousel from "./HeaderCarousel";
+import Stats from "./Stats";
 
 const Home = () => {
   const { token } = useSelector((s) => s.AuthReducer);
@@ -46,6 +47,7 @@ const Home = () => {
         ></motion.div>
         <HeaderCarousel />
         <Vision />
+        <Stats />
         <Courses />
         <Features />
         <Slider />
