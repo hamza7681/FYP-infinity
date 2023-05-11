@@ -21,6 +21,7 @@ import TutorPage from "./Pages/TutorPage";
 import OrderPage from "./Pages/OrderPage";
 import ViewCoursePage from "./Pages/ViewCoursePage";
 import WishListPage from "./Pages/WishListPage";
+import SwitchAccountPage from "./Pages/SwitchAccountPage";
 import EditCoursePage from "./Pages/EditCoursePage";
 import AboutPage from "./Pages/AboutPage";
 import ContactPage from "./Pages/ContactPage";
@@ -79,6 +80,7 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/order" element={<OrderPage />} />
           <Route path="/wishlist" element={<WishListPage />} />
+          <Route path="/switchaccount" element={<SwitchAccountPage />} />
         </Route>
       </Routes>
     </>

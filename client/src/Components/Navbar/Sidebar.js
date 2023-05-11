@@ -14,6 +14,7 @@ import {
 import { RiShoppingBag3Line } from "react-icons/ri";
 import { BiBookBookmark, BiChat } from "react-icons/bi";
 import GlobalButton from "../../Reuseables/GlobalButton";
+import { AiOutlineLogin } from "react-icons/ai";
 
 const Sidebar = ({ setShowSidebar }) => {
   const { token, user } = useSelector((s) => s.AuthReducer);
@@ -100,15 +101,31 @@ const Sidebar = ({ setShowSidebar }) => {
                     <FiHeart className="text-[22px]" />
                     Wishlist
                   </Link>
+                  <Link
+                    to="/switchaccount"
+                    className="p-[8px] text-gray-600 hover:bg-gray-300 rounded-[4px] text-[14px] flex flex-row items-center justify-start gap-3"
+                  >
+                    <AiOutlineLogin className="text-[22px]" />
+                    Login as Tutor
+                  </Link>
                 </>
               ) : (
-                <Link
-                  to="/add-course"
-                  className="p-[8px] text-gray-600 hover:bg-gray-300 rounded-[4px] text-[14px] flex flex-row items-center justify-start gap-3"
-                >
-                  <BsJournalPlus className="text-[22px]" />
-                  Add Course
-                </Link>
+                <>
+                  <Link
+                    to="/add-course"
+                    className="p-[8px] text-gray-600 hover:bg-gray-300 rounded-[4px] text-[14px] flex flex-row items-center justify-start gap-3"
+                  >
+                    <BsJournalPlus className="text-[22px]" />
+                    Add Course
+                  </Link>
+                  <Link
+                    to="/switchaccount"
+                    className="p-[8px] text-gray-600 hover:bg-gray-300 rounded-[4px] text-[14px] flex flex-row items-center justify-start gap-3"
+                  >
+                    <AiOutlineLogin className="text-[22px]" />
+                    Login as Student
+                  </Link>
+                </>
               )}
             </>
           ) : (

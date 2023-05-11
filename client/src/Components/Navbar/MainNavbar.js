@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import { NavbarAnimate } from "../../Animations";
 import { RiShoppingBag3Line } from "react-icons/ri";
-
+import { AiOutlineLogin } from "react-icons/ai";
 const MainNavbar = () => {
   const navigate = useNavigate();
   const [dropdown, setDropdown] = useState(false);
@@ -61,42 +61,38 @@ const MainNavbar = () => {
         <div className="w-7/12 md:flex hidden flex-row justify-around gap-2 items-center">
           <Link
             to="/tutors"
-            className={`text-[15px] px-[10px] py-[5px] rounded-[3px]  ${
-              location.pathname === "/tutors"
+            className={`text-[15px] px-[10px] py-[5px] rounded-[3px]  ${location.pathname === "/tutors"
                 ? "bg-[#f5822a] text-white"
                 : "hover:text-[#f5822a]"
-            }`}
+              }`}
           >
             Tutors
           </Link>
           <Link
             to="/courses"
-            className={`text-[15px] px-[10px] py-[5px] rounded-[3px]  ${
-              location.pathname === "/courses"
+            className={`text-[15px] px-[10px] py-[5px] rounded-[3px]  ${location.pathname === "/courses"
                 ? "bg-[#f5822a] text-white"
                 : "hover:text-[#f5822a]"
-            }`}
+              }`}
           >
             Courses
           </Link>
 
           <Link
             to="/about-us"
-            className={`text-[15px] px-[10px] py-[5px] rounded-[3px]  ${
-              location.pathname === "/about-us"
+            className={`text-[15px] px-[10px] py-[5px] rounded-[3px]  ${location.pathname === "/about-us"
                 ? "bg-[#f5822a] text-white"
                 : "hover:text-[#f5822a]"
-            }`}
+              }`}
           >
             About us
           </Link>
           <Link
             to="/contact-us"
-            className={`text-[15px] px-[10px] py-[5px] rounded-[3px]  ${
-              location.pathname === "/contact-us"
+            className={`text-[15px] px-[10px] py-[5px] rounded-[3px]  ${location.pathname === "/contact-us"
                 ? "bg-[#f5822a] text-white"
                 : "hover:text-[#f5822a]"
-            }`}
+              }`}
           >
             Contact us
           </Link>
@@ -104,17 +100,15 @@ const MainNavbar = () => {
             <>
               <Link
                 to="/cart"
-                className={`text-[20px] relative px-[10px] py-[5px] rounded-[3px]  ${
-                  location.pathname === "/cart"
+                className={`text-[20px] relative px-[10px] py-[5px] rounded-[3px]  ${location.pathname === "/cart"
                     ? "bg-[#f5822a] text-white"
                     : "hover:text-[#f5822a]"
-                }`}
+                  }`}
               >
                 <BsCart3 />
                 <div
-                  className={`absolute top-[-8px] left-[20px] w-[20px] h-[20px] ${
-                    location.pathname === "/cart" ? "bg-black" : "bg-[#f5822a]"
-                  } flex justify-center items-center rounded-full text-white text-[12px]`}
+                  className={`absolute top-[-8px] left-[20px] w-[20px] h-[20px] ${location.pathname === "/cart" ? "bg-black" : "bg-[#f5822a]"
+                    } flex justify-center items-center rounded-full text-white text-[12px]`}
                 >
                   {cartItems.length}
                 </div>
@@ -122,11 +116,10 @@ const MainNavbar = () => {
 
               <Link
                 to="/wishlist"
-                className={`text-[20px] relative px-[8px] py-[5px] rounded-[3px]  ${
-                  location.pathname === "/wishlist"
+                className={`text-[20px] relative px-[8px] py-[5px] rounded-[3px]  ${location.pathname === "/wishlist"
                     ? "bg-[#f5822a] text-white"
                     : "hover:text-[#f5822a]"
-                }`}
+                  }`}
               >
                 <FiHeart />
               </Link>
@@ -137,11 +130,10 @@ const MainNavbar = () => {
           {user.role === 2 ? (
             <Link
               to="/add-course"
-              className={`text-[22px] px-[10px] py-[5px] rounded-[3px]  ${
-                location.pathname === "/add-course"
+              className={`text-[22px] px-[10px] py-[5px] rounded-[3px]  ${location.pathname === "/add-course"
                   ? "bg-[#f5822a] text-white"
                   : "hover:text-[#f5822a]"
-              }`}
+                }`}
             >
               <BsJournalPlus />
             </Link>
@@ -223,15 +215,31 @@ const MainNavbar = () => {
                           <FiHeart className="text-[22px]" />
                           Wishlist
                         </Link>
+                        <Link
+                          to="/switchaccount"
+                          className="p-[8px] text-gray-600 hover:bg-gray-300 rounded-[4px] text-[14px] flex flex-row items-center justify-start gap-3"
+                        >
+                          <AiOutlineLogin className="text-[22px]" />
+                          Login as Tutor
+                        </Link>
                       </>
                     ) : (
-                      <Link
-                        to="/add-course"
-                        className="p-[8px] text-gray-600 hover:bg-gray-300 rounded-[4px] text-[14px] flex flex-row items-center justify-start gap-3"
-                      >
-                        <BsJournalPlus className="text-[22px]" />
-                        Add Course
-                      </Link>
+                      <>
+                        <Link
+                          to="/add-course"
+                          className="p-[8px] text-gray-600 hover:bg-gray-300 rounded-[4px] text-[14px] flex flex-row items-center justify-start gap-3"
+                        >
+                          <BsJournalPlus className="text-[22px]" />
+                          Add Course
+                        </Link>
+                        <Link
+                          to="/switchaccount"
+                          className="p-[8px] text-gray-600 hover:bg-gray-300 rounded-[4px] text-[14px] flex flex-row items-center justify-start gap-3"
+                        >
+                          <AiOutlineLogin className="text-[22px]" />
+                          Login as Student
+                        </Link>
+                      </>
                     )}
                   </div>
                   <div className="border-[1px] my-[20px]"></div>
