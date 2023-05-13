@@ -1,5 +1,5 @@
 import React from 'react';
-import {FcReadingEbook, FcOnlineSupport, FcMoneyTransfer} from "react-icons/fc"
+import {FcReadingEbook, FcOnlineSupport, FcCollaboration} from "react-icons/fc"
 const cardData = [
   {
     title: 'Learn Remotely',
@@ -14,7 +14,7 @@ const cardData = [
   {
     title: 'Mutli Role login system',
     description: 'Single account can be used as student and teacher user can learn and earn with same account',
-    icon: FcMoneyTransfer,
+    icon: FcCollaboration,
   },
 ];
 

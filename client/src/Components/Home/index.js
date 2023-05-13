@@ -8,7 +8,7 @@ import Slider from "./Slider";
 import { motion, useScroll } from "framer-motion";
 import HeaderCarousel from "./HeaderCarousel";
 import Stats from "./Stats";
-
+import Categories from "./Categories"
 const Home = () => {
   const { token } = useSelector((s) => s.AuthReducer);
   const dispatch = useDispatch();
@@ -51,6 +51,7 @@ const Home = () => {
         <Courses />
         <Features />
         <Slider />
+        <Categories />
       </div>
     </>
   );

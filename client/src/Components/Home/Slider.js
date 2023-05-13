@@ -10,7 +10,7 @@ import { picAnimate } from "../../Animations";
 
 const Slider = () => {
   return (
-    <div className="w-full flex flex-col md:flex-row items-center gap-3 md:gap-0 py-[50px] md:py-[70px] px-[15px] md:px-[30px]">
+    <div className="w-auto flex flex-col md:flex-row lg:mx-20 items-center gap-3 md:gap-0 py-[50px] md:py-[70px] px-[15px] md:px-[30px]">
       <div className="relative md:w-1/2 w-full flex flex-col p-[10px] gap-6">
         <img
           src={float1}
