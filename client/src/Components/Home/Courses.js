@@ -69,7 +69,7 @@ function Courses() {
           whileInView="show"
           className="w-full flex flex-col gap-3 md:flex-row flex-wrap items-center"
         >
-          {courses.slice(0, 4).map((val) => {
+          {courses.slice(0, 8).map((val) => {
             return (
               <>
                 <motion.div

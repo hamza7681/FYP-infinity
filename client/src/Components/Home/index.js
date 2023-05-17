@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import Courses from "./Courses";
 import Vision from "./Vision";
-import Features from "./Features";
 import { useDispatch, useSelector } from "react-redux";
 import { http } from "../../Axios/config";
 import Slider from "./Slider";
 import { motion, useScroll } from "framer-motion";
 import HeaderCarousel from "./HeaderCarousel";
 import Stats from "./Stats";
-import Categories from "./Categories"
+import Categories from "./Categories";
+import OwlCarousel from "./OwlCarousel";
 const Home = () => {
   const { token } = useSelector((s) => s.AuthReducer);
   const dispatch = useDispatch();
@@ -49,9 +49,9 @@ const Home = () => {
         <Vision />
         <Stats />
         <Courses />
-        <Features />
-        <Slider />
         <Categories />
+        <OwlCarousel/>
+        <Slider />
       </div>
     </>
   );

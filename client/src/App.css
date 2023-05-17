@@ -201,3 +201,8 @@ body::-webkit-scrollbar-thumb {
 .clip_pic{
   border-radius: 37% 63% 44% 56% / 77% 65% 35% 23% ;
 }
+.image11{
+  width: 100px !important;
+  height: 100px;
+  border-radius: 100%;
+}
