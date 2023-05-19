@@ -30,7 +30,7 @@ const cardData = [
 const Categories = () => {
   return (
     <>
-      <h2 className="font-bold text-[25px]">Our Features</h2>
+      <h2 className="font-bold text-[25px] ml-5">Our Features</h2>
       <div className="mx-10 flex lg:flex-row flex-col mt-7">
         {cardData.map((card, index) => {
           const Icon = card.icon;

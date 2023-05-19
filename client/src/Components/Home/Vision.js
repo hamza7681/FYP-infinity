@@ -10,7 +10,7 @@ const Vision = () => {
 
   return (
     <>
-      <div className="flex lg:flex-row flex-col py-[50px] md:py-[180px] px-[20px] md:px-16 w-auto gap-x-40">
+      <div className="flex lg:flex-row flex-col py-[50px] md:py-[180px] px-[20px] md:px-16 w-auto gap-x-40 lg:gap-x-60">
         <div className="lg:w-2/4 md:w-2/4 w-full ">
           <h2 className="text-[25px] font-bold mt-10">Welcome to Infinity</h2>
           <p className="w-full py-[5px] text-[15px] mt-1 text-justify">

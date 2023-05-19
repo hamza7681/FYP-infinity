@@ -14,7 +14,7 @@ import { http } from "../../Axios/config";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import { CoursesAnimate } from "../../Animations";
-
+import { Link } from "react-router-dom";
 function Courses() {
   const { courses, cartItems } = useSelector((s) => s.CourseReducer);
   const { token, user } = useSelector((s) => s.AuthReducer);
@@ -67,7 +67,7 @@ function Courses() {
           variants={CoursesAnimate}
           initial="hidden"
           whileInView="show"
-          className="w-full flex flex-col gap-3 md:flex-row flex-wrap items-center"
+          className="w-full flex flex-col gap-3 md:flex-row flex-wrap items-center justify-center "
         >
           {courses.slice(0, 8).map((val) => {
             return (
@@ -96,7 +96,7 @@ function Courses() {
                   </div>
                   <div className="flex flex-row justify-between w-full">
                     {wishlist &&
-                    !wishlist.find((item) => item.course._id === val._id) ? (
+                      !wishlist.find((item) => item.course._id === val._id) ? (
                       <div
                         onClick={(e) => {
                           addToWishlist(val._id);
@@ -164,17 +164,16 @@ function Courses() {
               </>
             );
           })}
-          <div className="flex flex-col gap-2 rounded-[5px] justify-center items-center w-[200px] border-2 drop-shadow-xl mb-2 h-[300px]">
-            <div
-              className="w-[70px] h-[70px] bg-[#03043b] rounded-full flex justify-center items-center cursor-pointer"
-              onClick={() => navigate("/courses")}
-            >
-              <BsArrowRight className="text-white text-[22px]" />
-            </div>
-            <p>Show More</p>
-          </div>
         </motion.div>
       </div>
+      <div className="w-full flex justify-center">
+      <Link to="/courses">
+        <button className="flex justify-center items-center bg-[#03043b] text-white p-5 mt-3 rounded-md">
+          Show more <BsArrowRight />
+        </button>
+        </Link>
+      </div>
+
     </>
   );
 }

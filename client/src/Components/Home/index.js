@@ -8,7 +8,7 @@ import { motion, useScroll } from "framer-motion";
 import HeaderCarousel from "./HeaderCarousel";
 import Stats from "./Stats";
 import Categories from "./Categories";
-import OwlCarousel from "./OwlCarousel";
+import OwlCarousel from "./Carousel";
 const Home = () => {
   const { token } = useSelector((s) => s.AuthReducer);
   const dispatch = useDispatch();
