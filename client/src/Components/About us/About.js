@@ -52,20 +52,27 @@ const About = () => {
           </div>
         </div>
       </div>
-      <Categories/>
+      <Categories />
       <Image />
       <div className="w-full mt-5">
-        <h2 className="flex text-center justify-center text-[30px] font-bold">Become an Instructor Today</h2>
-        <p className="flex text-center justify-center mt-3">Join one of the world’s largest online learning marketplaces. Our Instructor</p>
-        <p className="flex text-center justify-center">Support Team is ready to help you while our Teaching Center.</p>
+        <h2 className="flex text-center justify-center text-[30px] font-bold">
+          Become an Instructor Today
+        </h2>
+        <p className="flex text-center justify-center mt-3">
+          Join one of the world’s largest online learning marketplaces. Our
+          Instructor
+        </p>
+        <p className="flex text-center justify-center">
+          Support Team is ready to help you while our Teaching Center.
+        </p>
         <div class="flex justify-center mt-4">
-          <Link to ="/switch-account">
-          <button class="bg-[#03043b] text-white p-4 rounded">Get started now!</button>
+          <Link to="/switch-account">
+            <button class="bg-[#03043b] text-white p-4 rounded">
+              Get started now!
+            </button>
           </Link>
         </div>
-
       </div>
-
     </>
   );
 };

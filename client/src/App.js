@@ -27,7 +27,6 @@ import AboutPage from "./Pages/AboutPage";
 import ContactPage from "./Pages/ContactPage";
 import ViewTutorPage from "./Pages/ViewTutorPage";
 import GlobalLoader from "./Reuseables/GlobalLoader";
-import OwlCarouselLib from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 
