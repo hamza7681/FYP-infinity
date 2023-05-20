@@ -4,7 +4,6 @@ import { http } from "../../Axios/config";
 import FormattedPrice from "../../Reuseables/FormattedPrice";
 import { BsCart3, BsFillHeartFill } from "react-icons/bs";
 import ReactPaginate from "react-paginate";
-import Footer from "../Footer/Footer";
 import BreadCrumbs from "../../Reuseables/BreadCrumbs";
 import logo from "../../Assets/wishlist.jpg";
 
@@ -120,7 +119,6 @@ const WishList = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };
