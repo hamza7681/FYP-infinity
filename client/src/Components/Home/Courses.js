@@ -96,7 +96,7 @@ function Courses() {
                   </div>
                   <div className="flex flex-row justify-between w-full">
                     {wishlist &&
-                      !wishlist.find((item) => item.course._id === val._id) ? (
+                      !wishlist?.find((item) => item?.course?._id === val._id) ? (
                       <div
                         onClick={(e) => {
                           addToWishlist(val._id);

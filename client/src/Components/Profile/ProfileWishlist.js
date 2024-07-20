@@ -9,16 +9,20 @@ import ClipLoader from "react-spinners/ClipLoader";
 const ProfileWishlist = () => {
   const { token } = useSelector((s) => s.AuthReducer);
   const [wishlist, setWishlist] = useState([]);
+  const [loading, setLoading] = useState();
 
   useEffect(() => {
     if (token) {
+      setLoading(true)
       const getWishlist = async () => {
         try {
           const res = await http.get("/wishlist/get-wishlist-userId", {
             headers: { Authorization: token },
           });
+          setLoading(false)
           setWishlist(res.data);
         } catch (error) {
+          setLoading(false)
           console.log(error);
         }
       };
@@ -40,7 +44,7 @@ const ProfileWishlist = () => {
   const Items = ({ currentItems }) => {
     return (
       <>
-        {currentItems.length === 0 ? (
+        {loading? (
           <>
             <div className="flex justify-center items-center">
               <ClipLoader color="#000000" />
@@ -57,13 +61,13 @@ const ProfileWishlist = () => {
                       className="flex gap-3 md:gap-0 flex-col md:flex-row md:items-center justify-between border-b-[3px] pb-[10px]"
                     >
                       <img
-                        src={val.course.image}
+                        src={val?.course?.image}
                         alt="image_course"
                         className="w-full md:w-[150px] rounded-[7px]"
                       />
-                      <p>{val.course.title}</p>
+                      <p>{val?.course?.title}</p>
                       <p>
-                        <FormattedPrice price={val.course.price} />
+                        <FormattedPrice price={val?.course?.price} />
                       </p>
                       <div className="flex flex-col gap-3">
                         <div className="bg-[#33040D] rounded-[4px] px-[20px] py-[7px] flex flex-row justify-center items-center gap-3">

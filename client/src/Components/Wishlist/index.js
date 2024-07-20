@@ -56,13 +56,17 @@ const WishList = () => {
                       className="flex gap-3 md:gap-0 flex-col md:flex-row md:items-center justify-between border-b-[3px] pb-[10px]"
                     >
                       <img
-                        src={val.course.image}
+                        src={
+                          val.course?.image !==null ? val.course?.image:''
+                          // val.course?.image ? val.course?.image : ' '
+                          // val?.course?.image
+                        }
                         alt="image_course"
                         className="w-full md:w-[150px] rounded-[7px]"
                       />
-                      <p>{val.course.title}</p>
+                      <p>{val?.course?.title}</p>
                       <p>
-                        <FormattedPrice price={val.course.price} />
+                        <FormattedPrice price={val?.course?.price} />
                       </p>
                       <div className="flex flex-col gap-3">
                         <div className="bg-[#33040D] rounded-[4px] px-[20px] py-[7px] flex flex-row justify-center items-center gap-3">
